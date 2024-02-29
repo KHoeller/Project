@@ -1,0 +1,10 @@
+.north-arrow {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 50px; /* Passen Sie die Größe entsprechend an */
+    height: 50px; /* Passen Sie die Größe entsprechend an */
+    background-image: url('north_arrow.png'); /* Pfad zum Bild des Nordpfeils */
+    background-size: cover;
+    z-index: 1000; /* Stellen Sie sicher, dass der Nordpfeil über der Karte liegt */
+}
