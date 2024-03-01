@@ -10,105 +10,42 @@ import MousePosition from 'ol/control/MousePosition'; // für Koordinaten mithil
 import {createStringXY} from 'ol/coordinate';   // Info um string mit den jeweiligen Koordinaten erstellen 
 import { features } from 'process';
 
-
-
-//  Layernamen aus JSON-Datei importieren und in Array speichern
+//  Layernamen aus JSON-Datei importieren
 import jsondata from './config.json';
-    // console.log(jsondata); // einladen hat funktionert 
 
-// let jsonLayernames = jsondata;
-// console.log(jsonLayernames); // anschauen des Layers 
+// Layer für die Webapplikation erstellen und lesbar speichern 
+let layers: TileLayer<TileSource>[] = [];       // Array layers für die TileLayer 
 
-// let LayerArray = Object.values(jsonLayernames.layers); // array
-//     // console.log(LayerArray);
+layers.push(new TileLayer({
+  source: new OSM(),                    // der erste Layer liegt ganz zu unterst; hier: OSM
+}));
+
+    
+// Layer aus confi.json einladen 
+let jsonLayernames = jsondata;
+console.log(jsonLayernames); // anschauen des Layers 
+
+let LayerArray = Object.values(jsonLayernames.layers); // array
+console.log(LayerArray);
 
 // let layerNames: string[] = []; // Array für die Ergebnisse (Inhalte als string)
 
-// for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
-//   let layername = LayerArray[i].name;
-//   layerNames.push(layername);   // anschließend wird der Name als string im Array layerNames gespeichert 
-// }
-// console.log(layerNames);    // Array wurde erfolgreich erstellt 
+for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
+  let layerConfig = LayerArray[i];            // es werden nacheinander die Positionen des Arrays aufgerufen
+  let name = layerConfig.name;                // der name an der entsprechendenen Position wird gewählt
+  let isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false; // default: alle Layer ohne Angabe zu visible sind false = unsichtbar / (true = sichtbar)
 
-
-// // Layer für die Webapplikation erstellen und lesbar speichern 
-// let layers: TileLayer<TileSource>[] = [];       // Array layers für die TileLayer 
-
-// layers.push(new TileLayer({
-//   source: new OSM(),                    // der erste Layer liegt ganz zu unterst; hier: OSM
-// }));
-
-// for (let name of layerNames){     // Schleife durch alle Layernamen, daraus Layer erstellen und zu layers hinzufügen 
-//   let newLayer = new TileLayer({
-//     source: new TileWMS({
-//     url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  
-//     params: {'LAYERS': name, 'TILED': true},
-//     serverType: 'geoserver',
-//     // transition: 0,
-//     }),
-//   })
-
-//   for( let v = 0; v < LayerArray.length; v++){
-//     if(LayerArray[v].visible === true){
-//       layers.push(newLayer)
-//     } else {
-//       console.log('error')
-//     }
-//   }
-// }
-
-// console.log(LayerArray[0].visible) // name des ersten Arrays
-// console.log(layers);
-
-
-// for( let v = 0; v < LayerArray.length; v++){
-//   if(LayerArray[v].visible === true){
-//     layers.push(newLayer)
-//   } else {
-//     console.log('error')
-//   }
-// }
-
-
-
-
-
-
-
-
-
-
-//nur zum Testen: 
-const layers =  [
-  new TileLayer({
-    source: new OSM(),    // basic map 
-  }),
-
-  new TileLayer({
-    //extent: [650000, 590000, 1774447, 7473282], // anpassen entsprechend Layer !!!!
+  let newLayer = new TileLayer({
     source: new TileWMS({
-      url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  // url zum geoserver  
-
-      params: {'LAYERS': 'R_PM10_2021', 'TILED': true},
-      serverType: 'geoserver',
-      
-      transition: 0, // Countries have transparency, so do not fade tiles:
-    }),
-  }),
-  
-  new TileLayer({
-    //extent: [650000, 590000, 1774447, 7473282], // anpassen entsprechend Layer !!!!
-    source: new TileWMS({
-      url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  // url zum geoserver  
-
-      params: {'LAYERS': 'V_O3_2021', 'TILED': true},
-      serverType: 'geoserver',
-      
-      transition: 0, // Countries have transparency, so do not fade tiles:
-    }),
-  }),
-];
-//ENDE
+    url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  
+    params: {'LAYERS': name, 'TILED': true},
+    serverType: 'geoserver',
+    // transition: 0,
+    }), 
+    visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
+  });
+  layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
+}
 
 
 // Basis Map und view 
@@ -142,7 +79,7 @@ map.on('singleclick', function (evt) {                      // map.on - Arbeiten
   if(infoElement) {               
     infoElement.innerHTML = '';
     const viewResolution = evt.map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
-    const source = layers[1]?.getSource();                               // Quelle des Layers (auf position 1 des Arrays)
+    const source = layers[7]?.getSource();                               // Quelle des Layers (auf position 1 des Arrays)
     if (source instanceof TileWMS) {                                    // sofern die Quelle TileWMS ist -> kann getFeatureInfo abgerufen werden 
       const url = source.getFeatureInfoUrl(                             // mit der Eventkoordinate, der aktuellen Auflösung/Kartenausschnitt, dem CRS und dem Format für die Ausgabe 
         evt.coordinate,
