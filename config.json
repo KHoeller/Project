@@ -74,7 +74,8 @@
     }, {
         "name": "R_PM10_2020"
     }, {
-        "name": "R_PM10_2021"
+        "name": "R_PM10_2021",
+        "visible": true
     }, {
         "name": "R_PM25_2007"
     }, {
