@@ -9,16 +9,15 @@ import TileSource from 'ol/source/Tile.js';
 import MousePosition from 'ol/control/MousePosition'; // für Koordinaten mithilfe der Mausposition 
 import {createStringXY} from 'ol/coordinate';   // Info um string mit den jeweiligen Koordinaten erstellen 
 
-
-
 // import { features } from 'process';
-
 
 //  Layernamen aus JSON-Datei importieren
 import jsondata from './config.json';
 
+
 // Layer für die Webapplikation erstellen und lesbar speichern 
 let layers: TileLayer<TileSource>[] = [];       // Array layers für die TileLayer 
+
 
 layers.push(new TileLayer({
   source: new OSM(),                    // der erste Layer liegt ganz zu unterst; hier: OSM
@@ -32,7 +31,15 @@ console.log(jsonLayernames); // anschauen des Layers
 let LayerArray = Object.values(jsonLayernames.layers); // array
 console.log(LayerArray);
 
-// let layerNames: string[] = []; // Array für die Ergebnisse (Inhalte als string)
+
+    
+// Layer aus confi.json einladen 
+let jsonLayernames = jsondata;
+console.log(jsonLayernames); // anschauen des Layers 
+
+let LayerArray = Object.values(jsonLayernames.layers); // array
+console.log(LayerArray);
+
 
 for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
   let layerConfig = LayerArray[i];            // es werden nacheinander die Positionen des Arrays aufgerufen
