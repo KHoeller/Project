@@ -1,7 +1,7 @@
 {
     "layers": [{
         "name": "EwDichte",
-        "visible": true
+        "visible": false
     }, {
         "name": "TravelTime",
         "visible": false
@@ -14,7 +14,8 @@
     }, {
         "name": "Wetlands_DE"
     }, {
-        "name": "R_NO2_2014"
+        "name": "R_NO2_2014",
+        "visible": true
     }, {
         "name": "R_NO2_2015"
     }, {
@@ -74,7 +75,8 @@
     }, {
         "name": "R_PM10_2020"
     }, {
-        "name": "R_PM10_2021"
+        "name": "R_PM10_2021",
+        "visible": true
     }, {
         "name": "R_PM25_2007"
     }, {

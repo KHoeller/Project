@@ -8,7 +8,7 @@ import TileSource from 'ol/source/Tile.js';
 
 import MousePosition from 'ol/control/MousePosition'; // für Koordinaten mithilfe der Mausposition 
 import {createStringXY} from 'ol/coordinate';   // Info um string mit den jeweiligen Koordinaten erstellen 
-import { features } from 'process';
+
 
 //  Layernamen aus JSON-Datei importieren
 import jsondata from './config.json';
