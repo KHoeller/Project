@@ -1,7 +1,7 @@
-import React from 'react';
+
 
 // <!DOCTYPE html>
-//* <html>
+// <html>
 //   <head>
 //     <meta charset="UTF-8">
 //     <title>Tiled WMS</title>
@@ -53,40 +53,4 @@ import React from 'react';
     
 //     </div>
 //   </body>
-// </html> */}
-
-
-
-function Map () {
-  return (
-    <>
-      <h1> { map } </h1>
-    </>
-  );
-}
-
-
-function Wrapper () {
-  return (
-    <>
-      <wrapper> 'location' 
-        <div id = 'mouse-position' class = "Custom-mouse-position"></div>
-      </wrapper>
-    </>
-  )
-}
-
-function info () {
-  return (
-    <>
-      <div id = "info">&nbsp;</div>
-    </>
-  )
-}
-      
-
-
-
-
-
-
+// </html>

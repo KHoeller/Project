@@ -25,10 +25,10 @@ layers.push(new TileLayer({
 
     
 // Layer aus confi.json einladen 
-let jsonLayernames = jsondata;
-console.log(jsonLayernames); // anschauen des Layers 
+let jsonLayer = jsondata;
+//  console.log(jsonLayer); // anschauen des Layers 
 
-let LayerArray = Object.values(jsonLayernames.layers); // array
+let LayerArray = Object.values(jsonLayer.layers); // array
 console.log(LayerArray);
 
 
