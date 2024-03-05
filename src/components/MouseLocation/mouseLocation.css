@@ -1,0 +1,7 @@
+
+.wrapper {
+    /* padding: 5px; */
+    border: 1px solid black; 
+    z-index: 100; 
+    background-color: white;
+} 

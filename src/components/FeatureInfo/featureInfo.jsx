@@ -1,3 +1,6 @@
+
+import './FeatureInfo.css';
+
 export default function FeatureInfo () {
     return (
          

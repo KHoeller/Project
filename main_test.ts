@@ -32,14 +32,6 @@ let LayerArray = Object.values(jsonLayer.layers); // array
 console.log(LayerArray);
 
 
-    
-// Layer aus confi.json einladen 
-let jsonLayernames = jsondata;
-console.log(jsonLayernames); // anschauen des Layers 
-
-let LayerArray = Object.values(jsonLayernames.layers); // array
-console.log(LayerArray);
-
 
 for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
   let layerConfig = LayerArray[i];            // es werden nacheinander die Positionen des Arrays aufgerufen

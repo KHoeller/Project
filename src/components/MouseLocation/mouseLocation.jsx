@@ -1,7 +1,11 @@
+
+import mapStyle from './mouseLocation.css';
+
 export default function MouseLocation () {
     return (
         <div id = "location">
             <div id = 'mouse-position' class = "Custom-mouse-position"></div>
+            
         </div>
 
     );
