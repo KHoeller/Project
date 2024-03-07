@@ -8,6 +8,10 @@ import React, { useEffect } from 'react';
 
 import Layers from "./src/components/LayerN/LayerN";
 
+import FeatureInfo from './src/components/FeatureInfo/featureInfo';
+
+import MousePosition from './src/components/MousePosition/mousePosition';
+
 export default function App () {
 
     const map = new Map({
@@ -23,7 +27,16 @@ export default function App () {
         <> 
             <MapComp
                 map={map}
-            />           
+            />  
+            <FeatureInfo
+                map={map} 
+                evt=''
+                
+                />    
+            <MousePosition
+                map={map}
+                
+                />    
         </>
     )
 }

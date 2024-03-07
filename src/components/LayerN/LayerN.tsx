@@ -7,7 +7,7 @@ import TileSource from 'ol/source/Tile.js';
 import TileWMS from 'ol/source/TileWMS.js';
 
 //  Layernamen aus JSON-Datei importieren
-import jsondata from '/home/khoeller/Dokumente/OpenLayers/conf/config.json';
+import jsondata from '/home/khoeller/Dokumente/OpenLayers/conf/config.json'; //
 
 // import style 
 import './LayerN.css'; // nicht notwendig? 

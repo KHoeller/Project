@@ -3,24 +3,17 @@
 
 import React, { useEffect, useState } from 'react';
 import Map from 'ol/Map';
-import View from 'ol/View.js';
 
 // Map style laden 
 import './Map.css';
 
-// layers für Map laden 
-import Layers from "../LayerN/LayerN";
-
-import MousePosition from "/home/khoeller/Dokumente/OpenLayers/src/components/MousePosition/mousePosition";
-import FeatureInfo from '/home/khoeller/Dokumente/OpenLayers/src/components/FeatureInfo/featureInfo';
+import FeatureInfo from '../FeatureInfo/featureInfo';
 
 export type MapCompProps = {
     map: Map;
 };
 
-export default function MapComp ({
-    map
-}: MapCompProps) {
+export default function MapComp ({ map }: MapCompProps) {
 
     console.log(map)
 
@@ -36,7 +29,6 @@ export default function MapComp ({
     // };
     // myFunc()                                              
 
-    // Basis Map und view 
     useEffect(() => {
         // const map = new Map({
         //     layers: Layers(), // damit Array statt der Funktion verwendet wird 
@@ -47,11 +39,10 @@ export default function MapComp ({
         //     }),
         // });
 
-        
         map.setTarget('map');
 
-        MousePosition(map); // MousePosition
-        map.on('click', (evt) => FeatureInfo(evt, map)); // featureInfo --> ich brauche für beide Funktionen map -> das muss ich hieraus exportieren
+
+        // map.on('click', (evt) => FeatureInfo(evt, map)); // featureInfo --> ich brauche für beide Funktionen map -> das muss ich hieraus exportieren
     }, []); // wofür ist }, []); -> wofür sind die [] wie oben im Beispiel 
   
 
@@ -62,13 +53,8 @@ export default function MapComp ({
                 className ='map'>
                     Umwelt-Gesundheitskarte 
             </div>
-            <div 
-                id = 'mouse-position' 
-                className = 'mouse-position'>
-            </div>
-            <div id='info' className ='info'>value:</div>   
-             {/* value wird derzeit ersetzt, wenn man geclickt hat  */}
-           
+            {/* <div id='info' className ='info'>value:</div>   
+             value wird derzeit ersetzt, wenn man geclickt hat  */}
         </>
     );
 }

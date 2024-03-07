@@ -1,22 +1,29 @@
 
 // Component MousePosition
+import React from 'react';
 import './mousePosition.css';
 import Map from 'ol/Map';
 
 import MousePosition from 'ol/control/MousePosition'; // für Koordinaten mithilfe der Mausposition 
 import {createStringXY} from 'ol/coordinate'; 
 
+export type MousePositionProps = {
+    map: Map;
+};
 
-export default function addMousePositionControl (map: Map) {
-    const targetElement = document.getElementById('mouse-position');
-        if (targetElement !== null) {
-            const mousePositionControl = new MousePosition({      //aktuelle Mausposition 
-                coordinateFormat: createStringXY(5),                // Koordinaten auf 7 Nachkommastellen 
-                projection: 'EPSG:3857',
-                target: targetElement,                              // Eintragen in html bei div mouse-position -> in File Map
-            });
-            map.addControl(mousePositionControl);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
-        }
+export default function MousePositionControl ({map}: MousePositionProps) {
+    
+        const mousePosition = new MousePosition({      //aktuelle Mausposition 
+            coordinateFormat: createStringXY(5),                // Koordinaten auf 7 Nachkommastellen 
+            projection: 'EPSG:3857',
+            target: 'mouse-position',                              // Eintragen in html bei div mouse-position -> in File Map
+        });
+        
+        map.addControl(mousePosition);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
+
+    return(
+        <div id = 'mouse-position' className = 'mouse-position'></div>
+    )
 };      
 
 
