@@ -7,8 +7,7 @@
         @import "node_modules/ol/ol.css";
     </style> 
     <style> 
-      html, body,
-      #map {  
+      html, body {  
         position: fixed;
         top: 0; 
         left: 0;
@@ -16,38 +15,22 @@
         height: 100%;
         font-family: sans-serif;
       } 
-      #info{
-        position: fixed;
-        bottom: 30px;
-        right: 15px;
-        
-        
-        /* padding: 5px; */
-        border: 1px solid black; 
-        z-index: 100; 
-        background-color: cornsilk;
-      }
-
-      #wrapper{
-        /* padding: 5px; */
-        border: 1px solid black; 
-        z-index: 100; 
-        background-color: white;
-      }
+      /* style für html und body bleibt in dieser Datei */
     </style>
   </head>
   <body>
    
-    <div id="map"> </div> 
+    <div id="root"></div>
+                  <!-- <div id="map"> </div> 
 
-    <div id="wrapper">
-      <div id = "location">
-        <div id = 'mouse-position' class = "Custom-mouse-position"></div>
-    </div>
-      
-    <div id = "info">&nbsp;</div>
+                  <div id="wrapper">
+                    <div id = "location">
+                      <div id = 'mouse-position' class = "Custom-mouse-position"></div>
+                  </div>
+                    
+                  <div id = "info">&nbsp;</div> -->
 
-    <script type="module" src="./main_test.ts"></script>
+    <script type="module" src="./index.tsx"></script>
     
     </div>
   </body>

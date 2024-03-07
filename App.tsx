@@ -1,17 +1,22 @@
 
-import Map from './src/components/Map.tsx';
-import FeatureInfo from './src/components/FeatureInfo/featureInfo.jsx';
-import MouseLocation from './src/components/MouseLocation/mouseLocation.jsx';
+import MapComp from './src/components/Map/Map';
+import FeatureInfo from './src/components/FeatureInfo/featureInfoCopy'
+
+import React, { useEffect } from 'react';
+
 
 export default function App () {
+
     return (
         <> 
-            <div class={MouseLocation}>Koordinaten:</div>
-            <div class={FeatureInfo}></div>
+            <MapComp /> 
+            
+            <FeatureInfo /> 
         </>
     )
 }
 
+// bei <Map> müsste doch dann onClick vorkommen, damit dann die Featureinfos angezeigt werden? 
 
 
 // import [componentname] from './filename'; oder
@@ -26,9 +31,48 @@ export default function App () {
 
 
 
-
-
 // example: 
+
+// Arrays
+    // ADD:
+    // setArtists( // Replace the state
+    //   [ // with a new array
+    //     ...artists, // that contains all the old items
+    //     { id: nextId++, name: name } // and one new item at the end
+    //   ]
+    // );                                   // oder neues ArrayElement davor setzen 
+            // statt:
+                // artists.push({
+                    //   id: nextId++,
+                    //   name: name,
+                    // });
+
+    // Filter/remove
+    // setArtists(
+        //  artists.filter(a =>
+        //  a.id !== artist.id
+        //  )
+    // );    --> no modification at the original array!!!! 
+
+    // Transform
+        // function handleClick() {
+        //     const nextShapes = shapes.map(shape => {
+        //       if (shape.type === 'square') {
+        //         // No change
+        //         return shape;
+        //       } else {
+        //         // Return a new circle 50px below
+        //         return {
+        //           ...shape,
+        //           y: shape.y + 50,
+        //         };
+        //       }
+        //     });
+
+
+// immer - library (not important for me?)
+
+
     // import { useState } from 'react';
     // import { sculptureList } from './data.js';
 

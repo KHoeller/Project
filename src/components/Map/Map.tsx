@@ -1,13 +1,67 @@
+
+// Component Map 
+
+import React, { useEffect, useState } from 'react';
+import Map from 'ol/Map';
+import View from 'ol/View.js';
+
+// Map style laden 
 import './Map.css';
 
-// import './myComponentStyle.css';
+// layers für Map laden 
+import Layers from "/home/khoeller/Dokumente/OpenLayers/src/components/LayerN/LayerN";
 
-export default function Map () {
+import MousePosition from "/home/khoeller/Dokumente/OpenLayers/src/components/MousePosition/mousePosition";
+import '/home/khoeller/Dokumente/OpenLayers/src/components/MousePosition/mousePosition.css';
+
+
+
+export default function MapComp () {
+
+    // console.log('Hallo aus der Map');
+
+    // const [myText, setMyText] = useState('Hallo Welt');
+
+    // useEffect(() => {
+    //     window.setTimeout(() => {
+    //         setMyText('Gesundheit!');
+    //     }, 4000);    
+    // }, []);
+
+    // const myFunc = () => {
+    //     console.log('dwadd')
+    // };
+
+    // myFunc()
+
+
+    // Basis Map und view 
+    useEffect(() => {
+        const map = new Map({
+            layers: Layers(), // damit Array statt der Funktion verwendet wird 
+            target: 'map',
+            view: new View({
+                center: [1141371, 6735169],
+                zoom: 4,
+            }),
+        });
+        MousePosition(map); 
+    }) // wofür ist }, []); -> wofür sind die [] wie oben im Beispiel 
+  
+
     return (
-        <div 
-          id='map' 
-          className ='map'> 
-        </div>
+        <>
+            <div 
+                id='map' 
+                className ='map'>
+                    Umwelt-Gesundheitskarte 
+            </div>
+            <div 
+                id = 'mouse-position' 
+                className = 'mouse-position'>
+            </div>
+           
+        </>
     );
 }
 
