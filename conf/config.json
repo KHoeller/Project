@@ -76,7 +76,7 @@
         "name": "R_PM10_2020"
     }, {
         "name": "R_PM10_2021",
-        "visible": true
+        "visible": false
     }, {
         "name": "R_PM25_2007"
     }, {
@@ -116,7 +116,8 @@
     }, {
         "name": "V_SO2_2021"
     }, {
-        "name": "V_PM10_2021"
+        "name": "V_PM10_2021",
+        "visible": true
     }, {
         "name": "Gemeindegrenzen"
     }, {

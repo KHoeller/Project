@@ -10,7 +10,7 @@ import TileWMS from 'ol/source/TileWMS.js';
 import jsondata from '/home/khoeller/Dokumente/OpenLayers/conf/config.json';
 
 // import style 
-import './LayerN.css';
+import './LayerN.css'; // nicht notwendig? 
 
 export default function Layers () {
 // LayerArray für die Webapplikation erstellen und lesbar speichern 
@@ -23,6 +23,7 @@ export default function Layers () {
     // const jsonLayer = jsondata; // nicht notwendig?!
 
     let LayerArray = Object.values(jsondata.layers); // array
+    // console.log(LayerArray);
 
     for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
         let layerConfig = LayerArray[i];            // es werden nacheinander die Positionen des Arrays aufgerufen
@@ -30,18 +31,19 @@ export default function Layers () {
         let isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false; // default: alle Layer ohne Angabe zu visible sind false = unsichtbar / (true = sichtbar)
     
         let newLayer = new TileLayer({
-        source: new TileWMS({
-        url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  
-        params: {'LAYERS': name, 'TILED': true},
-        serverType: 'geoserver',
-        // transition: 0,
-        }), 
-        visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
+            source: new TileWMS({
+                url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  
+                params: {'LAYERS': name, 'TILED': true},
+                serverType: 'geoserver',
+                // transition: 0,
+            }), 
+            visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
         });
         layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
-        // console.log(layers);
             // layers ist ein Array mit Objekten zu jedem Layer aus dem Geoserver inklusive visible
+
     } 
+    
     return layers; 
     
 }

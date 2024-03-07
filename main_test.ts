@@ -12,7 +12,7 @@ import {createStringXY} from 'ol/coordinate';   // Info um string mit den jeweil
 // import { features } from 'process';
 
 // //  Layernamen aus JSON-Datei importieren
-import jsondata from './conf/config.json';
+import jsondata from '/home/khoeller/Dokumente/OpenLayers/conf/config.json';
 
 
 // Layer für die Webapplikation erstellen und lesbar speichern 
@@ -48,6 +48,7 @@ for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays w
     visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
   });
   layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
+  console.log(layers)
 }
 
 

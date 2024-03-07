@@ -14,7 +14,7 @@ export default function addMousePositionControl (map: Map) {
                 coordinateFormat: createStringXY(5),                // Koordinaten auf 7 Nachkommastellen 
                 projection: 'EPSG:3857',
                 target: targetElement,                              // Eintragen in html bei div mouse-position -> in File Map
-                });
+            });
             map.addControl(mousePositionControl);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
         }
 };      

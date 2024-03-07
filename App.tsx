@@ -1,17 +1,29 @@
 
 import MapComp from './src/components/Map/Map';
-import FeatureInfo from './src/components/FeatureInfo/featureInfoCopy'
+
+import Map from 'ol/Map';
+import View from 'ol/View.js';
 
 import React, { useEffect } from 'react';
 
+import Layers from "./src/components/LayerN/LayerN";
 
 export default function App () {
 
+    const map = new Map({
+        layers: Layers(), // damit Array statt der Funktion verwendet wird 
+        // target: 'map',
+        view: new View({
+            center: [1141371, 6735169],
+            zoom: 4,
+        }),
+    });
+
     return (
         <> 
-            <MapComp /> 
-            
-            <FeatureInfo /> 
+            <MapComp
+                map={map}
+            />           
         </>
     )
 }
@@ -32,6 +44,9 @@ export default function App () {
 
 
 // example: 
+
+// export function Name(){} -> aufrufen in anderem File mit Namen -> import {Name} from '';
+// export default function ->aufrufen und neuen Namen vergeben -> import xName from ''; (meist gleicher Name wie export default function)
 
 // Arrays
     // ADD:
