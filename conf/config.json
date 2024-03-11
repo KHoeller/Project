@@ -1,31 +1,53 @@
 {
+    "mapView": {
+        "center": [1141371, 6735169],
+        "zoom": 4
+    },
+
     "layers": [{
         "name": "EwDichte",
-        "visible": false
+        "visible": false,
+        "queryable": true
     }, {
         "name": "TravelTime",
-        "visible": false
+        "visible": false,
+        "queryable": false
     }, {
-        "name": "Agriculture_DE"
+        "name": "Agriculture_DE",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "Forest_DE"
+        "name": "Forest_DE",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "Water_bodies_DE"
+        "name": "Water_bodies_DE",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "Wetlands_DE"
+        "name": "Wetlands_DE",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NO2_2014",
-        "visible": true
+        "visible": true,
+        "queryable": true
     }, {
-        "name": "R_NO2_2015"
+        "name": "R_NO2_2015",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NO2_2016"
+        "name": "R_NO2_2016",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NO2_2017"
     }, {
         "name": "R_NO2_2018"
     }, {
-        "name": "R_NO2_2019"
+        "name": "R_NO2_2019",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NO2_2020"
     }, {
@@ -33,7 +55,9 @@
     }, {
         "name": "R_NOx_2014"
     }, {
-        "name": "R_NOx_2015"
+        "name": "R_NOx_2015",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NOx_2016"
     }, {
@@ -41,13 +65,18 @@
     }, {
         "name": "R_NOx_2018"
     }, {
-        "name": "R_NOx_2020"
+        "name": "R_NOx_2020",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NOx_2021"
     }, {
-        "name": "R_PM10_2006"
+        "name": "R_PM10_2006",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2007"
+        "name": "R_PM10_2007",
+        "queryable": true
     }, {
         "name": "R_PM10_2008"
     }, {
@@ -55,77 +84,135 @@
     }, {
         "name": "R_PM10_2010"
     }, {
-        "name": "R_PM10_2011"
+        "name": "R_PM10_2011",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2012"
+        "name": "R_PM10_2012",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2013"
+        "name": "R_PM10_2013",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2014"
+        "name": "R_PM10_2014",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2015"
+        "name": "R_PM10_2015",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2016"
+        "name": "R_PM10_2016",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2017"
+        "name": "R_PM10_2017",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2018"
+        "name": "R_PM10_2018",
+        "visible": false,
+        "queryable": true
+
     }, {
-        "name": "R_PM10_2019"
+        "name": "R_PM10_2019",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2020"
+        "name": "R_PM10_2020",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_PM10_2021",
-        "visible": false
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2007"
+        "name": "R_PM25_2007",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2008"
+        "name": "R_PM25_2008",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2010"
+        "name": "R_PM25_2010",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2011"
+        "name": "R_PM25_2011",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2012"
+        "name": "R_PM25_2012",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2013"
+        "name": "R_PM25_2013",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2014"
+        "name": "R_PM25_2014",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2015"
+        "name": "R_PM25_2015",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2016"
+        "name": "R_PM25_2016",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2017"
+        "name": "R_PM25_2017",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2018"
+        "name": "R_PM25_2018",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2019"
+        "name": "R_PM25_2019",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2020"
+        "name": "R_PM25_2020",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM25_2021"
+        "name": "R_PM25_2021",
+        "queryable": true
     }, {
-        "name": "V_CO_2021"
+        "name": "V_CO_2021",
+        "queryable": true
     }, {
-        "name": "V_NO2_2021"
+        "name": "V_NO2_2021",
+        "queryable": true
     }, {
-        "name": "V_O3_2021"
+        "name": "V_O3_2021",
+        "queryable": true
     }, {
-        "name": "V_PM2.5_2021"
+        "name": "V_PM2.5_2021",
+        "queryable": true
     }, {
-        "name": "V_SO2_2021"
+        "name": "V_SO2_2021",
+        "queryable": true
     }, {
         "name": "V_PM10_2021",
         "visible": true
     }, {
-        "name": "Gemeindegrenzen"
+        "name": "Gemeindegrenzen",
+        "queryable": false
     }, {
-        "name": "Hospitals_DE"
+        "name": "Hospitals_DE",
+        "queryable": true
     },  {
-        "name": "Hospitals_2_dach"
+        "name": "Hospitals_2_dach",
+        "queryable": true
     }, {
-        "name": "Nationalgrenze_DE"
+        "name": "Nationalgrenze_DE",
+        "queryable": false
     }
     ]
 }

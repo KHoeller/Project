@@ -21,7 +21,11 @@ export default function MousePositionControl ({map}: MousePositionProps) {
         });
         
         map.addControl(mousePosition);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
-        })
+
+        return () => {
+            map.removeControl(mousePosition);
+        };
+        }, [map])
 
     return(
         <div id = 'mouse-position' className = 'mouse-position'></div>

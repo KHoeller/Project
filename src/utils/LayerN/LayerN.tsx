@@ -7,10 +7,8 @@ import TileSource from 'ol/source/Tile.js';
 import TileWMS from 'ol/source/TileWMS.js';
 
 //  Layernamen aus JSON-Datei importieren
-import jsondata from '/home/khoeller/Dokumente/OpenLayers/conf/config.json'; //
+import jsondata from '../../../conf/config.json'; //  
 
-// import style 
-import './LayerN.css'; // nicht notwendig? 
 
 export default function Layers () {
 // LayerArray für die Webapplikation erstellen und lesbar speichern 
@@ -20,10 +18,7 @@ export default function Layers () {
     source: new OSM(),                    // der erste Layer liegt ganz zu unterst; hier: OSM
     }));
 
-    // const jsonLayer = jsondata; // nicht notwendig?!
-
     let LayerArray = Object.values(jsondata.layers); // array
-    // console.log(LayerArray);
 
     for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
         let layerConfig = LayerArray[i];            // es werden nacheinander die Positionen des Arrays aufgerufen

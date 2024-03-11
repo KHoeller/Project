@@ -4,24 +4,31 @@ import MapComp from './src/components/Map/Map';
 import Map from 'ol/Map';
 import View from 'ol/View.js';
 
-import React, { useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 
-import Layers from "./src/components/LayerN/LayerN";
+import Layers from "./src/utils/LayerN/LayerN";
+import { mapView } from './conf/config.json'; 
+
 
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 
 import MousePosition from './src/components/MousePosition/mousePosition';
 
 export default function App () {
+    console.log(mapView);
 
-    const map = new Map({
-        layers: Layers(), // damit Array statt der Funktion verwendet wird 
-        // target: 'map',
-        view: new View({
-            center: [1141371, 6735169],
-            zoom: 4,
-        }),
-    });
+   
+    const map = useMemo(() => { 
+        return new Map({
+            layers: Layers(), // damit Array statt der Funktion verwendet wird 
+            // target: 'map',
+            view: new View({
+                center: mapView.center,
+                zoom: mapView.zoom,
+            }),
+        });
+    }, []) 
+      
 
     return (
         <> 
@@ -34,8 +41,8 @@ export default function App () {
             
             <MousePosition
                 map={map}
-                
                 />    
+                
         </>
     )
 }

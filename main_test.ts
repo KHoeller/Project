@@ -104,7 +104,7 @@ map.on('singleclick', function (evt) {                      // map.on - Arbeiten
           let fet = responseObject.features[0].properties.GRAY_INDEX;
           console.log(fet);
          
-          infoElement.innerHTML = `GRAY_INDEX: ${fet}`;
+          infoElement.innerHTML = `${fet}`;
         })
         .catch(error => {
           console.log('my error is ', error)                             // falls url fehlerhaft ist wird ein Fehler gemeldet 

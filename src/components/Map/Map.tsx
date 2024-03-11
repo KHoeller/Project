@@ -7,7 +7,7 @@ import Map from 'ol/Map';
 // Map style laden 
 import './Map.css';
 
-import FeatureInfo from '../FeatureInfo/featureInfo';
+// import FeatureInfo from '../FeatureInfo/featureInfo'; --> hier unnötig, Beispiel für relativen Pfad
 
 export type MapCompProps = {
     map: Map;
@@ -16,7 +16,7 @@ export type MapCompProps = {
 export default function MapComp ({ map }: MapCompProps) {
 
     console.log(map)
-
+    // Beispiel: 
     // console.log('Hallo aus der Map');
     // const [myText, setMyText] = useState('Hallo Welt');
     // useEffect(() => {
@@ -29,35 +29,20 @@ export default function MapComp ({ map }: MapCompProps) {
     // };
     // myFunc()                                              
 
-    useEffect(() => {
-        // const map = new Map({
-        //     layers: Layers(), // damit Array statt der Funktion verwendet wird 
-        //     target: 'map',
-        //     view: new View({
-        //         center: [1141371, 6735169],
-        //         zoom: 4,
-        //     }),
-        // });
-
+    useEffect(() => {       // function wird nur einmal initial aufgerufen; in den eckigen Klammern kann man eine Bedingung eingeben, bei der es erneut aufgerufen wird z.B. map, wenn sich die map ändert
         map.setTarget('map');
-
-
-        // map.on('click', (evt) => FeatureInfo(evt, map)); // featureInfo --> ich brauche für beide Funktionen map -> das muss ich hieraus exportieren
-    }, []); // wofür ist }, []); -> wofür sind die [] wie oben im Beispiel 
-  
+    }, []); 
 
     return (
-        <>
             <div 
                 id='map' 
                 className ='map'>
                     Umwelt-Gesundheitskarte 
             </div>
-            {/* <div id='info' className ='info'>value:</div>   
-             value wird derzeit ersetzt, wenn man geclickt hat  */}
-        </>
     );
 }
+
+
 
 // CSS
     // {
@@ -88,3 +73,5 @@ export default function MapComp ({ map }: MapCompProps) {
     //         </div>
     //     );
     // }
+
+    
