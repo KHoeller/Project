@@ -30,9 +30,8 @@ export default function App () {
             />  
             <FeatureInfo
                 map={map} 
-                evt=''
-                
-                />    
+                />   
+            
             <MousePosition
                 map={map}
                 

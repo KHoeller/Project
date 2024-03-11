@@ -1,6 +1,6 @@
 
 // Component MousePosition
-import React from 'react';
+import React, {useEffect} from 'react';
 import './mousePosition.css';
 import Map from 'ol/Map';
 
@@ -13,13 +13,15 @@ export type MousePositionProps = {
 
 export default function MousePositionControl ({map}: MousePositionProps) {
     
-        const mousePosition = new MousePosition({      //aktuelle Mausposition 
+        useEffect(() => {                                   // useEffect -> erst wird das div unten im html body erstellt und dann der Befehl ausgeführt, sodass die Koordinaten ins div eingetragen werden können 
+            const mousePosition = new MousePosition({      //aktuelle Mausposition 
             coordinateFormat: createStringXY(5),                // Koordinaten auf 7 Nachkommastellen 
             projection: 'EPSG:3857',
             target: 'mouse-position',                              // Eintragen in html bei div mouse-position -> in File Map
         });
         
         map.addControl(mousePosition);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
+        })
 
     return(
         <div id = 'mouse-position' className = 'mouse-position'></div>

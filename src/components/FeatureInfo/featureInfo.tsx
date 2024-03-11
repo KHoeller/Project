@@ -4,25 +4,21 @@ import Layers from '../LayerN/LayerN';
 import TileWMS from 'ol/source/TileWMS.js';
 import { MapBrowserEvent } from 'ol';
 import Map from 'ol/Map';
-import View from 'ol';
-import {createStringXY} from 'ol/coordinate'; 
-
 
 import './featureInfo.css';
 
 export type FeatureInfoProps = {
-    map: Map,
-    evt: MapBrowserEvent<any>
+    map: Map
 };
 
-export default function FeatureInfo ({ /*evt,*/ map}: FeatureInfoProps){
+export default function FeatureInfo ({ map}: FeatureInfoProps){
 
     console.log(map)
     
     const [feature, setFeature] = useState('');
  
         useEffect(() => {
-            const handleClick = ({evt, map}:FeatureInfoProps) => {
+            const handleClick = (evt: MapBrowserEvent<any>) => {
                 // console.log(evt.coordinate);
                 const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
                 const source = Layers()[7]?.getSource();
@@ -59,7 +55,7 @@ export default function FeatureInfo ({ /*evt,*/ map}: FeatureInfoProps){
     
         
     return (
-            <div id='info' className ='info'>value:</div>            
+            <div id='info' className ='info'>value: {feature} </div>            
     )
 }
 
