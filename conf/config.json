@@ -11,7 +11,7 @@
     }, {
         "name": "TravelTime",
         "visible": false,
-        "queryable": false
+        "queryable": true
     }, {
         "name": "Agriculture_DE",
         "visible": false,
@@ -41,35 +41,53 @@
         "visible": false,
         "queryable": true
     }, {
-        "name": "R_NO2_2017"
+        "name": "R_NO2_2017",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NO2_2018"
+        "name": "R_NO2_2018",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NO2_2019",
         "visible": false,
         "queryable": true
     }, {
-        "name": "R_NO2_2020"
+        "name": "R_NO2_2020",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NO2_2021"
+        "name": "R_NO2_2021",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NOx_2014"
+        "name": "R_NOx_2014",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_NOx_2015",
         "visible": false,
         "queryable": true
     }, {
-        "name": "R_NOx_2016"
+        "name": "R_NOx_2016",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NOx_2017"
+        "name": "R_NOx_2017",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_NOx_2018"
+        "name": "R_NOx_2018",
+        "visible": true,
+        "queryable": true
     }, {
         "name": "R_NOx_2020",
         "visible": false,
         "queryable": true
     }, {
-        "name": "R_NOx_2021"
+        "name": "R_NOx_2021",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_PM10_2006",
         "visible": false,
@@ -78,11 +96,17 @@
         "name": "R_PM10_2007",
         "queryable": true
     }, {
-        "name": "R_PM10_2008"
+        "name": "R_PM10_2008",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2009"
+        "name": "R_PM10_2009",
+        "visible": false,
+        "queryable": true
     }, {
-        "name": "R_PM10_2010"
+        "name": "R_PM10_2010",
+        "visible": false,
+        "queryable": true
     }, {
         "name": "R_PM10_2011",
         "visible": false,
