@@ -28,8 +28,8 @@ export default function Layers () {
         let isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false; // default: alle Layer ohne Angabe zu visible sind false = unsichtbar / (true = sichtbar)
         let isQueryable = layerConfig.queryable !== undefined ? layerConfig.queryable : false;
 
-        console.log("Layername: ", name);               // das klappt
-        console.log('is Queryable:', isQueryable);      // das klappt 
+        // console.log("Layername: ", name);               // das klappt
+        // console.log('is Queryable:', isQueryable);      // das klappt 
 
         let newLayer = new TileLayer({
             source: new TileWMS({
@@ -42,8 +42,8 @@ export default function Layers () {
             visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
             // queryable: isQueryable, 
         });
-        newLayer.set('name', name);
-        newLayer.set('queryable', isQueryable);
+        newLayer.set('name', name);                 // ist das so korrekt? 
+        newLayer.set('queryable', isQueryable);     // ist das so korrekt? 
 
         layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
             // layers ist ein Array mit Objekten zu jedem Layer aus dem Geoserver inklusive visible

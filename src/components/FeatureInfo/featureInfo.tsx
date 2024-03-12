@@ -4,39 +4,43 @@ import Layers from '../../utils/LayerN/LayerN';
 import TileWMS from 'ol/source/TileWMS.js';
 import { MapBrowserEvent } from 'ol';
 import Map from 'ol/Map';
-
 import './featureInfo.css';
-// import LayerConfig from '../../../conf/config.json';
+
 
 export type FeatureInfoProps = {
     map: Map
 };
 
+// TODO derzeit funktioniert das nur für Rasterdaten? -Vectordaten? - vektordaten in einem bestimmten Bereich drumherum muss das noch erkannt werden 
+
 export default function FeatureInfo ({ map }: FeatureInfoProps){
 
     // console.log(map)
-    console.log(Layers);
+    // console.log(Layers);
     
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState({name: '', value:''});
  
     useEffect(() => {
         const handleClick = (evt: MapBrowserEvent<any>) => {
-            // console.log(evt.coordinate);
+            
+
             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
-            // TODO make all* (config.json) layers queryable
-            const layersArray = Layers();
+            const layersArray = Layers();       // TODO make all* (config.json) layers queryable
+
 
             for (const layer of layersArray) {
                 
                 const isLayerQueryable = layer.get('queryable') ?? false;
                 const isLayerVisible = layer.get('visible') ?? false; 
-                console.log(isLayerVisible);
+                const name = layer.get('name'); 
+                // console.log(name)
+                // console.log(isLayerVisible);
 
                 if (isLayerQueryable && isLayerVisible) {
                     const source = layer.getSource();
                     console.log(source)
                 if (source instanceof TileWMS) {                                    // sofern die Quelle TileWMS ist -> kann getFeatureInfo abgerufen werden 
-                const url = source?.getFeatureInfoUrl(                             // mit der Eventkoordinate, der aktuellen Auflösung/Kartenausschnitt, dem CRS und dem Format für die Ausgabe 
+                const url = source?.getFeatureInfoUrl(                              // mit der Eventkoordinate, der aktuellen Auflösung/Kartenausschnitt, dem CRS und dem Format für die Ausgabe 
                     evt.coordinate,
                     viewResolution,
                     'EPSG:3857',
@@ -52,7 +56,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                             if (responseObject.features && responseObject.features.length > 0) {
                                 const grayIndex = responseObject.features[0].properties.GRAY_INDEX;
                                 console.log(grayIndex);
-                                setValue(`${grayIndex}`); /*GRAY_INDEX: */
+                                setValue({name: name, value: `${grayIndex}`}); 
                             }
                         })
                         .catch(error => {
@@ -63,8 +67,10 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                 }
                 }
                 };
+                
             }
-        }
+            // TODO show results for each layer 
+        };
             
             
 
@@ -79,27 +85,33 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
     
         
     return (
-            <div id='info' className ='info'>Value: {value} </div>            
+            <div id='info' className ='info'> {value.name}: {value.value} </div>            
     )
 }
 
 
 
-// import React, {useEffect, useState} from 'react';
+
+
+
+// Basis FeatureInfo für jeden sichtbaren und queryable Layer ausgeben lassen (aber nur der letzte in der Konsole!) 
+// import React, { useEffect, useState } from 'react';
 // import Layers from '../../utils/LayerN/LayerN';
 // import TileWMS from 'ol/source/TileWMS.js';
 // import { MapBrowserEvent } from 'ol';
 // import Map from 'ol/Map';
 
 // import './featureInfo.css';
+// // import LayerConfig from '../../../conf/config.json';
 
 // export type FeatureInfoProps = {
 //     map: Map
 // };
 
-// export default function FeatureInfo ({ map}: FeatureInfoProps){
+// export default function FeatureInfo ({ map }: FeatureInfoProps){
 
-//     console.log(map)
+//     // console.log(map)
+//     console.log(Layers);
     
 //     const [value, setValue] = useState('');
  
@@ -108,16 +120,25 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
 //             // console.log(evt.coordinate);
 //             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
 //             // TODO make all* (config.json) layers queryable
-//             const source = Layers()[7]?.getSource();
+//             const layersArray = Layers();
+
+//             for (const layer of layersArray) {
                 
-//             if (source instanceof TileWMS) {                                    // sofern die Quelle TileWMS ist -> kann getFeatureInfo abgerufen werden 
+//                 const isLayerQueryable = layer.get('queryable') ?? false;
+//                 const isLayerVisible = layer.get('visible') ?? false; 
+//                 console.log(isLayerVisible);
+
+//                 if (isLayerQueryable && isLayerVisible) {
+//                     const source = layer.getSource();
+//                     console.log(source)
+//                 if (source instanceof TileWMS) {                                    // sofern die Quelle TileWMS ist -> kann getFeatureInfo abgerufen werden 
 //                 const url = source?.getFeatureInfoUrl(                             // mit der Eventkoordinate, der aktuellen Auflösung/Kartenausschnitt, dem CRS und dem Format für die Ausgabe 
 //                     evt.coordinate,
 //                     viewResolution,
 //                     'EPSG:3857',
 //                     { 'INFO_FORMAT': 'application/json' }                          
 //                 );
-//                 console.log(url)  
+//                 // console.log(url)  
         
 //                 if (url) {
 //                     fetch(url)
@@ -136,8 +157,12 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
 //                             alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
 //                         });
 //                 }
+//                 }
+//                 };
 //             }
-//         };
+//         }
+            
+            
 
 //         map.on('singleclick', handleClick); //
 
@@ -153,7 +178,6 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
 //             <div id='info' className ='info'>Value: {value} </div>            
 //     )
 // }
-
 
 
 // map.on('singleclick', function (evt) {                      // map.on - Arbeiten auf der map; on ist die Methode -> zwei Argumente - vordefiniertes Event! singeclick/dblclick/click; 

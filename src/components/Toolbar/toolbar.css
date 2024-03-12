@@ -1,0 +1,31 @@
+
+.buttonContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: absolute;
+    left: 1px; /* Position der linken Leiste */
+    top: 75px; 
+}
+.button {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+}
+
+.tool{
+    width: 35px;
+    /* height: 35px;  */
+    background-color: white; 
+    
+    border-color: grey;   
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    text-align: center;
+
+} 
+
+.tool:hover {
+    background-color: lightgrey !important; /* Ändere die Hintergrundfarbe bei Hover (wenn Maus über Button fährt*/
+}

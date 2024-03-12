@@ -208,6 +208,14 @@
         "name": "R_PM25_2021",
         "queryable": true
     }, {
+        "name": "Gemeindegrenzen",
+        "visible": true,
+        "queryable": false
+    }, {
+        "name": "Nationalgrenze_DE",
+        "visible": true,
+        "queryable": false
+    }, {
         "name": "V_CO_2021",
         "queryable": true
     }, {
@@ -226,17 +234,11 @@
         "name": "V_PM10_2021",
         "visible": true
     }, {
-        "name": "Gemeindegrenzen",
-        "queryable": false
-    }, {
         "name": "Hospitals_DE",
         "queryable": true
     },  {
         "name": "Hospitals_2_dach",
         "queryable": true
-    }, {
-        "name": "Nationalgrenze_DE",
-        "queryable": false
     }
     ]
 }

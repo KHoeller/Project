@@ -15,7 +15,7 @@ export type MapCompProps = {
 
 export default function MapComp ({ map }: MapCompProps) {
 
-    console.log(map)
+    // console.log(map)
     // Beispiel: 
     // console.log('Hallo aus der Map');
     // const [myText, setMyText] = useState('Hallo Welt');

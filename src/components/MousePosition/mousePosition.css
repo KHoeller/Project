@@ -1,8 +1,16 @@
 
 .mouse-position {
-    /* padding: 5px; */
-    /* border: 1px solid black;  */
-    z-index: 100; 
-    background-color: white;
-} 
+    position: fixed;      /* Positionierung relativ zum Viewport */
+    bottom: 30px;         /* Abstand zum unteren Rand des Viewports */
+    left: 5px;            /* Abstand zum linken Rand des Viewports */
+    padding: 10px;        /* Innenabstand */
+    /* border: 1px solid black;
+    z-index: 600;         /* Z-Index, um sicherzustellen, dass das Feld über anderen Inhalten liegt */
+    color: #000000; 
+    width: 280px; 
+    height: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 

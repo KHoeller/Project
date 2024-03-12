@@ -11,8 +11,10 @@ import { mapView } from './conf/config.json';
 
 
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
-
 import MousePosition from './src/components/MousePosition/mousePosition';
+import Toolbar from './src/components/Toolbar/toolbar';
+import Baseboard from './src/components/Baseboard/baseboard';
+import Sidebar from './src/components/Sidebar/sidebar';
 
 export default function App () {
     console.log(mapView);
@@ -20,8 +22,7 @@ export default function App () {
    
     const map = useMemo(() => { 
         return new Map({
-            layers: Layers(), // damit Array statt der Funktion verwendet wird 
-            // target: 'map',
+            layers: Layers(),                   // damit Array statt der Funktion verwendet wird 
             view: new View({
                 center: mapView.center,
                 zoom: mapView.zoom,
@@ -35,19 +36,27 @@ export default function App () {
             <MapComp
                 map={map}
             />  
+
             <FeatureInfo
                 map={map} 
-                />   
+            />   
             
+            <Toolbar/>
+
+            <Sidebar/>
+
             <MousePosition
-                map={map}
-                />    
-                
+                map={map}  
+            />  
+
+            <Baseboard/>
         </>
     )
 }
 
-// bei <Map> müsste doch dann onClick vorkommen, damit dann die Featureinfos angezeigt werden? 
+
+
+
 
 
 // import [componentname] from './filename'; oder
@@ -59,8 +68,6 @@ export default function App () {
 
 // {} -> reads the value of a javaScript 
 // <img className = '' src='' alt='' width={} heigth0{} /> 
-
-
 
 // example: 
 

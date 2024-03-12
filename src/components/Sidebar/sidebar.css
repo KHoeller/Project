@@ -1,0 +1,29 @@
+/* .sidebar{
+    position: absolute;
+    height: 100%;
+    width: 350px;
+    right: 0px;
+    top: 0px;
+    background-color: aliceblue; 
+    display: flex;
+} */
+
+.sidebarContainer {
+    position: relative;
+}
+
+.sidebarDrawer {
+    background-color: #fff; /* Hintergrundfarbe des Drawer-Inhalts */
+}
+
+.openButton {
+    position: fixed;
+    top: 20px; 
+    right: 0;
+    background: white;
+    border-color: grey;
+    transition: right 0.3s;
+}
+.openButton:hover{
+    background-color: lightgrey !important;
+}

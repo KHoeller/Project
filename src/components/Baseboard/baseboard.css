@@ -1,0 +1,22 @@
+.baseboard {
+    margin: 0;
+    padding: 0;
+    position: fixed; 
+    bottom: 0; 
+    left: 0;
+    width: 100%;
+    /* background-color: floralwhite; */
+    
+    height: 25px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+}
+
+.baseboard div {
+    flex: 1;
+    text-align: center;
+    border-right: none;
+    padding: 10px;
+}
+
