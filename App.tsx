@@ -25,7 +25,7 @@ export default function App () {
             layers: Layers(),                   // damit Array statt der Funktion verwendet wird 
             view: new View({
                 center: mapView.center,
-                zoom: mapView.zoom,
+                zoom: mapView.zoom
             }),
         });
     }, []) 
@@ -43,13 +43,15 @@ export default function App () {
             
             <Toolbar/>
 
+            
+
             <Sidebar/>
 
             <MousePosition
                 map={map}  
             />  
 
-            <Baseboard/>
+            <Baseboard />
         </>
     )
 }

@@ -17,7 +17,7 @@ export default function MousePositionControl ({map}: MousePositionProps) {
         const mousePosition = new MousePosition({           //aktuelle Mausposition 
         coordinateFormat: createStringXY(5),                // Koordinaten auf 7 Nachkommastellen 
         projection: 'EPSG:3857',
-        target: 'mouse-position',                           // Eintragen in html bei div mouse-position -> in File Map
+        target: 'mousePosition',                           // Eintragen in html bei div mouse-position -> in File Map
         });
         
         map.addControl(mousePosition);  // auf der Karte die aktuellen Koordinaten der Maus anzeigen 
@@ -26,10 +26,14 @@ export default function MousePositionControl ({map}: MousePositionProps) {
             map.removeControl(mousePosition);
         };
 
-        }, [map])
+    }, [map])
 
     return(
-        <div id = 'mouse-position' className = 'mouse-position'></div>
+        <>
+            <div  >
+                <div id='mousePosition'></div>
+            </div>
+        </>
     )
 };      
 

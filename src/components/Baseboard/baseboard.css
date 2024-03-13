@@ -1,22 +1,27 @@
 .baseboard {
-    margin: 0;
-    padding: 0;
     position: fixed; 
     bottom: 0; 
     left: 0;
     width: 100%;
-    /* background-color: floralwhite; */
-    
-    height: 25px;
+    height: auto;
     display: flex;
     flex-direction: row;
-    align-items: center; 
+    flex-wrap: wrap;
+    background-color: ivory;
+    font-size: 9pt;
+    align-items: center;
 }
 
 .baseboard div {
     flex: 1;
-    text-align: center;
     border-right: none;
     padding: 10px;
-}
+    font-size: 9pt;
+    display: flex;    
+    text-align: center;
+    align-items: center;
+    
+} 
 
+
+/* Wichtig für die unterschiedlichen Überschriften (h1 - h6) und Absatz p */

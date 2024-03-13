@@ -14,20 +14,20 @@
         "queryable": true
     }, {
         "name": "Agriculture_DE",
-        "visible": false,
-        "queryable": true
+        "visible": true,
+        "queryable": false
     }, {
         "name": "Forest_DE",
-        "visible": false,
-        "queryable": true
+        "visible": true,
+        "queryable": false
     }, {
         "name": "Water_bodies_DE",
-        "visible": false,
-        "queryable": true
+        "visible": true,
+        "queryable": false
     }, {
         "name": "Wetlands_DE",
         "visible": false,
-        "queryable": true
+        "queryable": false
     }, {
         "name": "R_NO2_2014",
         "visible": true,

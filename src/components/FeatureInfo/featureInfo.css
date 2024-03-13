@@ -4,9 +4,10 @@
     bottom: 30px;
     right: 15px;
        
-        
+    width:auto;    
     /* padding: 5px; */
     border: 1px solid black; 
     z-index: 100; 
     background-color: cornsilk;
+    
 }

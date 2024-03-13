@@ -31,7 +31,9 @@ export default function Sidebar (){
                 type="primary"
                 onClick={showDrawer}
                 className="openButton"
-                style={{ right: open ? '380px' : '0' }}
+                shape='default'
+                size='small'
+                style={{ right: open ? '380px' : '0', padding: '0px !important'}}
             > {open ? <MenuUnfoldOutlined style={{color: 'black'}}/> : <MenuFoldOutlined style={{color: 'black'}}/> }
             </Button>
         </div>
