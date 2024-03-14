@@ -38,3 +38,10 @@
 .ol-control button {
     margin: 4px; 
 }
+
+.ol-scale-line{
+    position: absolute;
+    bottom: 80px;
+    left: 5px; 
+    background: transparent;
+} 

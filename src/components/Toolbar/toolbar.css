@@ -14,15 +14,13 @@
     /* background-color: white;
 }  */
 
-.tool{
-    background-color: white; 
-    border-color: grey;   
+.tool{   
     border-radius: 6px; 
     width: 32px;
     height: 32px;
 
 } 
 
-.tool:hover {
+/* .tool:hover {
     background-color: lightgrey !important; 
-} /*Ändere die Hintergrundfarbe bei Hover (wenn Maus über Button fährt */
+} Ändere die Hintergrundfarbe bei Hover (wenn Maus über Button fährt */

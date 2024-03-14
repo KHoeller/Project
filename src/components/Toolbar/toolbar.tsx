@@ -12,10 +12,10 @@ export default function Toolbar (){
     return(
         <>
             <div className="buttonContainer">
-                <Button type="primary" className= 'tool' icon= { <ToolTwoTone twoToneColor='black'/>} shape='default' size={size}/>
-                <Button className= 'tool' type="primary"  icon= { <AimOutlined style={{ color: 'black'}}/>} shape='default' size={size} />
-                <Button type="primary" className='tool' icon= { <DownloadOutlined style={{ color: 'black'}}/>} size={size} shape='default'  />
-                <Button className= 'tool' type="primary" shape ='default' size ={size}/> 
+                <Button type="text" className= 'tool' icon= { <ToolTwoTone twoToneColor='black'/>} shape='default' size={size}/>
+                <Button className= 'tool' type="text"  icon= { <AimOutlined style={{ color: 'black'}}/>} shape='default' size={size} />
+                <Button type="text" className='tool' icon= { <DownloadOutlined style={{ color: 'black'}}/>} size={size} shape='default'  />
+                <Button className= 'tool' type="text" shape ='default' size ={size}/> 
             </div>
         </>
     )

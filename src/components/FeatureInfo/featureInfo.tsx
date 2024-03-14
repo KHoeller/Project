@@ -25,10 +25,10 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
         const handleClick = (evt: MapBrowserEvent<any>) => { // function for dealing with a click in the Browser 
             
             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
+            // TODO make use of the existing layers in the map
             const layersArray = Layers();       // TODO make all* (config.json) layers queryable // TileLayer mit allen Layern 
 
             let tempUpdatedValue: { layerName: string, attributeName: string, value: string }[] = [];
-            
 
             for (const layer of layersArray) {      // iterate over all layers 
                 
@@ -38,6 +38,8 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                 // console.log(name)
                 // console.log(isLayerVisible);
 
+                console.log(name, isLayerQueryable);
+                
                 if (isLayerQueryable && isLayerVisible) {                       // sofern layer visible = true und queryable = true ist, werden die folgenden Schritte ausgeführt
                     const source = layer.getSource();                           // getSource des jeweiligen Layers, um auf den Geoserver und die Daten zugreifen zu können 
                     console.log(source)

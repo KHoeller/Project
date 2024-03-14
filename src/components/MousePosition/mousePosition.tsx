@@ -30,9 +30,7 @@ export default function MousePositionControl ({map}: MousePositionProps) {
 
     return(
         <>
-            <div  >
-                <div id='mousePosition'></div>
-            </div>
+            <div id='mousePosition'></div>
         </>
     )
 };      

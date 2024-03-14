@@ -3,6 +3,7 @@
 // imports from OSM 
 import Map from 'ol/Map';   
 import View from 'ol/View.js';
+import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
 
 import React, { useMemo } from 'react';
 
@@ -16,25 +17,29 @@ import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 import MousePosition from './src/components/MousePosition/mousePosition';
 import Toolbar from './src/components/Toolbar/toolbar';
-import Baseboard from './src/components/Baseboard/baseboard';
+// import Baseboard from './src/components/Baseboard/baseboard';
 import Sidebar from './src/components/Sidebar/sidebar';
 
-import About from './src/components/About/about'; 
+    // import About from './src/components/About/about'; 
+
 
 export default function App () {
     console.log(mapView);
 
+    const scaleControl = useMemo(() => new ScaleLine(), []);
    
     const map = useMemo(() => { 
-        return new Map({                        // initial view 
+        return new Map({  
+            controls: defaultControls().extend([scaleControl]),                      
             layers: Layers(),                   // damit Array statt der Funktion verwendet wird 
-            view: new View({
+            view: new View({                    // initial view
                 center: mapView.center,
-                zoom: mapView.zoom
+                zoom: mapView.zoom            
             }),
         });
-    }, []) 
-      
+    }, [scaleControl]) 
+    
+  
 
     return ( 
         <> 
@@ -48,12 +53,12 @@ export default function App () {
 
             <Sidebar/>
 
-            <MousePosition
-                map={map} />  
+            {/* <MousePosition
+                map={map} />   */}
 
-            <Baseboard map={map}/>
+            {/* <Baseboard map={map}/> */}
 
-            <About />
+            {/* <About /> */}
         </>
     )
 }

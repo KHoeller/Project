@@ -1,5 +1,6 @@
 {
     "name": "wms-tiled",
+    "version": "1.0.0",
     "devDependencies": {
         "@types/node": "^20.11.21",
         "@types/ol": "^7.0.0",

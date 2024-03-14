@@ -21,13 +21,13 @@ export default function About (){
     
     return (
     <>
-        <Button className='buttonAbout' type="primary" onClick={showModal}>
-        About
+        <Button className='buttonAbout' type="text" onClick={showModal}>
+            About
         </Button>
         <Modal title="About the Project" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
         </Modal>
     </>
     );

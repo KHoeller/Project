@@ -1,13 +1,14 @@
 {
     "mapView": {
         "center": [1141371, 6735169],
-        "zoom": 4
+        "zoom": 5
     },
 
     "layers": [{
         "name": "EwDichte",
         "visible": false,
-        "queryable": true
+        "queryable": true,
+        "info": "Lorem ipsum…"
     }, {
         "name": "TravelTime",
         "visible": false,
@@ -23,7 +24,7 @@
     }, {
         "name": "Water_bodies_DE",
         "visible": true,
-        "queryable": true
+        "queryable": false
     }, {
         "name": "Wetlands_DE",
         "visible": false,
@@ -232,7 +233,8 @@
         "queryable": true
     }, {
         "name": "V_PM10_2021",
-        "visible": true
+        "visible": true,
+        "queryable": true
     }, {
         "name": "Hospitals_DE",
         "queryable": true

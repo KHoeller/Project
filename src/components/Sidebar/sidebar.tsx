@@ -28,14 +28,15 @@ export default function Sidebar (){
                 <p> Hier kommen die verschiedenen Layer hin </p>
             </Drawer>
             <Button
-                type="primary"
+                type="text"
                 onClick={showDrawer}
-                className="openButton"
+                className={open ? "openButton openButtonDrawerOpen" : "openButton"}
+                // "openButton" (wenn unten der style verwendet wird, dann Klasse openButton); so wird je nach Zustand die Klasse in css gewählt 
                 shape='default'
                 size='middle'
-                style={{ right: open ? '380px' : '0', display: 'inline-flex'}}
+                //style={{ right: open ? '380px' : '0' }}
             > 
-            {open ? <MenuUnfoldOutlined style={{color: 'black'}}/> : <MenuFoldOutlined style={{color: 'black'}}/> }
+            {open ? <MenuUnfoldOutlined style={{color: 'black', fontSize: 20}}/> : <MenuFoldOutlined style={{color: 'black', fontSize: 20}}/> }
             </Button>
         </div>
        

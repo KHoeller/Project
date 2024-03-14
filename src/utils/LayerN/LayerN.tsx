@@ -41,9 +41,13 @@ export default function Layers () {
             
             visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
             // queryable: isQueryable, 
+            properties: {
+                name: name,
+                queryable: isQueryable
+            }
         });
-        newLayer.set('name', name);                 // ist das so korrekt? 
-        newLayer.set('queryable', isQueryable);     // ist das so korrekt? 
+        // newLayer.set('name', name);                 // ist das so korrekt? 
+        // newLayer.set('queryable', isQueryable);     // ist das so korrekt? 
 
         layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
             // layers ist ein Array mit Objekten zu jedem Layer aus dem Geoserver inklusive visible

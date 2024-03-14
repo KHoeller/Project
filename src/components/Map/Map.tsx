@@ -4,6 +4,8 @@
 import React, { useEffect } from 'react';
 import Map from 'ol/Map';
 
+import Baseboard from '../Baseboard/baseboard';
+
 // import style for MapComp
 import './Map.css';
 
@@ -36,6 +38,7 @@ export default function MapComp ({ map }: MapCompProps) {
             <div className='mapContainer'>
                 <h1 className='map-heading'>Umwelt-Gesundheitskarte für Deutschland</h1>
                 <div id='map' className ='map'></div>
+                <Baseboard map={map}/>
             </div>
     );
 }
