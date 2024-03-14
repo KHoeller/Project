@@ -4,7 +4,7 @@
 .ol-mouse-position {
     position: fixed;
     right: 85%;
-    top: 93%;
+    top:  93%;
     padding: 5px;
     background-color: rgba(255, 255, 255, 0.8); /* Hintergrundfarbe mit Transparenz */
     border: 1px solid #ccc; /* Randstil und Farbe */

@@ -1,27 +1,32 @@
+// Root Document (App)
 
-import MapComp from './src/components/Map/Map';
-
-import Map from 'ol/Map';
+// imports from OSM 
+import Map from 'ol/Map';   
 import View from 'ol/View.js';
 
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 
+// import Object with Layers 
 import Layers from "./src/utils/LayerN/LayerN";
+// import MapView and ZoomLevel
 import { mapView } from './conf/config.json'; 
 
-
+// import Components 
+import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 import MousePosition from './src/components/MousePosition/mousePosition';
 import Toolbar from './src/components/Toolbar/toolbar';
 import Baseboard from './src/components/Baseboard/baseboard';
 import Sidebar from './src/components/Sidebar/sidebar';
 
+import About from './src/components/About/about'; 
+
 export default function App () {
     console.log(mapView);
 
    
     const map = useMemo(() => { 
-        return new Map({
+        return new Map({                        // initial view 
             layers: Layers(),                   // damit Array statt der Funktion verwendet wird 
             view: new View({
                 center: mapView.center,
@@ -31,27 +36,24 @@ export default function App () {
     }, []) 
       
 
-    return (
+    return ( 
         <> 
             <MapComp
-                map={map}
-            />  
+                map={map} />  
 
             <FeatureInfo
-                map={map} 
-            />   
+                map={map} />   
             
             <Toolbar/>
-
-            
 
             <Sidebar/>
 
             <MousePosition
-                map={map}  
-            />  
+                map={map} />  
 
-            <Baseboard />
+            <Baseboard map={map}/>
+
+            <About />
         </>
     )
 }

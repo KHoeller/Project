@@ -7,7 +7,7 @@ import { ToolTwoTone, AimOutlined, DownloadOutlined } from '@ant-design/icons';
 
 export default function Toolbar (){
 
-    const [size, setSize] = useState<SizeType>('small');
+    const size = 'middle';
 
     return(
         <>

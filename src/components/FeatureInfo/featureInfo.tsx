@@ -43,13 +43,13 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                     console.log(source)
                     if (source instanceof TileWMS) {                                    // sofern die Quelle TileWMS ist -> kann getFeatureInfo abgerufen werden 
                         
-                        const hitTolerance = 100;
+                        const hitTolerance = 100; // !!!
                         
                         const url = source?.getFeatureInfoUrl(                              // mit der Eventkoordinate, der aktuellen Auflösung/Kartenausschnitt, dem CRS und dem Format für die Ausgabe 
                             evt.coordinate,
                             viewResolution,
                             'EPSG:3857',
-                            { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }  ,                   
+                            { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }  ,            ///!!!       
                         );
                     // console.log(url)  
             
@@ -62,6 +62,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                         
             // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 
             // !!! Toleranz-Bereich für Vector-Data, da man diese sonst nie angezeigt bekommt?! 
+            // !!! ToleranzBereich anzeigen lassen? 
             
                                         // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
                                         

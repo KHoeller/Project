@@ -17,13 +17,24 @@
 }
 
 .openButton {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
     position: fixed;
-    top: 20px; 
+    top: 60px; 
     right: 0;
+    width: 32px;
+    padding: 0px 0px;
     background: white;
     border-color: grey;
-    transition: right 0.3s;
+    transition: right 0.3s; 
+    border-radius: 6px;     
 }
+
+/* .openButton .anticon{
+    transform: translateX(-3.5px);
+} */
+
 .openButton:hover{
     background-color: lightgrey !important;
 }

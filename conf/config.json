@@ -23,7 +23,7 @@
     }, {
         "name": "Water_bodies_DE",
         "visible": true,
-        "queryable": false
+        "queryable": true
     }, {
         "name": "Wetlands_DE",
         "visible": false,

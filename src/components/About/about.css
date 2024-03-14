@@ -1,0 +1,12 @@
+.buttonAbout{
+    background-color: white;
+    border-color: grey;
+    color: black;
+    padding: 0px 10px;
+    height: auto;
+}
+
+.buttonAbout:hover{
+    background-color: lightgray !important;
+    color: black !important;
+}

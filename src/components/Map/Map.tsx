@@ -1,14 +1,13 @@
 
-// Component Map 
+// Component Map: Map + Headline (+ css for ol-zoom)
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Map from 'ol/Map';
 
-// Map style laden 
+// import style for MapComp
 import './Map.css';
 
-// import FeatureInfo from '../FeatureInfo/featureInfo'; --> hier unnötig, Beispiel für relativen Pfad
-
+// Define Types for Component function 
 export type MapCompProps = {
     map: Map;
 };
@@ -31,17 +30,17 @@ export default function MapComp ({ map }: MapCompProps) {
 
     useEffect(() => {       // function wird nur einmal initial aufgerufen; in den eckigen Klammern kann man eine Bedingung eingeben, bei der es erneut aufgerufen wird z.B. map, wenn sich die map ändert
         map.setTarget('map');
-    }, []); 
+    }, [map]); 
 
     return (
-            <div 
-                id='map' 
-                className ='map'>
-                    Umwelt-Gesundheitskarte 
+            <div className='mapContainer'>
+                <h1 className='map-heading'>Umwelt-Gesundheitskarte für Deutschland</h1>
+                <div id='map' className ='map'></div>
             </div>
     );
 }
 
+// MapContainer mit einer Überschrift (Heading 1) und einer Karte 
 
 
 // CSS
