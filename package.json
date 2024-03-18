@@ -2,6 +2,7 @@
     "name": "wms-tiled",
     "version": "1.0.0",
     "devDependencies": {
+        "@types/geojson": "^7946.0.14",
         "@types/node": "^20.11.21",
         "@types/ol": "^7.0.0",
         "@types/react": "^18.2.63",
@@ -15,7 +16,10 @@
     },
     "dependencies": {
         "@ant-design/icons": "^5.3.1",
+        "@terrestris/react-util": "^3.0.0",
         "antd": "^5.15.2",
+        "geojson": "^0.5.0",
+        "lodash": "^4.17.21",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }

@@ -19,6 +19,7 @@ import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 import Toolbar from './src/components/Toolbar/toolbar';
 import Sidebar from './src/components/Sidebar/sidebar';
+// import NominatimSearch from './src/components/Search/search';
 
 export default function App () {
     console.log(mapView);
@@ -43,12 +44,13 @@ export default function App () {
             <MapComp
                 map={map} />  
 
+            {/* <NominatimSearch map={map}/> */}
             <FeatureInfo
                 map={map} />   
             
             <Toolbar/>
 
-            <Sidebar/>
+            <Sidebar map={map}/>
 
         </>
     )

@@ -1,4 +1,9 @@
+
+// drawer bleibt geöffnet auch wenn zoom o.ä. geclickt wird / es gibt keinen MaskLayer mehr, wenn drawer offen ist 
+// drawer kann mit button oder x geschlossen werden  
+
 import React, { useState, useEffect } from "react";
+import Map from 'ol/Map';  
 import './sidebar.css';
 
 import { Button, Drawer } from 'antd';
@@ -6,8 +11,11 @@ import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import LayerTree from "../LayerTree/layerTree";
 
+export type SidebarProps = {
+    map: Map;
+}
 
-export default function Sidebar (){
+export default function Sidebar ({map}:SidebarProps){
 
     const [open, setOpen] = useState(false);
   
@@ -28,7 +36,6 @@ export default function Sidebar (){
         <div className="sidebarContainer" >
              <Drawer
                 title='Themenbaum'
-                // getContainer=''
                 onClose={onClose}
                 open={open}
                 placement="right"
@@ -37,7 +44,7 @@ export default function Sidebar (){
                 mask={false}
                 keyboard={true}
             >
-                <LayerTree/>
+                <LayerTree map={map}/>
 
                 {/* <p> Hier kommen die verschiedenen Layer hin </p> im LayerTree*/}
             </Drawer>

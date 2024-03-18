@@ -1,4 +1,4 @@
-// Component Layers
+// Layers
 
 // notwendige Imports:
 import OSM from 'ol/source/OSM.js';
@@ -14,10 +14,22 @@ export default function Layers () {
 // LayerArray für die Webapplikation erstellen und lesbar speichern 
     let layers: TileLayer<TileSource>[] = [];       
 
-    layers.push(new TileLayer({
-    source: new OSM(),                    // der erste Layer liegt ganz zu unterst; hier: OSM
-    }));
+    // OSM Layer: 
+    let osmLayer = new TileLayer({              // OSM-Layer erstellen als BasisKarte
+        source: new OSM(),
+    });
 
+    osmLayer.set('name', 'osm');                // zum Layer Informationen wie Name, Title, Visibility hinzufügen 
+    osmLayer.set('title', 'OpenStreetMap');
+    osmLayer.set('visible', true);
+    
+    layers.push(osmLayer)
+
+
+    // Layer WMS Laermkartierung: 
+
+
+    // Layers aus der Config.-Datei
     let LayerArray = Object.values(jsondata.layers); // array
 
     for (let i = 0; i < LayerArray.length; i++) { // für jeden Eintrag des Arrays wird der Name gefiltert
@@ -26,15 +38,15 @@ export default function Layers () {
         let isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false; // default: alle Layer ohne Angabe zu visible sind false = unsichtbar / (true = sichtbar)
         let isQueryable = layerConfig.queryable !== undefined ? layerConfig.queryable : false;
         let title = layerConfig.title;
+        let url = layerConfig.url || 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms';
 
         // console.log("Layername: ", name);               // das klappt
         // console.log('is Queryable:', isQueryable);      // das klappt 
 
         let newLayer = new TileLayer({
             source: new TileWMS({
-                url: 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms',  
-                params: {'LAYERS': name, 'TILED': true},
-                serverType: 'geoserver',
+                url: url,  
+                params: {'LAYERS': name},
                 // transition: 0,
             }), 
             
