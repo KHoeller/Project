@@ -21,7 +21,7 @@ export default function About (){
     
     return (
     <>
-        <Button className='buttonAbout' type="text" onClick={showModal}>
+        <Button className='buttonAbout' type="default" onClick={showModal}>
             About
         </Button>
         <Modal title="About the Project" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>

@@ -12,16 +12,13 @@ import Layers from "./src/utils/LayerN/LayerN";
 // import MapView and ZoomLevel
 import { mapView } from './conf/config.json'; 
 
+import './General.css';
+
 // import Components 
 import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
-import MousePosition from './src/components/MousePosition/mousePosition';
 import Toolbar from './src/components/Toolbar/toolbar';
-// import Baseboard from './src/components/Baseboard/baseboard';
 import Sidebar from './src/components/Sidebar/sidebar';
-
-    // import About from './src/components/About/about'; 
-
 
 export default function App () {
     console.log(mapView);
@@ -53,12 +50,6 @@ export default function App () {
 
             <Sidebar/>
 
-            {/* <MousePosition
-                map={map} />   */}
-
-            {/* <Baseboard map={map}/> */}
-
-            {/* <About /> */}
         </>
     )
 }

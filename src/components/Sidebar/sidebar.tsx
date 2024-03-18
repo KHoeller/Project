@@ -1,35 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './sidebar.css';
 
 import { Button, Drawer } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
+import LayerTree from "../LayerTree/layerTree";
+
+
 export default function Sidebar (){
 
     const [open, setOpen] = useState(false);
+  
 
-    const showDrawer = () => {
-        setOpen(true);
-    };
+    const toggleDrawer = () => {
+        setOpen(!open)
+    }
+
+    // const showDrawer = () => {
+    //     setOpen(true)
+    // }
 
     const onClose = () => {
         setOpen(false);
     };
 
     return(
-        <div className="sidebarContainer">
-            <Drawer
+        <div className="sidebarContainer" >
+             <Drawer
                 title='Themenbaum'
+                // getContainer=''
                 onClose={onClose}
                 open={open}
                 placement="right"
                 className="sidebarDrawer"
+                maskClosable={false}
+                mask={false}
+                keyboard={true}
             >
-                <p> Hier kommen die verschiedenen Layer hin </p>
+                <LayerTree/>
+
+                {/* <p> Hier kommen die verschiedenen Layer hin </p> im LayerTree*/}
             </Drawer>
             <Button
-                type="text"
-                onClick={showDrawer}
+                type="default"
+                onClick={toggleDrawer}
                 className={open ? "openButton openButtonDrawerOpen" : "openButton"}
                 // "openButton" (wenn unten der style verwendet wird, dann Klasse openButton); so wird je nach Zustand die Klasse in css gewählt 
                 shape='default'
@@ -38,6 +52,8 @@ export default function Sidebar (){
             > 
             {open ? <MenuUnfoldOutlined style={{color: 'black', fontSize: 20}}/> : <MenuFoldOutlined style={{color: 'black', fontSize: 20}}/> }
             </Button>
+           
+            
         </div>
        
     );

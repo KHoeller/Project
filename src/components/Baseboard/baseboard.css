@@ -18,9 +18,23 @@
     font-size: 9pt;
     display: flex;    
     text-align: center;
-    align-items: center;
-    justify-content: center;    
+    align-items: center; 
+    /* justify-content: center;     */
 } 
+
+.Copyright{
+    justify-content: end;
+    margin-right: 5px; 
+}
+
+.buttonAbout{
+    justify-content: center;
+}
+
+.Koordinaten{
+    justify-content: start;
+    margin-left: 5px;
+}
 
 
 

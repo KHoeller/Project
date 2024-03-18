@@ -15,17 +15,19 @@ export default function Baseboard({map}: BaseboardProp) {
     return (
         <>
         <div className='baseboard'>
-            <MousePosition map = {map}/> 
+            <div className="Koordinaten">
+                Koordianten: <MousePosition map = {map}/>
+            </div> 
             
             <div></div>
             { /* ESPG 3857*/ }
-            <div>
+            <div className="buttonAbout">
                 <About/>
             </div>
             
             <div></div>
             
-            <div>
+            <div className='Copyright'>
                 <CopyrightCircleOutlined /> 
                 &nbsp;
                 OpenStreetMap contributors

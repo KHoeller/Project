@@ -10,8 +10,6 @@ import TileWMS from 'ol/source/TileWMS.js';
 import jsondata from '../../../conf/config.json'; //  
 
 
-
-
 export default function Layers () {
 // LayerArray für die Webapplikation erstellen und lesbar speichern 
     let layers: TileLayer<TileSource>[] = [];       
@@ -27,6 +25,7 @@ export default function Layers () {
         let name = layerConfig.name;                // der name an der entsprechendenen Position wird gewählt
         let isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false; // default: alle Layer ohne Angabe zu visible sind false = unsichtbar / (true = sichtbar)
         let isQueryable = layerConfig.queryable !== undefined ? layerConfig.queryable : false;
+        let title = layerConfig.title;
 
         // console.log("Layername: ", name);               // das klappt
         // console.log('is Queryable:', isQueryable);      // das klappt 
@@ -40,14 +39,15 @@ export default function Layers () {
             }), 
             
             visible: isVisible, // Angabe zu Sichtbarkeit des Layers 
-            // queryable: isQueryable, 
-            properties: {
-                name: name,
-                queryable: isQueryable
-            }
+            
+            // properties: {
+            //     name: name,
+            //     queryable: isQueryable
+            // }
         });
-        // newLayer.set('name', name);                 // ist das so korrekt? 
-        // newLayer.set('queryable', isQueryable);     // ist das so korrekt? 
+        newLayer.set('name', name);                 
+        newLayer.set('queryable', isQueryable);     
+        newLayer.set('title', title)
 
         layers.push(newLayer) // werden dem Array layers hinzugefügt, die dann auf der Karte gezeigt werden 
             // layers ist ein Array mit Objekten zu jedem Layer aus dem Geoserver inklusive visible

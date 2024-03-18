@@ -6,24 +6,27 @@
 
     "layers": [{
         "name": "EwDichte",
+        "title": "Einwohnerdichte",
         "visible": false,
         "queryable": true,
         "info": "Lorem ipsum…"
+        
     }, {
         "name": "TravelTime",
         "visible": false,
         "queryable": true
     }, {
         "name": "Agriculture_DE",
-        "visible": true,
+        "title": "Landwirtschaftliche Flächen",
+        "visible": false,
         "queryable": false
     }, {
         "name": "Forest_DE",
-        "visible": true,
+        "visible": false,
         "queryable": false
     }, {
         "name": "Water_bodies_DE",
-        "visible": true,
+        "visible": false,
         "queryable": false
     }, {
         "name": "Wetlands_DE",
@@ -31,7 +34,7 @@
         "queryable": false
     }, {
         "name": "R_NO2_2014",
-        "visible": true,
+        "visible": false,
         "queryable": true
     }, {
         "name": "R_NO2_2015",
@@ -79,7 +82,7 @@
         "queryable": true
     }, {
         "name": "R_NOx_2018",
-        "visible": true,
+        "visible": false,
         "queryable": true
     }, {
         "name": "R_NOx_2020",
@@ -207,6 +210,7 @@
         "queryable": true
     }, {
         "name": "R_PM25_2021",
+        "visible":false,
         "queryable": true
     }, {
         "name": "Gemeindegrenzen",
@@ -228,14 +232,15 @@
     }, {
         "name": "V_PM2.5_2021",
         "queryable": true
-    }, {
-        "name": "V_SO2_2021",
-        "queryable": true
-    }, {
+    },  {
         "name": "V_PM10_2021",
         "visible": true,
         "queryable": true
     }, {
+        "name": "V_SO2_2021",
+        "visible": true,
+        "queryable": true
+    },{
         "name": "Hospitals_DE",
         "queryable": true
     },  {

@@ -19,7 +19,11 @@
     font-family: sans-serif;
 }
 
-.ol-zoom .ol-zoom-in {
+
+
+
+/* verschoben in General.css*/
+/* .ol-zoom .ol-zoom-in {
     border-radius: 6px 6px 6px 6px;
     width: 32px; 
     height: 32px;
@@ -43,5 +47,5 @@
     position: absolute;
     bottom: 80px;
     left: 5px; 
-    background: transparent;
-} 
+    /* background: transparent; 
+} */

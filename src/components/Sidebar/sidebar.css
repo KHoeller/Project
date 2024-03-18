@@ -1,16 +1,17 @@
 
 
 .sidebarContainer {
-    position: fixed;       
+    position: relative;       
 }
 
-.ant-drawer{
-    box-sizing: content-box !important;
-}
+.ant-drawer-content-wrapper{
+/*variable je nach Header*/    /*variable je nach footer*/
+    top: 45px !important; 
+    
+    bottom: 28px !important; 
 
-.ant-drawer-mask{
-    background-color: transparent !important; /* mask is transparent, so you could see the layers well */
-} 
+    box-shadow: 0 0 0 !important;
+}
 
 .openButton {
     /*display: 'inline-flex';*/
@@ -18,11 +19,12 @@
     justify-content: center; 
     align-items: center;
     position: fixed;
-    top: 60px; 
+    top: 57px; 
     right: 0;
     width: 32px;
     padding: 0px 0px;
-    transition: right 0.3s; 
+    transition: right 0.33s; 
+    z-index: 1;
 
     /* background: white;
     border-color: grey; *
@@ -30,7 +32,7 @@
 }
 
 .openButtonDrawerOpen {
-    right: 380px;
+    right: 378px;
 }
 
 /* .openButton:hover{
