@@ -1,6 +1,5 @@
 
 import React, {useState} from "react";
-import { SizeType } from "antd/es/config-provider/SizeContext";
 import './toolbar.css';
 import { Button, Flex } from 'antd';
 import { ToolTwoTone, AimOutlined, DownloadOutlined } from '@ant-design/icons';

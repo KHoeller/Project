@@ -1,11 +1,17 @@
 // LayerTree:
+
+
+// basiert auf den Layern von map; 
+// ist gruppiert entsprechend der config
+// icons/modals neben dem Gruppentitel, sofern in der Config angegeben 
+
+
 import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
 import { Tree } from 'antd';
 
 import BaseLayer from 'ol/layer/Base';
-// import jsondata from '../../../conf/config.json';
-import Layers from '../../utils/LayerN/LayerN';
+import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
 
 export type LayerTreeProps = {
     map: Map;
@@ -15,52 +21,54 @@ type Layer = {
     name: string;
     title: string;
     visible?: boolean;
-}
-
-type Group = {
-    groupName: string;
-    layers: Layer[];
+    info?: boolean;
 }
 
 type TreeNode = {
     title: string;
     key: string;
-    children?: TreeNode[];
+    children?: TreeNode[]; // sofern children vorhanden sind
     layer?: Layer;
-    visible: boolean;
+    visible: boolean;      // sofern Angabe zu visible vorhanden ist
+    info: boolean;
 }
 
 export default function LayerTree({ map }: LayerTreeProps) {
     
 
-    const generateTreeData = (layers: any[]): TreeNode[] => {
+    const generateTreeData = (layers: any[]): TreeNode[] => {           // hier wird eine Function zur Generierung der Daten für einen LayerTree erstellt 
+                                                                        // Eingabe ist ein Array von Layern und Output ein TreeNode-Objekt 
         // Erstellen eines leeren Objekts, um die Layer nach Gruppen zu gruppieren
-        const layerGroups: { [groupName: string]: Layer[] } = {};
+        const layerGroups: { [groupName: string]: Layer[] } = {};       // die Gruppennamen werden als key verwendet und die zugehöirgen Werte als Array 
     
         // Gruppieren der Layer nach Gruppennamen oder Verwendung einer Standardgruppe
-        layers.forEach(layer => {
-            const groupName = layer.values_.groupName || 'Basiskarte';
-            if (!layerGroups[groupName]) {
+        layers.forEach(layer => {                                       // Iterieren über alle Layer in dem Array 
+            const groupName = layer.values_.groupName || 'Basiskarte';  // aus dem Array wird der Gruppenname extrahiert bzw. falls keiner vorhanden eine Standardgruppe festgelegt (OSM als einziges bislang keine Gruppe)
+            if (!layerGroups[groupName]) {                              // sofern der groupName noch nicht in layerGroups vorhanden ist, wird ein neues Array für die Gruppe angelegt
                 layerGroups[groupName] = [];
             }
-            layerGroups[groupName].push({
+            layerGroups[groupName].push({                               // entsprechend des groupNames wird der Layer in den richtigen Array gepusht und die Eigenschaften gespeichert
                 name: layer.values_.name,
                 title: layer.values_.title,
-                visible: layer.values_.visible || false
+                visible: layer.values_.visible || false,
+                info: layer.values_.info || false, 
+                // ist z.B. queryable relevant als Eigenschaft? 
             });
-        });
+        }); // Iteration/ Schleife zu Ende 
     
-        // Erstellen der Baumstruktur aus den gruppierten Layern
+        // Erstellen der Baumstruktur aus den gruppierten Layern -> das bisherige Objekt wird umstrukturiert 
         const treeData: TreeNode[] = Object.keys(layerGroups).map(groupName => ({
             title: groupName,
             key: groupName,
-            children: layerGroups[groupName].map(layer => ({
+            children: layerGroups[groupName].map(layer => ({        // erstellen von children der jeweiligen Gruppenknoten;output Array von Layern dieser Gruppe 
                 title: layer.title,
                 key: layer.name,
                 layer: layer,
                 visible: !!layer.visible
+                
             })),
-            visible: layerGroups[groupName].some(layer => !!layer.visible)
+            visible: layerGroups[groupName].some(layer => !!layer.visible), // sichtbarkeit des Gruppenknotens auf Basis der Sichtbarkeit der Kinder; wenn min. 1Layer sichtbar ist visible = true  
+            info: layerGroups[groupName][0]?.info || false,
         }));
     
         return treeData;
@@ -71,37 +79,55 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
     useEffect(() => {
-        const layersFromLayerN = Layers();
-        const generatedTreeData = generateTreeData(layersFromLayerN);
+        const layers = map.getLayers().getArray()                       // aktuelle Layers der map verwenden 
+        const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen 
         setTreeData(generatedTreeData);
 
         const initialCheckedKeys = generatedTreeData.flatMap(group =>
-            group.children?.filter(layer => layer.visible).map(layer => layer.key) || []
+            group.children?.filter(layer => layer.visible)              // aktuell sichtbaren Layer filtern 
+            .map(layer => layer.key) || [] 
         );
-        setCheckedKeys(initialCheckedKeys);
+        setCheckedKeys(initialCheckedKeys);                             // die auusgewählten Checkboxen des initial state 
     }, []);
 
-    const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
-        if (Array.isArray(checked)) {
+    const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert 
+        if (Array.isArray(checked)) {                                   // sofern es sich um einen Array handelt - keine halbgeprüften Checkboxen und alle ausgewählten keys enthalten
             setCheckedKeys(checked.map(key => String(key)));
         } else {
             setCheckedKeys(checked.checked.map(key => String(key)));
         }
-    }
+    }       // Unterscheidung half and full checked 
 
-    useEffect(() => {
-        map.getLayers().forEach(layer => {
-            const layerName = (layer as BaseLayer).getProperties().name;
-            const shouldBeVisible = checkedKeys.includes(layerName);
-            layer.setVisible(shouldBeVisible);
+    useEffect(() => {                                                       // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
+        map.getLayers().forEach(layer => {                                  // Iteration über alle Layer in der Karte 
+            const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
+            const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
+            layer.setVisible(shouldBeVisible);                              // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
         });
-    }, [checkedKeys, map]);
+    }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
 
     return (
         <Tree
             checkable
             selectable={false}
-            treeData={treeData}
+            treeData={treeData.map(node => ({
+                ...node,
+                title: (
+                    <span>
+                        {node.title}
+                        {node.info && <InfoIcon />}  {/* Hier sollte das InfoIcon gerendert werden */}
+                    </span>
+                ),
+                children: node.children?.map(layerNode => ({
+                    ...layerNode,
+                    title: (
+                        <span>
+                            {layerNode.title}
+                            {node.info && <InfoIcon />}  {/* Hier sollte das InfoIcon gerendert werden */}
+                        </span>
+                    ),
+                })),
+            }))}
             checkedKeys={checkedKeys}
             onCheck={onCheck}
         />
@@ -109,66 +135,104 @@ export default function LayerTree({ map }: LayerTreeProps) {
 };
 
 
-// !!!! derzeit kommen die Daten direkt aus der Config - Ziel Daten von map verwenden 
-
-// // import React, {useState, useEffect} from 'react';
+// // LayerTree: mit LayerN als Basis 
+// import React, { useState, useEffect } from 'react';
 // import Map from 'ol/Map';
 // import { Tree } from 'antd';
 
 // import BaseLayer from 'ol/layer/Base';
-// import { useState, useEffect } from 'react';
-    
-
+// // import jsondata from '../../../conf/config.json';
+// import Layers from '../../utils/LayerN/LayerN';
 
 // export type LayerTreeProps = {
 //     map: Map;
-//     layerGroups: any[];
 // }
 
-// export default function LayerTree ({map, layerGroups}: LayerTreeProps) {
+// type Layer = {
+//     name: string;
+//     title: string;
+//     visible?: boolean;
+// }
+
+// type Group = {
+//     groupName: string;
+//     layers: Layer[];
+// }
+
+// type TreeNode = {
+//     title: string;
+//     key: string;
+//     children?: TreeNode[];
+//     layer?: Layer;
+//     visible: boolean;
+// }
+
+// export default function LayerTree({ map }: LayerTreeProps) {
     
-//     const generateTreeData = (groups: any) => {
-//         return groups.map((group: any) => ({                    // über jeden Layer iterieren
-//             title: group.groupName,                 // title für LayerTree
-//             key: group.groupName,   
-//             children: group.layers.map((layer: any) => ({
+
+//     const generateTreeData = (layers: any[]): TreeNode[] => {
+//         // Erstellen eines leeren Objekts, um die Layer nach Gruppen zu gruppieren
+//         const layerGroups: { [groupName: string]: Layer[] } = {};
+    
+//         // Gruppieren der Layer nach Gruppennamen oder Verwendung einer Standardgruppe
+//         layers.forEach(layer => {
+//             const groupName = layer.values_.groupName || 'Basiskarte';
+//             if (!layerGroups[groupName]) {
+//                 layerGroups[groupName] = [];
+//             }
+//             layerGroups[groupName].push({
+//                 name: layer.values_.name,
+//                 title: layer.values_.title,
+//                 visible: layer.values_.visible || false
+//             });
+//         });
+    
+//         // Erstellen der Baumstruktur aus den gruppierten Layern
+//         const treeData: TreeNode[] = Object.keys(layerGroups).map(groupName => ({
+//             title: groupName,
+//             key: groupName,
+//             children: layerGroups[groupName].map(layer => ({
 //                 title: layer.title,
 //                 key: layer.name,
-//                 layer: layer, // layer an sich 
-//                 visible: layer.visible,           // info über visible 
-//             }))        
-                                        
+//                 layer: layer,
+//                 visible: !!layer.visible
+//             })),
+//             visible: layerGroups[groupName].some(layer => !!layer.visible)
 //         }));
-//     }; 
-
-//     const [treeData, setTreeData] = useState([]);               // Daten für den LayerTree
     
-//     const [checkedKeys, setCheckedKeys] = useState([]);         // initial state: ausgewählte Layer 
+//         return treeData;
+//     };
+    
+
+//     const [treeData, setTreeData] = useState<TreeNode[]>([]);
+//     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
 //     useEffect(() => {
-//         const generatedTreeData = generateTreeData(layerGroups);
+//         const layersFromLayerN = Layers();
+//         const generatedTreeData = generateTreeData(layersFromLayerN);
 //         setTreeData(generatedTreeData);
 
-//         let initialCheckedKeys = layerGroups.reduce((acc: string[], group: any) => {
-//             const groupCheckedKeys = group.layers.filter((layer: any) => layer.visible).map((layer: any) => layer.name);
-//             return [...acc, ...groupCheckedKeys];
-//         }, []);
+//         const initialCheckedKeys = generatedTreeData.flatMap(group =>
+//             group.children?.filter(layer => layer.visible).map(layer => layer.key) || []
+//         );
 //         setCheckedKeys(initialCheckedKeys);
-//     }, [layerGroups]);
+//     }, []);
 
-//     const onCheck = (keys: any) => {
-//     setCheckedKeys(keys)
+//     const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
+//         if (Array.isArray(checked)) {
+//             setCheckedKeys(checked.map(key => String(key)));
+//         } else {
+//             setCheckedKeys(checked.checked.map(key => String(key)));
+//         }
 //     }
 
-//     useEffect(()=> {
-//         map.getLayers().forEach((layer: BaseLayer) => {
-//             const layerName = layer.getProperties().name;
+//     useEffect(() => {
+//         map.getLayers().forEach(layer => {
+//             const layerName = (layer as BaseLayer).getProperties().name;
 //             const shouldBeVisible = checkedKeys.includes(layerName);
 //             layer.setVisible(shouldBeVisible);
 //         });
 //     }, [checkedKeys, map]);
-
-
 
 //     return (
 //         <Tree
@@ -180,7 +244,6 @@ export default function LayerTree({ map }: LayerTreeProps) {
 //         />
 //     );
 // };
-
 
 
 // // gegliederter LayerTree - funktioniert 

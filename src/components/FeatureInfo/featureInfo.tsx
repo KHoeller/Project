@@ -25,7 +25,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                
             let tempUpdatedValue: { layerName: string, attributeName: string, value: string }[] = [];
 
-            console.log(map.getLayers());
+            // console.log(map.getLayers());
             map.getLayers().forEach(layer =>  {      // iterate over all layers 
                 
                 if (layer instanceof TileLayer) {
@@ -55,7 +55,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps){
                                     return response.json();
                                 })                                                  // response auf Anfrage der URL 
                                     .then((responseObject) => {
-                                        console.log(responseObject);
+                                        // console.log(responseObject);
                                         if (responseObject.features && responseObject.features.length > 0) {
                             
                 // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 

@@ -19,7 +19,7 @@ import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 import Toolbar from './src/components/Toolbar/toolbar';
 import Sidebar from './src/components/Sidebar/sidebar';
-// import NominatimSearch from './src/components/Search/search';
+import LayerTree from './src/components/LayerTree/layerTree';
 
 export default function App () {
     console.log(mapView);
@@ -37,7 +37,7 @@ export default function App () {
         });
     }, [scaleControl]) 
     
-  
+//    console.log(map);
 
     return ( 
         <> 
@@ -49,6 +49,8 @@ export default function App () {
                 map={map} />   
             
             <Toolbar/>
+
+           {/* <LayerTree map={map}/> */}
 
             <Sidebar map={map}/>
 

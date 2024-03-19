@@ -8,6 +8,7 @@
         {
             "groupName": "Landbedeckung",
             "enableSlider": false,
+            "info": true,
             "layers": [
                 {
                     "name": "Agriculture_DE",
@@ -33,6 +34,7 @@
         {
             "groupName": "NO2",
             "enableSlider": true,
+            "info": true,
             "layers": [
                 {
                     "name": "R_NO2_2014",
@@ -94,6 +96,7 @@
         {
             "groupName": "NOx",
             "enableSlider": true,
+            "info": true,
             "layers": [
                 {
                     "name": "R_NOx_2014",
@@ -143,6 +146,7 @@
         {
             "groupName": "PM10",
             "enableSlider": true,
+            "info": true,
             "layers": [
                 {
                     "name": "R_PM10_2006",
@@ -251,8 +255,9 @@
             ]
         },
         {
-            "groupName": "PM25",
+            "groupName": "PM2.5",
             "enableSlider": true,
+            "info": true,
             "layers": [
                 {
                     "name": "R_PM25_2007",
@@ -349,6 +354,7 @@
         },
         {
             "groupName": "SO2",
+            "info": true,
             "layers": [
                 {
                     "name": "V_SO2_2021",
@@ -361,6 +367,7 @@
         },
         {
             "groupName": "CO",
+            "info": true,
             "layers": [
                 {
                     "name": "V_CO_2021",
@@ -372,6 +379,7 @@
         },
         {
             "groupName": "O3",
+            "info": true,
             "layers": [
                 {
                     "name": "V_O3_2021",
@@ -402,6 +410,7 @@
         },
         {
             "groupName": "Bevölkerungsdaten",
+            "info": true,
             "layers": [
                 {
                     "name": "EwDichte",
@@ -417,6 +426,7 @@
         
         {
             "groupName": "Gesundheitsdaten",
+            "info": true,
             "layers": [
                 {
                     "name": "TravelTime",
@@ -428,6 +438,14 @@
                     "name": "Hospitals_DE",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Standorte Krankenhäuser",
+                    "visible": false,
+                    "queryable": true
+                },
+                {
+                    "name": "Hospitals_2_dach",
+                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
+                    "title": "Standorte Krankenhäuser_Dach",
+                    "visible": false,
                     "queryable": true
                 }
             ]
