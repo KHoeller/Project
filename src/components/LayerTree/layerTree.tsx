@@ -4,18 +4,6 @@ import Map from 'ol/Map';
 import { Tree } from 'antd';
 
 import BaseLayer from 'ol/layer/Base';
-import Collection  from 'ol/Collection';
-
-// austesten: 
-//TODO 
-    // ich muss status visible je nach check anpassen 
-
-// Der Code kann bislang: 
-    // aktuell visible Layers auf der Karte auswählen 
-    // auswählen und nicht auswählen von Layern -> aber ohne Auswirkung auf die Karte 
-    // andere Layer anclicken und auf der Karte anzeigen lassen 
-    // -> ABER sobald man einen anderen Layer auswählt, ist der erste auch nicht mehr ausgewählt
-    // das auswählen und deselecten von Layern ist noch recht willkürlich 
 
 
 export type LayerTreeProps = {
@@ -75,100 +63,7 @@ export default function LayerTree ({map}: LayerTreeProps) {
     );
 };
     
-
-
-// import React, {useState, useEffect} from 'react';
-// import Map from 'ol/Map';
-// import { Tree } from 'antd';
-
-// import BaseLayer from 'ol/layer/Base';
-// import Collection  from 'ol/Collection';
-
-// // austesten: 
-// //TODO 
-//     // ich muss status visible je nach check anpassen 
-
-// // Der Code kann bislang: 
-//     // aktuell visible Layers auf der Karte auswählen 
-//     // auswählen und nicht auswählen von Layern -> aber ohne Auswirkung auf die Karte 
-//     // andere Layer anclicken und auf der Karte anzeigen lassen 
-//     // -> ABER sobald man einen anderen Layer auswählt, ist der erste auch nicht mehr ausgewählt
-//     // das auswählen und deselecten von Layern ist noch recht willkürlich 
-
-
-// export type LayerTreeProps = {
-//     map: Map;
-// }
-
-// export default function LayerTree ({map}: LayerTreeProps) {
-    
-//     const generateTreeData = (layers: any) => {
-//         layers.map((layer: any) => ({                    // über jeden Layer iterieren
-//             title: layer.getProperties().title,                 // title für LayerTree
-//             key: layer.getProperties().name,                    // name als key
-//             layer: layer,                                       // layer an sich 
-//             // checked: layer.getVisible(),                        // info über visible 
-//         }));
-//     }; 
-
-//     const [treeData, setTreeData] = useState([]);               // Daten für den LayerTree
-//     // const [checkedKeys, setCheckedKeys] = useState([]);         // initial state: ausgewählte Layer 
-
-//     useEffect(() => {
-//         const layers = map.getLayers(); 
-//         console.log(map.getLayers())                               // alle Layers aus der Config 
-//         const generatedTreeData: any = generateTreeData(layers);     // Layer für Datenbaum generieren
-//         setTreeData(generatedTreeData);                         // ausgangsdaten für den Daten baum 
-
-//         // const updateCheckedKeys = () => {                       
-//         //     const newCheckedKeys = generatedTreeData            // für jeden Layer 
-//         //         .filter((node: any) => node.layer.getVisible()) // filter jedes Elements in dem Array (jeder Layer) nach visible 
-//         //         .map((node: any) => node.key);
-//         //     setCheckedKeys(newCheckedKeys);
-//         // };
-
-//         // updateCheckedKeys();
-
-//         // const handleLayerVisibilityChange = () => {
-//         //     updateCheckedKeys();
-//         // };
-
-//         // map.getLayers().forEach(layer => {                      // ändern der visibilty gemäß der map 
-//         //     layer.on('change:visible', handleLayerVisibilityChange);
-//         // });
-
-//         // return () => {
-//         //     map.getLayers().forEach(layer => {
-//         //         layer.un('change:visible', handleLayerVisibilityChange);
-//         //     });
-//         // };
-//     }, [map]);
-
-//     // const onCheck = (checkedKeys: any) => {
-//     //     setCheckedKeys(checkedKeys);    
-//     //  };
-
-//     // useEffect(()=>{
-//     //         map.getLayers().forEach(layer => {
-//     //             const layerName = layer.getProperties().name;
-//     //             const shouldBeVisible = checkedKeys.includes(layerName);
-//     //             layer.setVisible(shouldBeVisible);
-//     //         });
-//     // })
-   
-
-//     return (
-//         <Tree
-//             checkable
-//             // checkedKeys={checkedKeys}
-//             // onCheck={onCheck}
-//             selectable={false}
-//             treeData={treeData}
-//         />
-//     );
-// };
-    
-
+//BasicStructure von AntDesign 
 
     // const [expandedKeys, setExpandedKeys] = useState<React.Key[]>([]);      // für später, wenn man Unterkategorien hat 
     // const [checkedKeys, setCheckedKeys] = useState<React.Key[]>([]);        // Möglichkeit zum Auswählen, auch wenn noch nichts passiert 
