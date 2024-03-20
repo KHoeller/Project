@@ -5,7 +5,12 @@ import { Button, Modal } from 'antd';
 
 import './layerGroupInfo.css';
 
-const InfoIcon: React.FC = () => {
+ type InfoIconProps = {
+    infoTextTitle?: string,
+    infoText?: string,
+}
+
+const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
     
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -34,7 +39,9 @@ const InfoIcon: React.FC = () => {
     return (
         <span className='layer-tree-info'> 
             <Button type={type} icon={<InfoCircleOutlined style={{ color: '#1890ff' }} />} shape='default' size={size} onClick={handleButtonClick}/>
-            <Modal title="Information zum Schadstoff" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}></Modal>
+            <Modal title={infoTextTitle} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}> 
+                <p>{infoText}</p>
+            </Modal>
         </span>
     );
 };

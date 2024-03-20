@@ -22,6 +22,9 @@ type Layer = {
     title: string;
     visible?: boolean;
     info?: boolean;
+    infoText?: string; 
+    infoTextTitle?: string; 
+    enableSlider?: boolean;
 }
 
 type TreeNode = {
@@ -31,6 +34,9 @@ type TreeNode = {
     layer?: Layer;
     visible: boolean;      // sofern Angabe zu visible vorhanden ist
     info: boolean;
+    infoText?: string;
+    infoTextTitle?: string;
+    enableSlicder?: boolean;
 }
 
 export default function LayerTree({ map }: LayerTreeProps) {
@@ -52,6 +58,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 title: layer.values_.title,
                 visible: layer.values_.visible || false,
                 info: layer.values_.info || false, 
+                infoText: layer.values_.infoText || false,
+                infoTextTitle: layer.values_.infoTextTitle || false,
                 // ist z.B. queryable relevant als Eigenschaft? 
             });
         }); // Iteration/ Schleife zu Ende 
@@ -64,13 +72,21 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 title: layer.title,
                 key: layer.name,
                 layer: layer,
-                visible: !!layer.visible
+                visible: !!layer.visible,
+                info: !!layer.info,
+                infoText: layer.infoText || undefined,
+                infoTextTitle: layer.infoTextTitle || undefined,
                 
             })),
             visible: layerGroups[groupName].some(layer => !!layer.visible), // sichtbarkeit des Gruppenknotens auf Basis der Sichtbarkeit der Kinder; wenn min. 1Layer sichtbar ist visible = true  
             info: layerGroups[groupName][0]?.info || false,
+            infoText: layerGroups[groupName][0]?.infoText || undefined,
+            infoTextTitle: layerGroups[groupName][0]?.infoTextTitle || undefined,
+            // infoText: layerGroups[groupName].infoText,
+            // infoTextTitle: layerGroups[groupName].infoTextTitle
+            
         }));
-    
+        
         return treeData;
     };
     
@@ -90,6 +106,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
         setCheckedKeys(initialCheckedKeys);                             // die auusgewählten Checkboxen des initial state 
     }, []);
 
+
     const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert 
         if (Array.isArray(checked)) {                                   // sofern es sich um einen Array handelt - keine halbgeprüften Checkboxen und alle ausgewählten keys enthalten
             setCheckedKeys(checked.map(key => String(key)));
@@ -106,6 +123,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
         });
     }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
 
+
     return (
         <Tree
             checkable
@@ -115,7 +133,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 title: (
                     <span>
                         {node.title}
-                        {node.info && <InfoIcon />}  {/* Hier sollte das InfoIcon gerendert werden */}
+                        {node.info && <InfoIcon infoTextTitle={node.infoTextTitle} infoText={node.infoText}/>}  
                     </span>
                 ),
                 children: node.children?.map(layerNode => ({
@@ -123,7 +141,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
                     title: (
                         <span>
                             {layerNode.title}
-                            {node.info && <InfoIcon />}  {/* Hier sollte das InfoIcon gerendert werden */}
+                            {layerNode.info && <InfoIcon infoTextTitle={layerNode.infoTextTitle} infoText={layerNode.infoText}/>} 
                         </span>
                     ),
                 })),
@@ -133,6 +151,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
         />
     );
 };
+
+
 
 
 // // LayerTree: mit LayerN als Basis 
