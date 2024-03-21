@@ -15,6 +15,7 @@
     
         let osmLayer = new TileLayer({              // OSM-Layer erstellen als BasisKarte
             source: new OSM(),
+            
         });
 
         osmLayer.set('name', 'osm');                // zum Layer Informationen wie Name, Title, Visibility hinzufügen 
@@ -32,6 +33,9 @@
 
             const groupName = group.groupName;
             const info = group.info !== undefined ? group.info: false;
+            const infoTextTitle = group.infoTextTitle !== undefined ? group.infoTextTitle : 'undefined';
+            const infoText = group.infoText !== undefined ? group.infoText : 'undefined';
+            const enabeleSlider = group.enableSlider !== undefined ? group.enableSlider : false;
 
             // Für jeden Layer in der Gruppe
             group.layers.forEach(layerConfig => {
@@ -40,6 +44,7 @@
                 const isQueryable = layerConfig.queryable !== undefined ? layerConfig.queryable : false;
                 const title = layerConfig.title;
                 const url = layerConfig.url || 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms';
+                const year = layerConfig.year !== undefined ? layerConfig.year : false;
                 
     
                 let newLayer = new TileLayer({
@@ -54,11 +59,15 @@
                 newLayer.set('queryable', isQueryable);
                 newLayer.set('title', title);
                 newLayer.set('groupName', groupName);
-                newLayer.set('info', info)
+                newLayer.set('info', info);
+                newLayer.set('infoTextTitle', infoTextTitle);
+                newLayer.set('infoText', infoText);
+                newLayer.set('enableSlider', enabeleSlider);
+                newLayer.set('year', year);
     
                 layers.push(newLayer); // Füge den Layer dem Array hinzu
             });
-            console.log(layers);
+            // console.log(layers);
         });
         
         return layers;
