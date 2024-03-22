@@ -1,131 +1,886 @@
 import React, { useEffect, useState } from 'react'; 
-    import TileWMS from 'ol/source/TileWMS.js';
-    import TileLayer from 'ol/layer/Tile';
-    import { MapBrowserEvent } from 'ol';
-    import Map from 'ol/Map';
+import TileWMS from 'ol/source/TileWMS.js';
+import TileLayer from 'ol/layer/Tile';
+import { MapBrowserEvent } from 'ol';
+import Map from 'ol/Map';
+import { Modal } from 'antd';
 
-    import FeatureInfoModal from '../FeatureInfoModal/featureInfoModal';
-    import './featureInfo.css';
+import './featureInfo.css';
 
+export type FeatureInfoProps = {
+    map: Map;
+};
 
-    export type FeatureInfoProps = {
-        map: Map;
-    };
+const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
+    const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]);
+    const [modalVisible, setModalVisible] = useState(false);
 
-    export default function FeatureInfo ({ map }: FeatureInfoProps){
+    useEffect(() => {
+        const handleClick = async (evt: MapBrowserEvent<any>) => {
+            const viewResolution = map.getView().getResolution() ?? 0;      
+            let tempSelectedFeatureInfo: { layerName: string, attributes: { attributeName: string, value: string }[] }[] = [];
 
-        
-        // useState (hook-function) um den Zustand einer Komponente zuverwalten -> updateValue = aktueller Zustandswert, setUpdatevalue = Funktion, um Zustand zu aktualisieren
-        const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributeName: string, value: string }[]>([]); // (Typ des Zustands) Array, der Objekte enthält, die keys name und value haben
-                                                                                                // ([]) -> inital state leerer Array 
-        useEffect(() => {
-            const handleClick = (evt: MapBrowserEvent<any>) => {                // function for dealing with a click in the Browser 
-                
-                const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
-                // TODO make use of the existing layers in the map
-                
-                let tempUpdatedValue: { layerName: string, attributeName: string, value: string }[] = [];
+            await Promise.all(map.getLayers().getArray().map(async layer =>  {      
+                if (layer instanceof TileLayer) {
+                    const isLayerQueryable = layer.get('queryable') ?? false;
+                    const isLayerVisible = layer.get('visible') ?? false;
+                    const name = layer.get('title');
 
-                // console.log(map.getLayers());
-                map.getLayers().forEach(layer =>  {      // iterate over all layers 
-                    
-                    if (layer instanceof TileLayer) {
-                        const isLayerQueryable = layer.get('queryable') ?? false;
-                        const isLayerVisible = layer.get('visible') ?? false;
-                        const name = layer.get('name');
+                    if (isLayerQueryable && isLayerVisible) {
+                        const source = layer.getSource();
 
-                        if (isLayerQueryable && isLayerVisible) {
-                            const source = layer.getSource();
+                        if (source instanceof TileWMS) {
+                            const hitTolerance = 100;
+                            const url = source?.getFeatureInfoUrl(
+                                evt.coordinate,
+                                viewResolution,
+                                'EPSG:3857',
+                                { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+                            );
 
-                            if (source instanceof TileWMS) {
-                                const hitTolerance = 100;
-                                const url = source?.getFeatureInfoUrl(
-                                    evt.coordinate,
-                                    viewResolution,
-                                    'EPSG:3857',
-                                    { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
-                                );
-                        // console.log(url)  
-                
-                                if (url) {                                              // sofern die URL true ist 
-                                    fetch(url)
-                                    .then((response) => {
-                                        if (!response.ok) {
-                                            throw new Error('Network response was not ok');
-                                        }
-                                        return response.json();
-                                    })                                                  // response auf Anfrage der URL 
-                                        .then((responseObject) => {
-                                            // console.log(responseObject);
-                                            if (responseObject.features && responseObject.features.length > 0) {
-                                
-                    // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 
-                    // !!! Toleranz-Bereich für Vector-Data, da man diese sonst nie angezeigt bekommt?! 
-                    // !!! ToleranzBereich anzeigen lassen? 
-                    
-                                                // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
-                                                
-                                                const properties = responseObject.features[0].properties;       // alle Properties anzeigen lassen 
-                                                const selectedAttributes = ['GRAY_INDEX', 'AirPollutionLevel', 'AQ Station Name', 'Air Pollution Group']
+                            if (url) {                                              
+                                try {
+                                    const response = await fetch(url);
+                                    if (!response.ok) {
+                                        throw new Error('Network response was not ok');
+                                    }
+                                    const responseObject = await response.json();
+                                    if (responseObject.features && responseObject.features.length > 0) {
+                                        const properties = responseObject.features[0].properties;       
+                                        const selectedAttributes = ['GRAY_INDEX', 
+                                                                    'AQ Station Name', 
+                                                                    'Air Pollution Group',
+                                                                    'AirPollutionLevel',  
+                                                                    'Unit Of Airpollution Level', 
+                                                                    'GEN', 
+                                                                    'EW/KFL', 
+                                                                    'EWZ', 
+                                                                    'NAME_LATN', 
+                                                                    'Average_travel_time', 
+                                                                    'Code_18', 
+                                                                    'name', 
+                                                                    'addr:city',
+                                                                    'addr:street']
 
+                                        const layerAttributes: { attributeName: string, value: string }[] = [];
 
-                                                // Suche nach den selectedAttributes (damit nicht einfach alle Attributes ausgegeben werden)
-                                                selectedAttributes.forEach(desiredAttribute => {
-                                                    if (properties.hasOwnProperty(desiredAttribute)) {
-                                                        const value = properties[desiredAttribute];
-                                                        tempUpdatedValue.push({ layerName: name, attributeName: desiredAttribute, value: `${value}` });
-                                                    }
-                                                });
-
-
-                                                // Object.keys(properties).forEach(key => {
-                                                //     const value = properties[key];
-
-                                                //     // console.log(grayIndex);
-                                                //     tempUpdatedValue.push({ layerName: name, attributeName: key, value: `${value}` });       // zum Array die neuen Informationen des Layers hinzufügen 
-                                                // });
-                                                
-                                                setUpdatedValue([...tempUpdatedValue]);                             // die updatedValues werden bei jeder Iteration dem Array hinzugefügt 
-                                                        // setValue({name: name, value: `${grayIndex}`}); // Ursprünglich, dann wird immer nur der letzte Value festgehalten 
-                                                
+                                        selectedAttributes.forEach(desiredAttribute => {
+                                            if (properties.hasOwnProperty(desiredAttribute)) {
+                                                const value = properties[desiredAttribute];
+                                                layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` });
                                             }
-                                        })
+                                        });
 
-                                    .catch(error => {
-
-                                        console.log('my error is ', error);
-                                        alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
-                                    });
+                                        if (layerAttributes.length > 0) {
+                                            tempSelectedFeatureInfo.push({ layerName: name, attributes: layerAttributes });
+                                        }
+                                    }
+                                } catch (error) {
+                                    console.log('my error is ', error);
+                                    alert('Sorry, es ist ein Fehler aufgetreten');
                                 }
                             }
                         }
-                    };
-                    
-                });
-                
-                // To Do show results only for selected attributes 
-            };
-                
-                
+                    }
+                }                
+            }));
 
-            map.on('singleclick', handleClick); //
+            if (tempSelectedFeatureInfo.length > 0) {
+                setSelectedFeatureInfo(tempSelectedFeatureInfo);
+                setModalVisible(true);
+            }
+        };
 
-            return () => {
-                map.un('singleclick', handleClick); // TODO should be unregister something if the component unmounts?
-            };
-            
-            
-        }, [map]); // TODO what happens if the map prop has changed?
+        map.on('singleclick', handleClick); 
+
+        return () => {
+            map.un('singleclick', handleClick); 
+        };
         
+    }, [map]); 
+
+    const handleModalCancel = () => {
+        setModalVisible(false);
+    };
+
+    const baseboardHeight = document.querySelector('.baseboard')?.clientHeight || 0; 
+
+    // const modalTop = baseboardHeight + 20; 
+
+    return (
+        <Modal
+            title="Feature Information"
+            open={modalVisible}
+            onCancel={handleModalCancel}
+            footer={null}
+            mask={false}
+            maskClosable={false}
+            keyboard={true}
+            // style={{ bottom: baseboardHeight }}
             
-        return (
-                <div id='info' className ='info'> 
-                    {updatedValue.map((item, index) => (
-                    <div key={index}>{item.layerName} / {item.attributeName}: {item.value}</div>
+            // getContainer={() => document.getElementById('map-container')} // ID des Map-Containers verwenden
+        >
+            {selectedFeatureInfo.map((featureInfo, index) => (
+                <div key={index}>
+                    <h3>{featureInfo.layerName}</h3>
+                    {featureInfo.attributes.map((attribute, attrIndex) => (
+                        <div key={attrIndex} className="feature-info-container">
+                            <div className='attribute-row'>
+                                <span className="attribute-name">{attribute.attributeName}:</span>
+                                <span className="attribute-value">{attribute.value}</span>
+                            </div>
+                        </div>
                     ))}
-                </div>            
-        )
-    }
+                </div>
+            ))}
+        </Modal>
+    );
+};
+
+export default FeatureInfo;
+
+
+// import React, { useEffect, useState } from 'react'; 
+// import TileWMS from 'ol/source/TileWMS.js';
+// import TileLayer from 'ol/layer/Tile';
+// import { MapBrowserEvent } from 'ol';
+// import Map from 'ol/Map';
+// import { Modal } from 'antd';
+
+// import './featureInfo.css';
+
+// export type FeatureInfoProps = {
+//     map: Map;
+// };
+
+// const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
+//     const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]);
+//     const [modalVisible, setModalVisible] = useState(false);
+
+//     useEffect(() => {
+//         const handleClick = async (evt: MapBrowserEvent<any>) => {
+//             const viewResolution = map.getView().getResolution() ?? 0;      
+//             let tempSelectedFeatureInfo: { layerName: string, attributes: { attributeName: string, value: string }[] }[] = [];
+
+//             await Promise.all(map.getLayers().getArray().map(async layer =>  {      
+//                 if (layer instanceof TileLayer) {
+//                     const isLayerQueryable = layer.get('queryable') ?? false;
+//                     const isLayerVisible = layer.get('visible') ?? false;
+//                     const name = layer.get('title');
+
+//                     if (isLayerQueryable && isLayerVisible) {
+//                         const source = layer.getSource();
+
+//                         if (source instanceof TileWMS) {
+//                             const hitTolerance = 100;
+//                             const url = source?.getFeatureInfoUrl(
+//                                 evt.coordinate,
+//                                 viewResolution,
+//                                 'EPSG:3857',
+//                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+//                             );
+
+//                             if (url) {                                              
+//                                 try {
+//                                     const response = await fetch(url);
+//                                     if (!response.ok) {
+//                                         throw new Error('Network response was not ok');
+//                                     }
+//                                     const responseObject = await response.json();
+//                                     if (responseObject.features && responseObject.features.length > 0) {
+//                                         const properties = responseObject.features[0].properties;       
+//                                         const selectedAttributes = ['GRAY_INDEX', 'AirPollutionLevel', 'AQ Station Name', 'Air Pollution Group', 'Unit Of Airpollution Level', 'EW/KFL', 'GEN', 'EWZ', 'NAME_LATN', 'Average_travel_time', 'Code_18', 'addr:street', 'addr:city', 'name']
+
+//                                         const layerAttributes: { attributeName: string, value: string }[] = [];
+
+//                                         selectedAttributes.forEach(desiredAttribute => {
+//                                             if (properties.hasOwnProperty(desiredAttribute)) {
+//                                                 const value = properties[desiredAttribute];
+//                                                 layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` });
+//                                             }
+//                                         });
+
+//                                         if (layerAttributes.length > 0) {
+//                                             tempSelectedFeatureInfo.push({ layerName: name, attributes: layerAttributes });
+//                                         }
+//                                     }
+//                                 } catch (error) {
+//                                     console.log('my error is ', error);
+//                                     alert('Sorry, es ist ein Fehler aufgetreten');
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }                
+//             }));
+
+//             if (tempSelectedFeatureInfo.length > 0) {
+//                 setSelectedFeatureInfo(tempSelectedFeatureInfo);
+//                 setModalVisible(true);
+//             }
+//         };
+
+//         map.on('singleclick', handleClick); 
+
+//         return () => {
+//             map.un('singleclick', handleClick); 
+//         };
+        
+//     }, [map]); 
+
+//     const handleModalCancel = () => {
+//         setModalVisible(false);
+//     };
+
+//     return (
+//         <Modal
+//             title="Feature Information"
+//             open={modalVisible}
+//             onCancel={handleModalCancel}
+//             footer={null}
+//             mask={false}
+//             maskClosable={false}
+//         >
+//             {selectedFeatureInfo.map((featureInfo, index) => (
+//                 <div key={index}>
+//                     <h3>{featureInfo.layerName}</h3>
+//                     {featureInfo.attributes.map((attribute, attrIndex) => (
+//                         <div key={attrIndex} className="feature-info-container">
+//                             <div className='attribute-row'>
+//                                 <span className="attribute-name">{attribute.attributeName}:</span>
+//                                 <span className="attribute-value">{attribute.value}</span>
+//                             </div>
+//                         </div>
+//                     ))}
+//                 </div>
+//             ))}
+//         </Modal>
+//     );
+// };
+
+// export default FeatureInfo;
+
+
+// import React, { useEffect, useState } from 'react'; 
+// import TileWMS from 'ol/source/TileWMS.js';
+// import TileLayer from 'ol/layer/Tile';
+// import { MapBrowserEvent } from 'ol';
+// import Map from 'ol/Map';
+
+// import FeatureModal from '../FeatureInfoModal/featureInfoModal';
+
+// // import FeatureInfoModal from '../FeatureInfoModal/featureInfoModal';
+// import './featureInfo.css';
+
+
+// export type FeatureInfoProps = {
+//     map: Map;
+// };
+
+// export default function FeatureInfo ({ map }: FeatureInfoProps){
+
+    
+//     // useState (hook-function) um den Zustand einer Komponente zuverwalten -> updateValue = aktueller Zustandswert, setUpdatevalue = Funktion, um Zustand zu aktualisieren
+//     // const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]); // (Typ des Zustands) Array, der Objekte enthält, die keys name und value haben
+//                                                                                             // ([]) -> inital state leerer Array 
+
+//     const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]);
+//     const [modalVisible, setModalVisible] = useState(false);
+//     const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] } | null>(null);
+                                                                                        
+//     useEffect(() => {
+//         const handleClick = (evt: MapBrowserEvent<any>) => {                // function for dealing with a click in the Browser 
+            
+//             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
+//             // TODO make use of the existing layers in the map
+            
+//             let tempUpdatedValue: { layerName: string, attributes: { attributeName: string, value: string }[] }[] = [];
+
+//             // console.log(map.getLayers());
+//             map.getLayers().forEach(layer =>  {      // iterate over all layers 
+                
+//                 if (layer instanceof TileLayer) {
+//                     const isLayerQueryable = layer.get('queryable') ?? false;
+//                     const isLayerVisible = layer.get('visible') ?? false;
+//                     const name = layer.get('name');
+
+//                     if (isLayerQueryable && isLayerVisible) {
+//                         const source = layer.getSource();
+
+//                         if (source instanceof TileWMS) {
+//                             const hitTolerance = 100;
+//                             const url = source?.getFeatureInfoUrl(
+//                                 evt.coordinate,
+//                                 viewResolution,
+//                                 'EPSG:3857',
+//                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+//                             );
+//                     // console.log(url)  
+            
+//                             if (url) {                                              // sofern die URL true ist 
+//                                 fetch(url)
+//                                 .then((response) => {
+//                                     if (!response.ok) {
+//                                         throw new Error('Network response was not ok');
+//                                     }
+//                                     return response.json();
+//                                 })                                                  // response auf Anfrage der URL 
+//                                     .then((responseObject) => {
+//                                         // console.log(responseObject);
+//                                         if (responseObject.features && responseObject.features.length > 0) {
+                            
+//                 // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 
+//                 // !!! Toleranz-Bereich für Vector-Data, da man diese sonst nie angezeigt bekommt?! 
+//                 // !!! ToleranzBereich anzeigen lassen? 
+                
+//                                             // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
+                                            
+//                                             const properties = responseObject.features[0].properties;       // alle Properties anzeigen lassen 
+//                                             const selectedAttributes = ['GRAY_INDEX', 
+//                                                                         'AirPollutionLevel', 
+//                                                                         'AQ Station Name', 
+//                                                                         'Air Pollution Group', 
+//                                                                         'Unit Of Airpollution Level', 
+//                                                                         'EW/KFL',
+//                                                                         'GEN',
+//                                                                         'EWZ',
+//                                                                         'NAME_LATN',
+//                                                                         // 'NUTS_NAME',
+//                                                                         'Average_travel_time',
+//                                                                         'Code_18',
+//                                                                         'addr:street',
+//                                                                         'addr:city',
+//                                                                         'name']
+
+//                                             const layerAttributes: { attributeName: string, value: string }[] = [];
+
+//                                             // Suche nach den selectedAttributes (damit nicht einfach alle Attributes ausgegeben werden)
+//                                             selectedAttributes.forEach(desiredAttribute => {
+//                                                 if (properties.hasOwnProperty(desiredAttribute)) {
+//                                                     const value = properties[desiredAttribute];
+//                                                     layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` });
+//                                                 }
+//                                             });
+
+//                                             // Füge nur hinzu, wenn Attribute vorhanden sind
+//                                             if (layerAttributes.length > 0) {
+//                                                 tempUpdatedValue.push({ layerName: name, attributes: layerAttributes });
+//                                             }
+
+//                                             setUpdatedValue([...tempUpdatedValue]);                             // die updatedValues werden bei jeder Iteration dem Array hinzugefügt 
+//                                                     // setValue({name: name, value: `${grayIndex}`}); // Ursprünglich, dann wird immer nur der letzte Value festgehalten 
+                                            
+//                                         }
+//                                     })
+
+//                                 .catch(error => {
+
+//                                     console.log('my error is ', error);
+//                                     alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
+//                                 });
+//                             }
+//                         }
+//                     }
+//                 };
+                
+//             });
+            
+//             // To Do show results only for selected attributes 
+//         };
+
+            
+            
+
+//         map.on('singleclick', handleClick); //
+
+//         return () => {
+//             map.un('singleclick', handleClick); // TODO should be unregister something if the component unmounts?
+//         };
+        
+        
+//     }, [map]); 
+    
+//     const handleFeatureClick = (featureInfo: { layerName: string, attributes: { attributeName: string, value: string }[] }) => {
+//         setSelectedFeatureInfo(featureInfo);
+//         setModalVisible(true);
+//     };
+
+//     const handleModalCancel = () => {
+//         setModalVisible(false);
+//     };
+
+//     return (
+//         <>
+//             <div className="info">
+//                 {/* Code für das Anzeigen der Feature-Informationen */}
+//             </div>
+//             <FeatureModal visible={modalVisible} onCancel={handleModalCancel} featureInfo={selectedFeatureInfo} />
+//         </>
+//     );
+        
+    // return (
+    //         <div id='info' className ='info'> 
+    //             {updatedValue.map((layerInfo, index) => (
+    //             <div key={index}>
+    //                 <h3>{layerInfo.layerName}</h3>
+    //                 {layerInfo.attributes.map((attribute, attrIndex) => (
+    //                     <div key={attrIndex} className="feature-info-container">
+    //                         <div className="attribute-name">{attribute.attributeName}:</div>
+    //                         <div className="attribute-value">{attribute.value}</div>
+    //                     </div>
+    //                 ))}
+    //             </div>
+    //             ))}
+    //         </div>            
+    // )
+// }
+
+
+
+// Funktioniert -- values für alle sichtbaren Layer und ÜBerschrift über Attributen 
+// import React, { useEffect, useState } from 'react'; 
+// import TileWMS from 'ol/source/TileWMS.js';
+// import TileLayer from 'ol/layer/Tile';
+// import { MapBrowserEvent } from 'ol';
+// import Map from 'ol/Map';
+
+// // import FeatureInfoModal from '../FeatureInfoModal/featureInfoModal';
+// import './featureInfo.css';
+
+
+// export type FeatureInfoProps = {
+//     map: Map;
+// };
+
+// export default function FeatureInfo ({ map }: FeatureInfoProps){
+
+    
+//     // useState (hook-function) um den Zustand einer Komponente zuverwalten -> updateValue = aktueller Zustandswert, setUpdatevalue = Funktion, um Zustand zu aktualisieren
+//     const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]); // (Typ des Zustands) Array, der Objekte enthält, die keys name und value haben
+//                                                                                             // ([]) -> inital state leerer Array 
+//     useEffect(() => {
+//         const handleClick = (evt: MapBrowserEvent<any>) => {                // function for dealing with a click in the Browser 
+            
+//             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
+//             // TODO make use of the existing layers in the map
+            
+//             let tempUpdatedValue: { layerName: string, attributes: { attributeName: string, value: string }[] }[] = [];
+
+//             // console.log(map.getLayers());
+//             map.getLayers().forEach(layer =>  {      // iterate over all layers 
+                
+//                 if (layer instanceof TileLayer) {
+//                     const isLayerQueryable = layer.get('queryable') ?? false;
+//                     const isLayerVisible = layer.get('visible') ?? false;
+//                     const name = layer.get('name');
+
+//                     if (isLayerQueryable && isLayerVisible) {
+//                         const source = layer.getSource();
+
+//                         if (source instanceof TileWMS) {
+//                             const hitTolerance = 100;
+//                             const url = source?.getFeatureInfoUrl(
+//                                 evt.coordinate,
+//                                 viewResolution,
+//                                 'EPSG:3857',
+//                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+//                             );
+//                     // console.log(url)  
+            
+//                             if (url) {                                              // sofern die URL true ist 
+//                                 fetch(url)
+//                                 .then((response) => {
+//                                     if (!response.ok) {
+//                                         throw new Error('Network response was not ok');
+//                                     }
+//                                     return response.json();
+//                                 })                                                  // response auf Anfrage der URL 
+//                                     .then((responseObject) => {
+//                                         // console.log(responseObject);
+//                                         if (responseObject.features && responseObject.features.length > 0) {
+                            
+//                 // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 
+//                 // !!! Toleranz-Bereich für Vector-Data, da man diese sonst nie angezeigt bekommt?! 
+//                 // !!! ToleranzBereich anzeigen lassen? 
+                
+//                                             // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
+                                            
+//                                             const properties = responseObject.features[0].properties;       // alle Properties anzeigen lassen 
+//                                             const selectedAttributes = ['GRAY_INDEX', 
+//                                                                         'AirPollutionLevel', 
+//                                                                         'AQ Station Name', 
+//                                                                         'Air Pollution Group', 
+//                                                                         'Unit Of Airpollution Level', 
+//                                                                         'EW/KFL',
+//                                                                         'GEN',
+//                                                                         'EWZ',
+//                                                                         'NAME_LATN',
+//                                                                         // 'NUTS_NAME',
+//                                                                         'Average_travel_time',
+//                                                                         'Code_18',
+//                                                                         'addr:street',
+//                                                                         'addr:city',
+//                                                                         'name']
+
+//                                             const layerAttributes: { attributeName: string, value: string }[] = [];
+
+//                                             // Suche nach den selectedAttributes (damit nicht einfach alle Attributes ausgegeben werden)
+//                                             selectedAttributes.forEach(desiredAttribute => {
+//                                                 if (properties.hasOwnProperty(desiredAttribute)) {
+//                                                     const value = properties[desiredAttribute];
+//                                                     layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` });
+//                                                 }
+//                                             });
+
+//                                             // Füge nur hinzu, wenn Attribute vorhanden sind
+//                                             if (layerAttributes.length > 0) {
+//                                                 tempUpdatedValue.push({ layerName: name, attributes: layerAttributes });
+//                                             }
+
+//                                             setUpdatedValue([...tempUpdatedValue]);                             // die updatedValues werden bei jeder Iteration dem Array hinzugefügt 
+//                                                     // setValue({name: name, value: `${grayIndex}`}); // Ursprünglich, dann wird immer nur der letzte Value festgehalten 
+                                            
+//                                         }
+//                                     })
+
+//                                 .catch(error => {
+
+//                                     console.log('my error is ', error);
+//                                     alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
+//                                 });
+//                             }
+//                         }
+//                     }
+//                 };
+                
+//             });
+            
+//             // To Do show results only for selected attributes 
+//         };
+            
+            
+
+//         map.on('singleclick', handleClick); //
+
+//         return () => {
+//             map.un('singleclick', handleClick); // TODO should be unregister something if the component unmounts?
+//         };
+        
+        
+//     }, [map]); // TODO what happens if the map prop has changed?
+    
+        
+//     return (
+//             <div id='info' className ='info'> 
+//                 {updatedValue.map((layerInfo, index) => (
+//                 <div key={index}>
+//                     <h3>{layerInfo.layerName}</h3>
+//                     {layerInfo.attributes.map((attribute, attrIndex) => (
+//                         <div key={attrIndex} className="feature-info-container">
+//                             <div className="attribute-name">{attribute.attributeName}:</div>
+//                             <div className="attribute-value">{attribute.value}</div>
+//                         </div>
+//                     ))}
+//                 </div>
+//                 ))}
+//             </div>            
+//     )
+// }
+
+
+{/* <div key={attrIndex}>{attribute.attributeName}: {attribute.value}</div>
+.feature-info-container 
+.attribute-name 
+.attribute-value   */}
+
+// import React, { useEffect, useState } from 'react'; 
+// import TileWMS from 'ol/source/TileWMS.js';
+// import TileLayer from 'ol/layer/Tile';
+// import { MapBrowserEvent } from 'ol';
+// import Map from 'ol/Map';
+
+// // import FeatureInfoModal from '../FeatureInfoModal/featureInfoModal';
+// import './featureInfo.css';
+
+
+// export type FeatureInfoProps = {
+//     map: Map;
+// };
+
+// export default function FeatureInfo ({ map }: FeatureInfoProps){
+
+    
+//     // useState (hook-function) um den Zustand einer Komponente zuverwalten -> updateValue = aktueller Zustandswert, setUpdatevalue = Funktion, um Zustand zu aktualisieren
+//     const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributeName: string, value: string }[]>([]); // (Typ des Zustands) Array, der Objekte enthält, die keys name und value haben
+//                                                                                             // ([]) -> inital state leerer Array 
+//     useEffect(() => {
+//         const handleClick = (evt: MapBrowserEvent<any>) => {                // function for dealing with a click in the Browser 
+            
+//             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
+//             // TODO make use of the existing layers in the map
+            
+//             let tempUpdatedValue: { layerName: string, attributeName: string, value: string }[] = [];
+
+//             // console.log(map.getLayers());
+//             map.getLayers().forEach(layer =>  {      // iterate over all layers 
+                
+//                 if (layer instanceof TileLayer) {
+//                     const isLayerQueryable = layer.get('queryable') ?? false;
+//                     const isLayerVisible = layer.get('visible') ?? false;
+//                     const name = layer.get('name');
+
+//                     if (isLayerQueryable && isLayerVisible) {
+//                         const source = layer.getSource();
+
+//                         if (source instanceof TileWMS) {
+//                             const hitTolerance = 100;
+//                             const url = source?.getFeatureInfoUrl(
+//                                 evt.coordinate,
+//                                 viewResolution,
+//                                 'EPSG:3857',
+//                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+//                             );
+//                     // console.log(url)  
+            
+//                             if (url) {                                              // sofern die URL true ist 
+//                                 fetch(url)
+//                                 .then((response) => {
+//                                     if (!response.ok) {
+//                                         throw new Error('Network response was not ok');
+//                                     }
+//                                     return response.json();
+//                                 })                                                  // response auf Anfrage der URL 
+//                                     .then((responseObject) => {
+//                                         // console.log(responseObject);
+//                                         if (responseObject.features && responseObject.features.length > 0) {
+                            
+               
+//                 // !!! ToleranzBereich anzeigen lassen? 
+                
+//                                             // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
+                                            
+//                                             const properties = responseObject.features[0].properties;       // alle Properties anzeigen lassen 
+//                                             const selectedAttributes = ['GRAY_INDEX', 
+//                                                                         'AirPollutionLevel', 
+//                                                                         'AQ Station Name', 
+//                                                                         'Air Pollution Group', 
+//                                                                         'Unit Of Airpollution Level', 
+//                                                                         'EW/KFL',
+//                                                                         'GEN',
+//                                                                         'EWZ',
+//                                                                         'NAME_LATN',
+//                                                                         // 'NUTS_NAME',
+//                                                                         'Average_travel_time',
+//                                                                         'Code_18',
+//                                                                         'addr:street',
+//                                                                         'addr:city',
+//                                                                         'name']
+
+
+//                                             // Suche nach den selectedAttributes (damit nicht einfach alle Attributes ausgegeben werden)
+//                                             selectedAttributes.forEach(desiredAttribute => {
+//                                                 if (properties.hasOwnProperty(desiredAttribute)) {
+//                                                     const value = properties[desiredAttribute];
+//                                                     tempUpdatedValue.push({ layerName: name, attributeName: desiredAttribute, value: `${value}` });
+//                                                 }
+//                                             });
+
+
+//                                             // Object.keys(properties).forEach(key => {
+//                                             //     const value = properties[key];
+
+//                                             //     // console.log(grayIndex);
+//                                             //     tempUpdatedValue.push({ layerName: name, attributeName: key, value: `${value}` });       // zum Array die neuen Informationen des Layers hinzufügen 
+//                                             // });
+                                            
+//                                             setUpdatedValue([...tempUpdatedValue]);                             // die updatedValues werden bei jeder Iteration dem Array hinzugefügt 
+//                                                     // setValue({name: name, value: `${grayIndex}`}); // Ursprünglich, dann wird immer nur der letzte Value festgehalten 
+                                            
+//                                         }
+//                                     })
+
+//                                 .catch(error => {
+
+//                                     console.log('my error is ', error);
+//                                     alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
+//                                 });
+//                             }
+//                         }
+//                     }
+//                 };
+                
+//             });
+            
+//             // To Do show results only for selected attributes 
+//         };
+            
+            
+
+//         map.on('singleclick', handleClick); //
+
+//         return () => {
+//             map.un('singleclick', handleClick); // TODO should be unregister something if the component unmounts?
+//         };
+        
+        
+//     }, [map]); // TODO what happens if the map prop has changed?
+    
+        
+//     return (
+//             <div id='info' className ='info'> 
+//                 {updatedValue.map((item, index) => (
+//                 <div key={index}>
+//                     <h3>{item.layerName}</h3>
+//                     {item.layerName} / {item.attributeName}: {item.value}</div>
+//                 ))}
+//             </div>            
+//     )
+// }
+
+
+// Code funktioniert und nur noch relevante Features, aber keine schöne Darstellung 
+// import React, { useEffect, useState } from 'react'; 
+// import TileWMS from 'ol/source/TileWMS.js';
+// import TileLayer from 'ol/layer/Tile';
+// import { MapBrowserEvent } from 'ol';
+// import Map from 'ol/Map';
+
+// import FeatureInfoModal from '../FeatureInfoModal/featureInfoModal';
+// import './featureInfo.css';
+
+
+// export type FeatureInfoProps = {
+//     map: Map;
+// };
+
+// export default function FeatureInfo ({ map }: FeatureInfoProps){
+
+    
+//     // useState (hook-function) um den Zustand einer Komponente zuverwalten -> updateValue = aktueller Zustandswert, setUpdatevalue = Funktion, um Zustand zu aktualisieren
+//     const [updatedValue, setUpdatedValue] = useState<{ layerName: string, attributeName: string, value: string }[]>([]); // (Typ des Zustands) Array, der Objekte enthält, die keys name und value haben
+//                                                                                             // ([]) -> inital state leerer Array 
+//     useEffect(() => {
+//         const handleClick = (evt: MapBrowserEvent<any>) => {                // function for dealing with a click in the Browser 
+            
+//             const viewResolution = map.getView().getResolution() ?? 0;      // aktueller Kartenausschnitt und aktuelle Auflösung um den geclickten Punkt möglichst genau an GeoServer zurückzugeben
+//             // TODO make use of the existing layers in the map
+            
+//             let tempUpdatedValue: { layerName: string, attributeName: string, value: string }[] = [];
+
+//             // console.log(map.getLayers());
+//             map.getLayers().forEach(layer =>  {      // iterate over all layers 
+                
+//                 if (layer instanceof TileLayer) {
+//                     const isLayerQueryable = layer.get('queryable') ?? false;
+//                     const isLayerVisible = layer.get('visible') ?? false;
+//                     const name = layer.get('name');
+
+//                     if (isLayerQueryable && isLayerVisible) {
+//                         const source = layer.getSource();
+
+//                         if (source instanceof TileWMS) {
+//                             const hitTolerance = 100;
+//                             const url = source?.getFeatureInfoUrl(
+//                                 evt.coordinate,
+//                                 viewResolution,
+//                                 'EPSG:3857',
+//                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() }
+//                             );
+//                     // console.log(url)  
+            
+//                             if (url) {                                              // sofern die URL true ist 
+//                                 fetch(url)
+//                                 .then((response) => {
+//                                     if (!response.ok) {
+//                                         throw new Error('Network response was not ok');
+//                                     }
+//                                     return response.json();
+//                                 })                                                  // response auf Anfrage der URL 
+//                                     .then((responseObject) => {
+//                                         // console.log(responseObject);
+//                                         if (responseObject.features && responseObject.features.length > 0) {
+                            
+//                 // !!! Gray Index gibt es für Vector-Daten auf jeden Fall nicht 
+//                 // !!! Toleranz-Bereich für Vector-Data, da man diese sonst nie angezeigt bekommt?! 
+//                 // !!! ToleranzBereich anzeigen lassen? 
+                
+//                                             // const grayIndex = responseObject.features[0].properties.GRAY_INDEX; // von der response den Gray, index abfragen;
+                                            
+//                                             const properties = responseObject.features[0].properties;       // alle Properties anzeigen lassen 
+//                                             const selectedAttributes = ['GRAY_INDEX', 
+//                                                                         'AirPollutionLevel', 
+//                                                                         'AQ Station Name', 
+//                                                                         'Air Pollution Group', 
+//                                                                         'Unit Of Airpollution Level', 
+//                                                                         'EW/KFL',
+//                                                                         'GEN',
+//                                                                         'EWZ',
+//                                                                         'NAME_LATN',
+//                                                                         // 'NUTS_NAME',
+//                                                                         'Average_travel_time',
+//                                                                         'Code_18',
+//                                                                         'addr:street',
+//                                                                         'addr:city',
+//                                                                         'name']
+
+
+//                                             // Suche nach den selectedAttributes (damit nicht einfach alle Attributes ausgegeben werden)
+//                                             selectedAttributes.forEach(desiredAttribute => {
+//                                                 if (properties.hasOwnProperty(desiredAttribute)) {
+//                                                     const value = properties[desiredAttribute];
+//                                                     tempUpdatedValue.push({ layerName: name, attributeName: desiredAttribute, value: `${value}` });
+//                                                 }
+//                                             });
+
+
+//                                             // Object.keys(properties).forEach(key => {
+//                                             //     const value = properties[key];
+
+//                                             //     // console.log(grayIndex);
+//                                             //     tempUpdatedValue.push({ layerName: name, attributeName: key, value: `${value}` });       // zum Array die neuen Informationen des Layers hinzufügen 
+//                                             // });
+                                            
+//                                             setUpdatedValue([...tempUpdatedValue]);                             // die updatedValues werden bei jeder Iteration dem Array hinzugefügt 
+//                                                     // setValue({name: name, value: `${grayIndex}`}); // Ursprünglich, dann wird immer nur der letzte Value festgehalten 
+                                            
+//                                         }
+//                                     })
+
+//                                 .catch(error => {
+
+//                                     console.log('my error is ', error);
+//                                     alert('Sorry, es ist ein Fehler aufgetreten') // TODO Show user an error -> kann man sicherlich noch etwas schöner gestalten 
+//                                 });
+//                             }
+//                         }
+//                     }
+//                 };
+                
+//             });
+            
+//             // To Do show results only for selected attributes 
+//         };
+            
+            
+
+//         map.on('singleclick', handleClick); //
+
+//         return () => {
+//             map.un('singleclick', handleClick); // TODO should be unregister something if the component unmounts?
+//         };
+        
+        
+//     }, [map]); // TODO what happens if the map prop has changed?
+    
+        
+//     return (
+//             <div id='info' className ='info'> 
+//                 {updatedValue.map((item, index) => (
+//                 <div key={index}>{item.layerName} / {item.attributeName}: {item.value}</div>
+//                 ))}
+//             </div>            
+//     )
+// }
 
 
 // import React, { useState, useEffect } from 'react'; 
