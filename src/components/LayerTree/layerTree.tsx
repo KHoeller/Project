@@ -1,9 +1,11 @@
-// LayerTree:
+// // LayerTree:
 
 
-// basiert auf den Layern von map; 
-// ist gruppiert entsprechend der config
-// icons/modals neben dem Gruppentitel, sofern in der Config angegeben 
+
+
+// // basiert auf den Layern von map; 
+// // ist gruppiert entsprechend der config
+// // icons/modals neben dem Gruppentitel, sofern in der Config angegeben 
 
 
 import React, { useState, useEffect } from 'react';
@@ -12,7 +14,8 @@ import { Tree } from 'antd';
 
 import BaseLayer from 'ol/layer/Base';
 import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
-import RasterSlider from '../Slider_RasterData/slider';
+
+// import RasterSlider from '../Slider_RasterData/slider';
 
 export type LayerTreeProps = {
     map: Map;
@@ -29,7 +32,7 @@ type Layer = {
 }
 
 type TreeNode = {
-    title: string | JSX.Element;
+    title: string ;
     key: string;
     children?: TreeNode[]; // sofern children vorhanden sind
     layer?: Layer;
@@ -38,7 +41,7 @@ type TreeNode = {
     infoText?: string;
     infoTextTitle?: string;
     enableSlider?: boolean;
-    slider?:JSX.Element;
+    
 }
 
 export default function LayerTree({ map }: LayerTreeProps) {
@@ -46,6 +49,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
 
     const generateTreeData = (layers: any[]): TreeNode[] => {
         const layerGroups: { [groupName: string]: Layer[] } = {};
+        const groupsWithSlider: string[] = [];
+
         layers.forEach(layer => {
             const groupName = layer.values_.groupName || 'Basiskarte';
             if (!layerGroups[groupName]) {
@@ -60,11 +65,16 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 infoTextTitle: layer.values_.infoTextTitle || false,
                 enableSlider: layer.values_.enableSlider || false,
             });
+            if (layer.values_.enableSlider) {
+                groupsWithSlider.push(groupName);
+            }
         });
     
-        const treeData: TreeNode[] = Object.keys(layerGroups).map(groupName => {
+        const treeData: TreeNode[] = Object.keys(layerGroups)
+
+        .map(groupName => {
             const groupLayers = layerGroups[groupName];
-            const slider = groupLayers.some(layer => layer.enableSlider) ? <RasterSlider /> : undefined;
+            // const slider = groupsWithSlider.includes(groupName) ? <RasterSlider  /> : undefined;
             const groupNode: TreeNode = {
                 title: groupName,
                 key: groupName,
@@ -85,16 +95,16 @@ export default function LayerTree({ map }: LayerTreeProps) {
             };
            
 
-            if (slider) {
-                groupNode.children = [
-                    ...(groupNode.children ?? []),
-                    { 
-                        ...groupNode.children![0], 
-                        title: slider,
-                        key: groupNode.children![0].key + "_slider" // Eindeutigen Schlüssel für den Slider erstellen
-                    }
-                ];
-            }
+            // if (slider) {
+            //     groupNode.children = [
+            //         ...(groupNode.children ?? []),
+            //         { 
+            //             ...groupNode.children![0], 
+            //             title: slider,
+            //             key: groupNode.children![0].key + "_slider" // Eindeutigen Schlüssel für den Slider erstellen
+            //         }
+            //     ];
+            // }
 
 
 
@@ -108,7 +118,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
     useEffect(() => {
-        const layers = map.getLayers().getArray()                       // aktuelle Layers der map verwenden 
+        const layers = map.getLayers().getArray();                        // aktuelle Layers der map verwenden 
         const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen 
         setTreeData(generatedTreeData);
 
@@ -163,6 +173,173 @@ export default function LayerTree({ map }: LayerTreeProps) {
         />
     );
 }
+
+
+// import React, { useState, useEffect } from 'react';
+// import Map from 'ol/Map';
+// import { Tree } from 'antd';
+
+// import BaseLayer from 'ol/layer/Base';
+// import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
+
+// // import RasterSlider from '../Slider_RasterData/slider';
+
+// export type LayerTreeProps = {
+//     map: Map;
+// }
+
+// type Layer = {
+//     name: string;
+//     title: string;
+//     visible?: boolean;
+//     info?: boolean;
+//     infoText?: string; 
+//     infoTextTitle?: string; 
+//     enableSlider?: boolean;
+// }
+
+// type TreeNode = {
+//     title: string ;
+//     key: string;
+//     children?: TreeNode[]; // sofern children vorhanden sind
+//     layer?: Layer;
+//     visible: boolean;      // sofern Angabe zu visible vorhanden ist
+//     info: boolean;
+//     infoText?: string;
+//     infoTextTitle?: string;
+//     enableSlider?: boolean;
+    
+// }
+
+// export default function LayerTree({ map }: LayerTreeProps) {
+    
+
+//     const generateTreeData = (layers: any[]): TreeNode[] => {
+//         const layerGroups: { [groupName: string]: Layer[] } = {};
+//         const groupsWithSlider: string[] = [];
+
+//         layers.forEach(layer => {
+//             const groupName = layer.values_.groupName || 'Basiskarte';
+//             if (!layerGroups[groupName]) {
+//                 layerGroups[groupName] = [];
+//             }
+//             layerGroups[groupName].push({
+//                 name: layer.values_.name,
+//                 title: layer.values_.title,
+//                 visible: layer.values_.visible || false,
+//                 info: layer.values_.info || false, 
+//                 infoText: layer.values_.infoText || false,
+//                 infoTextTitle: layer.values_.infoTextTitle || false,
+//                 enableSlider: layer.values_.enableSlider || false,
+//             });
+//             if (layer.values_.enableSlider) {
+//                 groupsWithSlider.push(groupName);
+//             }
+//         });
+    
+//         const treeData: TreeNode[] = Object.keys(layerGroups)
+
+//         .map(groupName => {
+//             const groupLayers = layerGroups[groupName];
+//             // const slider = groupsWithSlider.includes(groupName) ? <RasterSlider  /> : undefined;
+//             const groupNode: TreeNode = {
+//                 title: groupName,
+//                 key: groupName,
+//                 children: groupLayers.map(layer => ({
+//                     title: layer.title,
+//                     key: layer.name,
+//                     layer: layer,
+//                     visible: !!layer.visible,
+//                     info: !!layer.info,
+//                     infoText: layer.infoText || undefined,
+//                     infoTextTitle: layer.infoTextTitle || undefined,
+//                 })),
+//                 visible: groupLayers.some(layer => !!layer.visible),
+//                 info: groupLayers[0]?.info || false,
+//                 infoText: groupLayers[0]?.infoText || undefined,
+//                 infoTextTitle: groupLayers[0]?.infoTextTitle || undefined,
+//                 enableSlider: groupLayers[0]?.enableSlider || false,
+//             };
+           
+
+//             // if (slider) {
+//             //     groupNode.children = [
+//             //         ...(groupNode.children ?? []),
+//             //         { 
+//             //             ...groupNode.children![0], 
+//             //             title: slider,
+//             //             key: groupNode.children![0].key + "_slider" // Eindeutigen Schlüssel für den Slider erstellen
+//             //         }
+//             //     ];
+//             // }
+
+
+
+//             return groupNode;
+//         });
+    
+//         return treeData;
+//     };
+    
+//     const [treeData, setTreeData] = useState<TreeNode[]>([]);
+//     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
+
+//     useEffect(() => {
+//         const layers = map.getLayers().getArray();                        // aktuelle Layers der map verwenden 
+//         const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen 
+//         setTreeData(generatedTreeData);
+
+//         const initialCheckedKeys = generatedTreeData.flatMap(group =>
+//             group.children?.filter(layer => layer.visible)              // aktuell sichtbaren Layer filtern 
+//             .map(layer => layer.key) || [] 
+//         );
+//         setCheckedKeys(initialCheckedKeys);                             // die auusgewählten Checkboxen des initial state 
+//     }, []);
+
+
+//     const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert 
+//         if (Array.isArray(checked)) {                                   // sofern es sich um einen Array handelt - keine halbgeprüften Checkboxen und alle ausgewählten keys enthalten
+//             setCheckedKeys(checked.map(key => String(key)));
+//         } else {
+//             setCheckedKeys(checked.checked.map(key => String(key)));
+//         }
+//     }       // Unterscheidung half and full checked 
+
+//     useEffect(() => {                                                       // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
+//         map.getLayers().forEach(layer => {                                  // Iteration über alle Layer in der Karte 
+//             const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
+//             const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
+//             layer.setVisible(shouldBeVisible);                              // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
+//         });
+//     }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
+
+
+//     return (
+//         <Tree
+//             checkable
+//             selectable={false}
+//             treeData={treeData.map(node => ({
+//                 ...node,
+//                 title: (
+//                     <span>
+//                         {node.title}
+//                         {node.info && !node.layer && <InfoIcon infoTextTitle={node.infoTextTitle} infoText={node.infoText}/>}  
+//                     </span>
+//                 ),
+//                 children: node.children?.map(layerNode => ({
+//                     ...layerNode,
+//                     title: (
+//                         <span>
+//                             {layerNode.title}
+//                         </span>
+//                     ),
+//                 })),
+//             }))}
+//             checkedKeys={checkedKeys}
+//             onCheck={onCheck}
+//         />
+//     );
+// }
 
 
 

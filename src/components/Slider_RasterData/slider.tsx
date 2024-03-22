@@ -91,7 +91,7 @@ export default function RasterSlider({ map }: SliderProps) {
 
                 return (
                     <div key={groupName}>
-                        <h3>{groupName}</h3>
+                       {/* <h3>{groupName}</h3>*/}
                         <Checkbox
                             checked={sliderEnabled[groupName]}
                             onChange={(e) => toggleSlider(groupName, e.target.checked)}

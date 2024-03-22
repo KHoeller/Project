@@ -19,7 +19,11 @@ import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfo';
 import Toolbar from './src/components/Toolbar/toolbar';
 import Sidebar from './src/components/Sidebar/sidebar';
-import LayerTree from './src/components/LayerTree/layerTree';
+import Baseboard from './src/components/Baseboard/baseboard';
+import Base from 'antd/es/typography/Base';
+import NominatimSearch from './src/components/Search/search';
+
+
 
 export default function App () {
     console.log(mapView);
@@ -41,18 +45,19 @@ export default function App () {
 
     return ( 
         <> 
-            <MapComp
-                map={map} />  
+            {/* <Toolbar/> */}
+            
 
             {/* <NominatimSearch map={map}/> */}
-            <FeatureInfo
-                map={map} />   
+            {/* <FeatureInfo
+                map={map} />    */}
             
+            <NominatimSearch map={map}/>
             <Toolbar/>
-
-           {/* <LayerTree map={map}/> */}
-
             <Sidebar map={map}/>
+            <FeatureInfo map={map}/>
+            <Baseboard map={map}/>            
+            <MapComp map={map} />  
 
         </>
     )

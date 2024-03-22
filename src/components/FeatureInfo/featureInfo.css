@@ -1,13 +1,53 @@
-
-#info {
+  /* .info {
+    z-index: 10050;
     position: fixed;
     bottom: 30px;
-    right: 15px;
+    left: 15px;
        
-    width:auto;    
-    /* padding: 5px; */
+    width:auto; 
+       
+    padding: 5px;
     border: 1px solid black; 
     z-index: 100; 
     background-color: cornsilk;
     
+  }   */
+.ant-modal{
+    width: 400px !important;
+    position: relative;
+    top: 350px;
+    left: 50px;
+    max-height: 50hv;
+    margin: 0 0;
+    z-index: 99 !important;
+       
+}
+
+.feature-info-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.attribute-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.attribute-name {
+    flex: 1;
+    text-align: left;
+}
+
+.attribute-value {
+    flex: 1;
+    text-align: right;
+}
+
+.ant-modal-wrap{
+    position: static; /* ODER position: initial; */
+    inset: auto; /* ODER entfernen Sie diese Zeile, da 'auto' der Standardwert ist */
+    z-index: 0 !important; /* ODER entfernen Sie diese Zeile, da 'auto' der Standardwert ist */
+    overflow: initial; /* ODER overflow: initial; */
+    outline: none; /* ODER entfernen Sie diese Zeile, da 'none' der Standardwert ist */
+    -webkit-overflow-scrolling: initial; 
 }

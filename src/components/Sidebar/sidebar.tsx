@@ -10,6 +10,8 @@ import { Button, Drawer } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
 import LayerTree from "../LayerTree/layerTree";
+import RasterSlider from "../Slider_RasterData/slider";
+import FeatureInfo from "../FeatureInfo/featureInfo";
 
 export type SidebarProps = {
     map: Map;
@@ -45,6 +47,10 @@ export default function Sidebar ({map}:SidebarProps){
                 keyboard={true}
             >
                 <LayerTree map={map}/>
+
+                <RasterSlider map={map}/>
+
+                {/* <FeatureInfo map={map}/> */}
 
                 {/* <p> Hier kommen die verschiedenen Layer hin </p> im LayerTree*/}
             </Drawer>

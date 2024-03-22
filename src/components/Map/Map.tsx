@@ -6,6 +6,8 @@ import Map from 'ol/Map';
 
 import Baseboard from '../Baseboard/baseboard';
 import NominatimSearch from '../Search/search';
+import FeatureInfo from '../FeatureInfo/featureInfo';
+import Toolbar from '../Toolbar/toolbar';
 
 // import style for MapComp
 import './Map.css';
@@ -37,10 +39,17 @@ export default function MapComp ({ map }: MapCompProps) {
 
     return (
             <div className='mapContainer'>
+                {/* <NominatimSearch map={map}/>
+                <Toolbar/>
+                <FeatureInfo map={map}/> */}
+                {/* <Baseboard map={map}/> */}
+              
                 <h1 className='map-heading'>Umwelt-Gesundheitskarte für Deutschland</h1>
                 <div id='map' className ='map'></div>
-                <Baseboard map={map}/>
-               <NominatimSearch map={map}/>
+                
+                
+               
+                
             </div>
     );
 }
