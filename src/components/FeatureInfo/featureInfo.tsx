@@ -5,15 +5,19 @@ import { MapBrowserEvent } from 'ol';
 import Map from 'ol/Map';
 import { Modal } from 'antd';
 
+
+
 import './featureInfo.css';
 
 export type FeatureInfoProps = {
     map: Map;
 };
 
-const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
-    const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]);
-    const [modalVisible, setModalVisible] = useState(false);
+// const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
+    export default function FeatureInfo ({ map }: FeatureInfoProps) {
+    
+    const [selectedValue, setSelectedValue] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]); // Zustandsvariable für ausgewählten Feature-Informationen
+    const [modalVisible, setModalVisible] = useState(false); // Zustandsvariable für Sichtbarkeit des Modals 
 
     useEffect(() => {
         const handleClick = async (evt: MapBrowserEvent<any>) => {
@@ -86,7 +90,7 @@ const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
             }));
 
             if (tempSelectedFeatureInfo.length > 0) {
-                setSelectedFeatureInfo(tempSelectedFeatureInfo);
+                setSelectedValue(tempSelectedFeatureInfo);
                 setModalVisible(true);
             }
         };
@@ -103,41 +107,38 @@ const FeatureInfo: React.FC<FeatureInfoProps> = ({ map }) => {
         setModalVisible(false);
     };
 
-    const baseboardHeight = document.querySelector('.baseboard')?.clientHeight || 0; 
-
-    // const modalTop = baseboardHeight + 20; 
-
     return (
-        <Modal
-            title="Feature Information"
-            open={modalVisible}
-            onCancel={handleModalCancel}
-            footer={null}
-            mask={false}
-            maskClosable={false}
-            keyboard={true}
-            // style={{ bottom: baseboardHeight }}
-            
-            // getContainer={() => document.getElementById('map-container')} // ID des Map-Containers verwenden
-        >
-            {selectedFeatureInfo.map((featureInfo, index) => (
-                <div key={index}>
-                    <h3>{featureInfo.layerName}</h3>
-                    {featureInfo.attributes.map((attribute, attrIndex) => (
-                        <div key={attrIndex} className="feature-info-container">
-                            <div className='attribute-row'>
-                                <span className="attribute-name">{attribute.attributeName}:</span>
-                                <span className="attribute-value">{attribute.value}</span>
+        <div>
+            <Modal
+                className='featureInfo-container'
+                wrapClassName='Modal-Feature'
+                title="Feature Information"
+                open={modalVisible}
+                onCancel={handleModalCancel}
+                footer={null}
+                mask={false}
+                maskClosable={false}
+                keyboard={true}
+            >
+                {selectedValue.map((featureInfo, index) => (
+                    <div key={index}>
+                        <h3>{featureInfo.layerName}</h3>
+                        {featureInfo.attributes.map((attribute, attrIndex) => (
+                            <div key={attrIndex} className="feature-info-container">
+                                <div className='attribute-row'>
+                                    <span className="attribute-name">{attribute.attributeName}:</span>
+                                    <span className="attribute-value">{attribute.value}</span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </Modal>
+                        ))}
+                    </div>
+                ))}
+            </Modal>
+        </div>
     );
 };
 
-export default FeatureInfo;
+// export default FeatureInfo;
 
 
 // import React, { useEffect, useState } from 'react'; 
