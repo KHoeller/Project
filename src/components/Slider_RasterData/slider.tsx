@@ -4,6 +4,7 @@
 
 // TODO -> Einbindung in LayerTree an die entsprechende Stelle
 // TODO -> Übergang bei changes geschmeidiger 
+
 import React, { useState, useEffect } from 'react';
 import { Slider, Checkbox } from 'antd';
 import Map from 'ol/Map';
@@ -14,53 +15,62 @@ export type SliderProps = {
 }
 
 
-
+// 
 
 export default function RasterSlider({ map }: SliderProps) {
     const layers = map.getLayers().getArray();
-    const [groupsWithSlider, setGroupsWithSlider] = useState<string[]>([]);
-    const [selectedLayerIndexes, setSelectedLayerIndexes] = useState<{ [key: string]: number }>({});
-    const [sliderEnabled, setSliderEnabled] = useState<{ [key: string]: boolean }>({});
+    const [groupsWithSlider, setGroupsWithSlider] = useState<string[]>([]);             // for groups with enableSlider = true
+    const [selectedLayerIndexes, setSelectedLayerIndexes] = useState<{ [key: string]: number }>({});    // renew the index of the group to change the year of the layer inside a group
+    const [sliderEnabled, setSliderEnabled] = useState<{ [key: string]: boolean }>({});     // to check and uncheck the slider 
 
     useEffect(() => {
         const groupsWithSlider: string[] = [];
         const selectedLayerIndexes: { [key: string]: number } = {};
         const sliderEnabled: { [key: string]: boolean } = {};
 
-        layers.forEach((layer: any) => {
-            const groupName = layer.get('groupName');
-            const enableSlider = layer.get('enableSlider');
+        layers.forEach((layer: any) => {                                // Schleife fuer jeden Layer
+            const groupName = layer.get('groupName');                   // groupname von layern 
+            const enableSlider = layer.get('enableSlider');             // get Information for sliders 
 
-            if (enableSlider && groupName && !groupsWithSlider.includes(groupName)) {
-                groupsWithSlider.push(groupName);
-                selectedLayerIndexes[groupName] = 0;
+            if (enableSlider && groupName && !groupsWithSlider.includes(groupName)) { // wenn enableSlider und groupname true sind und der groupname noch nicht im Array groupsWithSlider vorhanden ist...
+                groupsWithSlider.push(groupName);           // ... dann wird der groupname hinzugefügt; an array with according groupnames 
+                selectedLayerIndexes[groupName] = 2;
                 sliderEnabled[groupName] = false;
             }
         });
 
-        setGroupsWithSlider(groupsWithSlider);
+        setGroupsWithSlider(groupsWithSlider);              // function for updating value 
         setSelectedLayerIndexes(selectedLayerIndexes);
         setSliderEnabled(sliderEnabled);
-    }, [layers]);
+    }, [layers]); // wird jedes Mal ausgeführt, wenn sich der Wert der layers ändert 
 
-    const onChange = (groupName: string, newValue: number) => {
+    const onChange = (groupName: string, newValue: number) => { // function in case of changed slider; newValue: newIndex
         setSelectedLayerIndexes(prevState => ({
             ...prevState,
-            [groupName]: newValue
+            [groupName]: newValue           // enthält vorherigen Zustand und gibt neuen Zustand zurück; aktualisieren nur für betreffende Gruppe (Index der anderen Gruppen bleiben erhalten)
         }));
     }
 
+    // Rest nochmal nachvollziehen 
+
     useEffect(() => {
         groupsWithSlider.forEach(groupName => {
-            const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
-            const selectedLayerIndex = selectedLayerIndexes[groupName];
-            const selectedLayer = groupLayers[selectedLayerIndex];
+            const groupLayers = layers.filter(layer => layer.get('groupName') === groupName); // für jeden Gruppennamen die Layer suchen 
+
+            const marks: any = {};
+            groupLayers.forEach((layer: any, index: number) => {
+                const fullYear = layer.get('year');
+                marks[index] = "'" + fullYear.toString().slice(-2); // Extrahiere die letzten beiden Ziffern
+            });
+
+            const selectedLayerIndex = selectedLayerIndexes[groupName];                         // der index des ausgewählten Layers in der jeweiligen Gruppe
+            const selectedLayer = groupLayers[selectedLayerIndex];                          // ausgerwählten Layer abrufen 
     
             
             groupLayers.forEach((layer: any) => {
-                if (sliderEnabled[groupName]) {
-                    if (layer === selectedLayer) {
-                        layer.setVisible(true);
+                if (sliderEnabled[groupName]) {                         // ist der slider aktiviert? 
+                    if (layer === selectedLayer) {                      // ist der aktuelle Layer der ausgewählte Layer? 
+                        layer.setVisible(true);                         // wenn es der gewählte Layer ist und der slider aktiv ist -> sieht man ihn 
                     } else {
                         layer.setVisible(false);
                     }
@@ -74,14 +84,14 @@ export default function RasterSlider({ map }: SliderProps) {
     const toggleSlider = (groupName: string, checked: boolean) => {
         setSliderEnabled(prevState => ({
             ...prevState,
-            [groupName]: checked
+            [groupName]: checked // aktivieren und deaktivieren der slider -> prevState hat vorherigen Zustand, sodass nur die entsprechende Gruppe verändert wird
         }));
     }
 
     return (
         <div className='Slider'>
-            {groupsWithSlider.map((groupName, index) => {
-                const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
+            {groupsWithSlider.map((groupName) => {
+                const groupLayers = layers.filter(layer => layer.get('groupName') === groupName); // Layer zur aktuellen Gruppe 
 
                 const marks: any = {};
                 groupLayers.forEach((layer: any, index: number) => {
@@ -90,14 +100,14 @@ export default function RasterSlider({ map }: SliderProps) {
                 });
 
                 return (
-                    <div key={groupName}>
+                    <div key={groupName}> {/* für jede Gruppe rendern */}
                        {/* <h3>{groupName}</h3>*/}
-                        <Checkbox
+                        <Checkbox 
                             checked={sliderEnabled[groupName]}
                             onChange={(e) => toggleSlider(groupName, e.target.checked)}
                             style={{ marginBottom: '1rem' }}
                         >
-                            {groupName} ein
+                            {groupName} ein 
                         </Checkbox>
                         {sliderEnabled[groupName] && (
                             <Slider
@@ -115,115 +125,6 @@ export default function RasterSlider({ map }: SliderProps) {
         </div>
     );
 }
-
-
-// import React, { useState, useEffect } from 'react';
-// import { Slider, Switch } from 'antd';
-// import Map from 'ol/Map';
-// import './slider.css';
-
-// export type SliderProps = {
-//     map: Map;
-// }
-
-// export default function RasterSlider({ map }: SliderProps) {
-//     const layers = map.getLayers().getArray();
-//     const [groupsWithSlider, setGroupsWithSlider] = useState<string[]>([]);
-//     const [selectedLayerIndexes, setSelectedLayerIndexes] = useState<{ [key: string]: number }>({});
-//     const [sliderEnabled, setSliderEnabled] = useState<{ [key: string]: boolean }>({});
-
-//     useEffect(() => {
-//         const groupsWithSlider: string[] = [];
-//         const selectedLayerIndexes: { [key: string]: number } = {};
-//         const sliderEnabled: { [key: string]: boolean } = {};
-
-//         layers.forEach((layer: any) => {
-//             const groupName = layer.get('groupName');
-//             const enableSlider = layer.get('enableSlider');
-
-//             if (enableSlider && groupName && !groupsWithSlider.includes(groupName)) {
-//                 groupsWithSlider.push(groupName);
-//                 selectedLayerIndexes[groupName] = 0;
-//                 sliderEnabled[groupName] = true;
-//             }
-//         });
-
-//         setGroupsWithSlider(groupsWithSlider);
-//         setSelectedLayerIndexes(selectedLayerIndexes);
-//         setSliderEnabled(sliderEnabled);
-//     }, [layers]);
-
-//     const onChange = (groupName: string, newValue: number) => {
-//         setSelectedLayerIndexes(prevState => ({
-//             ...prevState,
-//             [groupName]: newValue
-//         }));
-//     }
-
-//     useEffect(() => {
-//         groupsWithSlider.forEach(groupName => {
-//             const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
-//             const selectedLayerIndex = selectedLayerIndexes[groupName];
-//             const selectedLayer = groupLayers[selectedLayerIndex];
-    
-//             groupLayers.forEach((layer: any) => {
-//                 if (sliderEnabled[groupName]) {
-//                     if (layer === selectedLayer) {
-//                         layer.setVisible(true);
-//                     } else {
-//                         layer.setVisible(false);
-//                     }
-//                 } else {
-//                     layer.setVisible(false);
-//                 }
-//             });
-//         });
-//     }, [groupsWithSlider, layers, selectedLayerIndexes, sliderEnabled]);
-
-//     const toggleSlider = (groupName: string, checked: boolean) => {
-//         setSliderEnabled(prevState => ({
-//             ...prevState,
-//             [groupName]: checked
-//         }));
-//     }
-
-//     return (
-//         <div className='Slider'>
-//             {groupsWithSlider.map((groupName, index) => {
-//                 const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
-
-//                 const marks: any = {};
-//                 groupLayers.forEach((layer: any, index: number) => {
-//                     const fullYear = layer.get('year');
-//                     marks[index] = "'" + fullYear.toString().slice(-2); // Extrahiere die letzten beiden Ziffern
-//                 });
-
-//                 return (
-//                     <div key={groupName}>
-//                         <h3>{groupName}</h3>
-//                         <Switch
-//                             checkedChildren="Slider an"
-//                             unCheckedChildren="Slider aus"
-//                             checked={sliderEnabled[groupName]}
-//                             onChange={(checked: boolean) => toggleSlider(groupName, checked)}
-//                             style={{ marginBottom: '1rem' }}
-//                         />
-//                         {sliderEnabled[groupName] && (
-//                             <Slider
-//                                 onChange={(newValue: number) => onChange(groupName, newValue)}
-//                                 style={{ width: '100%' }}
-//                                 max={groupLayers.length - 1}
-//                                 value={selectedLayerIndexes[groupName]}
-//                                 marks={marks}
-//                                 tooltip={{ open: false }}
-//                             />
-//                         )}
-//                     </div>
-//                 );
-//             })}
-//         </div>
-//     );
-// }
 
 
 // // funktioniert: erstellt Slider für die vier Gruppen mit enableSlider=true -> aber ein Block mit allen SLidern 
@@ -468,33 +369,10 @@ export default function RasterSlider({ map }: SliderProps) {
 
 
 
-// export default function RasterSlider ({onChange}){
-
-//     return(
-//         <Slider />
-//     )
-// }
 
 
 
 
 
 
-
-    // const marks = {};
-
-    //     const [year, setYear] = useState<number | undefined>(undefined);
-
-    //     const handleChange = (newYear: number) => {
-    //         setYear(newYear);
-    //     };
-    // className='raster-slider' 
-    //     defaultValue={2010}
     
-    // min={2000} // Mindestwert auf das früheste Jahr setzen
-    // max={2022} // Höchstwert auf das späteste Jahr setzen
-    // step={1} // Schritt von 1 Jahr
-    // value={year}
-    // marks={marks} // Verwenden Sie die vordefinierten Markierungen
-    // onChange={handleChange}
-    // tooltipVisible 
