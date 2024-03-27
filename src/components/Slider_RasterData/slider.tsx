@@ -6,91 +6,104 @@
 // TODO -> Übergang bei changes geschmeidiger 
 
 
-
-
 import React, { useState, useEffect } from 'react';
 import { Slider } from 'antd';
 import Map from 'ol/Map';
-import './slider.css';
 
-export type SliderProps = {
-    map: Map;
+
+export type Layer = {
+    name: string;
+    title: string;
+    visible: boolean;
+    info: boolean;
+    infoText: boolean;
+    infoTextTitle: boolean;
+    year: number;
+    enableSlider: boolean;
+    queryable: boolean;
+    layerType: string;
+    layer: any; // Der Typ des Layers in OpenLayers kann vielfältig sein, daher wird any verwendet
 }
 
-export default function RasterSlider({ map }: SliderProps) {
-    const layers = map.getLayers().getArray();
-
-    const [groupsWithSlider, setGroupsWithSlider] = useState<string[]>([]);                             // array for groups with enableSlider = true 
-    const [selectedLayerIndexes, setSelectedLayerIndexes] = useState<{ [key: string]: number }>({});
-
-    useEffect(() => {
-        const groupsWithSlider: string[] = [];
-        const selectedLayerIndexes: { [key: string]: number } = {};
-
-        layers.forEach((layer: any) => {
-            const groupName = layer.get('groupName');
-            const enableSlider = layer.get('enableSlider');
-
-            if (enableSlider && groupName && !groupsWithSlider.includes(groupName)) {
-                groupsWithSlider.push(groupName);
-                selectedLayerIndexes[groupName] = 0;
-            }
-        });
-
-        setGroupsWithSlider(groupsWithSlider);
-        setSelectedLayerIndexes(selectedLayerIndexes);
-    }, [layers]);
-
-    const onChange = (groupName: string, newValue: number) => {
-        setSelectedLayerIndexes(prevState => ({
-            ...prevState,
-            [groupName]: newValue
-        }));
-    }
-
-    useEffect(() => {
-        groupsWithSlider.forEach(groupName => {
-            const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
-            const selectedLayerIndex = selectedLayerIndexes[groupName];
-            const selectedLayer = groupLayers[selectedLayerIndex];
+export type SliderProps = {
+    group: Layer[];
+    groupName: string;
+    checked: boolean;
     
-            groupLayers.forEach((layer: any) => {
-                if (layer === selectedLayer) {
-                    layer.setVisible(true);
+}
+
+export default function RasterSlider({ group, groupName, checked }: SliderProps) {
+    const [inputValue, setInputValue] = useState<number | null>(0);
+
+    console.log('group:', group);
+    console.log('checked:', checked)
+    useEffect(() => {
+        if (checked) {
+            
+            group.forEach((layer, index) => {
+                if (index === inputValue) {
+                    layer.layer.setVisible(true);
                 } else {
-                    layer.setVisible(false);
+                    layer.layer.setVisible(false);
                 }
             });
-        });
-    }, [groupsWithSlider, layers, selectedLayerIndexes]);
+        } else {
+            group.forEach(layer => layer.layer.setVisible(false));
+            setInputValue(null);
+        }
+        console.log(inputValue);
+    }, [checked, group, inputValue]);
+       
+
+    const years = group.map(layer => layer.year);
+
+    // const visible = group.map(layer => layer.visible);
+
+    // console.log(group);
+
+   
+    const handleChange = (newValue: number) => {
+        
+        setInputValue(newValue);
+       
+        // group.forEach((layer, index) => {
+        //     if (index === newValue) {
+        //         layer.layer.setVisible(true);
+        //     } else {
+        //         layer.layer.setVisible(false);
+        //     }
+        // });
+    }
+
+    
+    // const handleSliderClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    //     // Hier verhindern wir, dass der Klick auf den Slider andere Ereignisse auslöst
+    //     e.stopPropagation();
+    //     // Führe den Klick-Handler für den Slider aus
+        
+    // };
+
+    const marks: { [key: number]: string } = years.reduce
+        <{ [key: number]: string }>((acc, year, index) => {
+        const shortYear = year.toString().slice(-2);
+        acc[index] = shortYear;
+        return acc;
+    }, {});
+
 
     return (
         <div>
-            {groupsWithSlider.map((groupName, index) => {
-                const groupLayers = layers.filter(layer => layer.get('groupName') === groupName);
-
-                const marks: any = {};
-                groupLayers.forEach((layer: any, index: number) => {
-                    const fullYear = layer.get('year');
-                    marks[index] = "'" + fullYear.toString().slice(-2); // Extrahiere die letzten beiden Ziffern
-                });
-
-                return (
-                    <div key={groupName}>
-                        <h3>{groupName}</h3>
-                        <Slider
-                            onChange={(newValue: number) => onChange(groupName, newValue)}
-                            style={{ width: '100%' }}
-                            max={groupLayers.length - 1}
-                            value={selectedLayerIndexes[groupName]}
-                            marks={marks}
-                            included={false}
-                            tooltip={{ open: false }}
-                            
-                        />
-                    </div>
-                );
-            })}
+            <h3> Jahresmittelwerte {groupName}</h3>
+            <Slider
+                value={inputValue !== null ? inputValue : 0}
+                onChange={handleChange}
+                included={false}
+                min={0}
+                max={years.length - 1}
+                marks={marks}
+               
+                style={{ width: '250px'}}/>
+                
         </div>
     );
 }
