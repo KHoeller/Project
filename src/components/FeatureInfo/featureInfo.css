@@ -12,16 +12,31 @@
     background-color: cornsilk;
     
   }   */
-.ant-modal{
-    width: 400px !important;
-    position: relative;
-    top: 350px;
-    left: 50px;
-    max-height: 50hv;
-    margin: 0 0;
-    z-index: 99 !important;
-       
+.ant-modal-wrap.Modal-Feature{
+    
+    all: unset;
+      
 }
+
+
+.ant-modal.featureInfo-container {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-25%);
+    left: 50px; 
+    width: 350px !important;
+    padding: 0 0 0 0;
+    margin: 0 0;
+    padding-bottom: 0;
+    box-shadow: 0 0;
+    max-width: calc(100vw - 100px);
+    padding-bottom: 0;
+    overflow: auto;
+    max-height: 50vh;
+}
+
+
+
 
 .feature-info-container {
     display: flex;
@@ -43,11 +58,17 @@
     text-align: right;
 }
 
-.ant-modal-wrap{
-    position: static; /* ODER position: initial; */
-    inset: auto; /* ODER entfernen Sie diese Zeile, da 'auto' der Standardwert ist */
-    z-index: 0 !important; /* ODER entfernen Sie diese Zeile, da 'auto' der Standardwert ist */
-    overflow: initial; /* ODER overflow: initial; */
-    outline: none; /* ODER entfernen Sie diese Zeile, da 'none' der Standardwert ist */
+
+
+
+/* .ant-modal-wrap{
+    position: static; 
+    inset: auto; 
+    z-index: 0 !important; 
+    overflow: initial;  
+    outline: none; 
     -webkit-overflow-scrolling: initial; 
-}
+} */ 
+
+
+
