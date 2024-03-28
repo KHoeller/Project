@@ -5,14 +5,13 @@
 // // icons/modals neben dem Gruppentitel, sofern in der Config angegeben 
 
 
+
 import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
 import { Tree } from 'antd';
 
 import BaseLayer from 'ol/layer/Base';
 import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
-
-// import RasterSlider from '../Slider_RasterData/slider'; // TODO einbauen 
 
 export type LayerTreeProps = {
     map: Map;
@@ -50,9 +49,13 @@ export default function LayerTree({ map }: LayerTreeProps) {
 
         layers.forEach(layer => {                                          // Schleife für jeden layer 
             const groupName = layer.values_.groupName || 'Basiskarte';      // Gruppennamen abrufen
+
+
+
             if (!layerGroups[groupName]) {
                 layerGroups[groupName] = [];                                // sofern groupname noch nicht in layerGroups -> neuen key mit Gruppennamen hinzufügen 
             }
+
             layerGroups[groupName].push({                                   // zum Gruppennamen hinzufügen:
                 name: layer.values_.name,                                   // layername, title, information to visible, info, infoText and infoTextTitle, enableSlider
                 title: layer.values_.title,                                  
@@ -62,9 +65,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 infoTextTitle: layer.values_.infoTextTitle || false,
                 enableSlider: layer.values_.enableSlider || false,
             });
-            // if (layer.values_.enableSlider) {                               // if enableSlider = true, push to groupsWithSlider array
-            //     groupsWithSlider.push(groupName);
-            // }
+
         });
     
         const treeData: TreeNode[] = Object.keys(layerGroups)               // EIgenschaften von layerGroups zurückgeben
@@ -90,20 +91,6 @@ export default function LayerTree({ map }: LayerTreeProps) {
                     enableSlider: groupLayers[0]?.enableSlider || false,
                 };
             
-
-                // if (slider) {
-                //     groupNode.children = [
-                //         ...(groupNode.children ?? []),
-                //         { 
-                //             ...groupNode.children![0], 
-                //             title: slider,
-                //             key: groupNode.children![0].key + "_slider" // Eindeutigen Schlüssel für den Slider erstellen
-                //         }
-                //     ];
-                // }
-
-
-
                 return groupNode; 
             });
 
@@ -115,7 +102,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
     useEffect(() => {
-        const layers = map.getLayers().getArray();                        // aktuelle Layers der map verwenden 
+        const layers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);                     // aktuelle Layers der map verwenden 
         const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen auf Basis der Daten der map 
         setTreeData(generatedTreeData);                                 // function zur Aktualisierung der Daten 
 
