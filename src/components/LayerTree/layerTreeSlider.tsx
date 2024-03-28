@@ -1,15 +1,16 @@
 
 import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
-import { Tree, Checkbox, Grid } from 'antd';
-import RasterSlider from '../Slider_RasterData/slider'; // Stelle sicher, dass du den Pfad entsprechend anpasst
+import { Tree } from 'antd';
+import RasterSlider from '../Slider_RasterData/slider'; 
+import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
 
 export type LayerTreeProps = {
     map: Map;
 }
 
 export default function LayerTreeSlider({ map }: LayerTreeProps) {
-    // const layers = map.getLayers().getArray();
+    
     const [layerGroups, setLayerGroups] = useState<{ [groupName: string]: any[] }>({});
 
     const [checkedGroups, setCheckedGroups] = useState<string[]>([]);
@@ -54,34 +55,37 @@ export default function LayerTreeSlider({ map }: LayerTreeProps) {
         checked: React.Key[] | 
         { checked: React.Key[]; 
         }) => {
-            const checkedGroupNames = Array.isArray(checked) ? checked.map(key => String(key)) : checked.checked.map(key => String(key));
+            const checkedGroupNames = Array.isArray(checked) ? 
+                checked.map(key => String(key)) : 
+                checked.checked.map(key => String(key));
+
             setCheckedGroups(checkedGroupNames);
-            // setExpandedGroups(checkedGroupNames);
+            
             console.log('checkedGroups', checkedGroupNames); 
 
-            // layers.forEach(layer => {
-            //     const groupName = layer.get('groupName');
-            //     if (groupName && !checkedGroupNames.includes(groupName)) {
-            //         layer.setVisible(false);
-            //     }
-            // });
-
             const newExpandedGroups = [...expandedGroups];
-    checkedGroupNames.forEach(groupName => {
-        if (!newExpandedGroups.includes(groupName)) {
-            newExpandedGroups.push(groupName);
-        }
+            checkedGroupNames.forEach(groupName => {
+                if (!newExpandedGroups.includes(groupName)) {
+                newExpandedGroups.push(groupName);
+            }
     });
     setExpandedGroups(newExpandedGroups);
+    };
 
-            
-
+    const handleGroupCollapse = (groupName: string) => {
+        setExpandedGroups(prevExpandedGroups => prevExpandedGroups.filter(group => group !== groupName));
     };
     
 
     // Erstellen treeData-Struktur 
     const treeData = Object.keys(layerGroups).map(groupName => ({
-        title: groupName,
+        title: (
+            <span>
+                {groupName}
+                <InfoIcon infoTextTitle={layerGroups[groupName][0].infoTextTitle} infoText={layerGroups[groupName][0].infoText} /> 
+            </span>
+            // InfoModal mithilfe des InfoIcons oeffnen -> einfuegen neben dem groupName 
+        ),
         key: groupName,
         
         children: [{
@@ -90,20 +94,13 @@ export default function LayerTreeSlider({ map }: LayerTreeProps) {
                         group={layerGroups[groupName]} 
                         groupName={groupName} 
                         checked={checkedGroups.includes(groupName)} 
+                        onGroupCollapse={handleGroupCollapse}
                     />,
-            key: `slider_${groupName}`, // Eindeutiger Schlüssel für den Slider
+            key: `slider_${groupName}`, 
             checkable: false,
         }],
         // checkable: false
     }));
-   
-//     layerGroups[groupName].map(layer => ({
-        //     title: layer.name,
-        //     key: layer.name,
-        //     layerInfo: layer 
-        // })).concat({
-    
-        
 
     return (
         <Tree 
@@ -113,8 +110,7 @@ export default function LayerTreeSlider({ map }: LayerTreeProps) {
             checkedKeys={checkedGroups}
             expandedKeys={expandedGroups}
             onCheck={onCheck}
-            onExpand={(expandedKeys, info) => setExpandedGroups(expandedKeys as string[])}
-            
+            onExpand={(expandedKeys) => setExpandedGroups(expandedKeys as string[])}
         />
     );
 }
