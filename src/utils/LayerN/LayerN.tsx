@@ -45,6 +45,7 @@
                 const title = layerConfig.title;
                 const url = layerConfig.url || 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms';
                 const year = layerConfig.year !== undefined ? layerConfig.year : false;
+                const layerType = layerConfig.layerType;
                 
     
                 let newLayer = new TileLayer({
@@ -64,6 +65,7 @@
                 newLayer.set('infoText', infoText);
                 newLayer.set('enableSlider', enabeleSlider);
                 newLayer.set('year', year);
+                newLayer.set('layerType', layerType);
     
                 layers.push(newLayer); // Füge den Layer dem Array hinzu
             });

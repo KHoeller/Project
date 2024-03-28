@@ -1,20 +1,25 @@
 
+// der Part des LayerTrees holt sich keine Informationen über die aktuell sichtbaren Layer in map 
+// -> sofern Raster initial state visible = true ein Problem 
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
 import { Tree } from 'antd';
 import RasterSlider from '../Slider_RasterData/slider'; 
 import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
+import Legende from '../Legende/legendSlider';
 
-export type LayerTreeProps = {
+export type LayerTreeSliderProps = {
     map: Map;
 }
 
-export default function LayerTreeSlider({ map }: LayerTreeProps) {
+export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
     
     const [layerGroups, setLayerGroups] = useState<{ [groupName: string]: any[] }>({});
-
     const [checkedGroups, setCheckedGroups] = useState<string[]>([]);
-
     const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
 
     useEffect(() => {
@@ -51,25 +56,23 @@ export default function LayerTreeSlider({ map }: LayerTreeProps) {
     }, [map]);
 
     
-    const onCheck = (
-        checked: React.Key[] | 
-        { checked: React.Key[]; 
-        }) => {
-            const checkedGroupNames = Array.isArray(checked) ? 
-                checked.map(key => String(key)) : 
-                checked.checked.map(key => String(key));
+    const onCheck = (checked: React.Key[] | { checked: React.Key[]; }) => {
+        const checkedGroupNames = Array.isArray(checked) ? 
+            checked.map(key => String(key)) : 
+            checked.checked.map(key => String(key));
 
-            setCheckedGroups(checkedGroupNames);
-            
-            console.log('checkedGroups', checkedGroupNames); 
+        setCheckedGroups(checkedGroupNames);
+        
+        console.log('checkedGroups', checkedGroupNames); 
 
-            const newExpandedGroups = [...expandedGroups];
-            checkedGroupNames.forEach(groupName => {
-                if (!newExpandedGroups.includes(groupName)) {
-                newExpandedGroups.push(groupName);
-            }
+        const newExpandedGroups = [...expandedGroups];
+        checkedGroupNames.forEach(groupName => {
+            if (!newExpandedGroups.includes(groupName)) {
+            newExpandedGroups.push(groupName);
+        }
     });
-    setExpandedGroups(newExpandedGroups);
+
+        setExpandedGroups(newExpandedGroups);
     };
 
     const handleGroupCollapse = (groupName: string) => {
@@ -90,16 +93,25 @@ export default function LayerTreeSlider({ map }: LayerTreeProps) {
         
         children: [{
         
-            title: <RasterSlider 
+            title: 
+                <>
+                    <RasterSlider 
                         group={layerGroups[groupName]} 
                         groupName={groupName} 
                         checked={checkedGroups.includes(groupName)} 
                         onGroupCollapse={handleGroupCollapse}
-                    />,
+                    />
+                    <Legende 
+                        group={layerGroups[groupName]} 
+                        groupName={groupName} 
+                        checked={checkedGroups.includes(groupName)} 
+                        onGroupCollapse={handleGroupCollapse}
+                    />
+                </>,
             key: `slider_${groupName}`, 
             checkable: false,
+            
         }],
-        // checkable: false
     }));
 
     return (

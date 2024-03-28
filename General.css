@@ -1,14 +1,10 @@
-.ol-zoom .ol-zoom-in {
-    border-radius: 6px 6px 6px 6px;
-    width: 32px; 
-    height: 32px;
-}
-
+.ol-zoom .ol-zoom-in,
 .ol-zoom .ol-zoom-out {
     border-radius: 6px 6px 6px 6px;
     width: 32px; 
-    height: 32px;
+    height: 32px;   
 }
+
 
 .ol-control{
     background-color: transparent;
@@ -22,5 +18,6 @@
     position: absolute;
     bottom: 80px;
     left: 5px; 
+ 
     /* background: transparent; */
 } 

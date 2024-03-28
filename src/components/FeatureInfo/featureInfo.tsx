@@ -1,3 +1,6 @@
+
+
+
 import React, { useEffect, useState } from 'react'; 
 import TileWMS from 'ol/source/TileWMS.js';
 import TileLayer from 'ol/layer/Tile';
@@ -6,6 +9,7 @@ import Map from 'ol/Map';
 import { Modal } from 'antd';
 
 import Draggable from 'react-draggable';
+import type { DraggableData, DraggableEvent } from 'react-draggable';
 
 import './featureInfo.css';
 
@@ -118,6 +122,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
     const handleModalCancel = () => { // function for closing the modal 
         setModalVisible(false);
     };
+    
 
     return (
         <div>

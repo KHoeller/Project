@@ -13,11 +13,13 @@ import { Tree } from 'antd';
 import BaseLayer from 'ol/layer/Base';
 import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
 
+import Legende from '../Legende/legend';
+
 export type LayerTreeProps = {
     map: Map;
 }
 
-type Layer = {
+export type Layer = {
     name: string;
     title: string;
     visible?: boolean;
@@ -45,11 +47,9 @@ export default function LayerTree({ map }: LayerTreeProps) {
 
     const generateTreeData = (layers: any[]): TreeNode[] => {          // Funktion zur Generierung der Daten (in der richtigen Struktur) fuer den LayerTree 
         const layerGroups: { [groupName: string]: Layer[] } = {};       // Layergroups Name und dazugehörige Layer (Struktur von layerGRoups)
-        const groupsWithSlider: string[] = [];                          // Layer with enableSlider = true -> template array 
 
         layers.forEach(layer => {                                          // Schleife für jeden layer 
             const groupName = layer.values_.groupName || 'Basiskarte';      // Gruppennamen abrufen
-
 
 
             if (!layerGroups[groupName]) {
@@ -71,7 +71,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
         const treeData: TreeNode[] = Object.keys(layerGroups)               // EIgenschaften von layerGroups zurückgeben
             .map(groupName => {                                                 // function for each groupName
                 const groupLayers = layerGroups[groupName];
-                // const slider = groupsWithSlider.includes(groupName) ? <RasterSlider  /> : undefined;
+                
                 const groupNode: TreeNode = {                                   // Structure Layertree 
                     title: groupName,
                     key: groupName,
@@ -102,11 +102,13 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
     useEffect(() => {
-        const layers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);                     // aktuelle Layers der map verwenden 
-        const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen auf Basis der Daten der map 
+        const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);   
+        const layers = map.getLayers().getArray();
+        console.log('layersl',layers); 
+        const generatedTreeData = generateTreeData(layersTree);             // mithilfe der obigen Funktion die strukturierten Daten erstellen auf Basis der Daten der map 
         setTreeData(generatedTreeData);                                 // function zur Aktualisierung der Daten 
 
-        const initialCheckedKeys = generatedTreeData.flatMap(group =>
+        const initialCheckedKeys = generateTreeData(layers).flatMap(group =>
             group.children?.filter(layer => layer.visible)              // aktuell sichtbaren Layer filtern und speichern in initialCheckedKeys 
             .map(layer => layer.key) || [] 
         );
@@ -117,12 +119,16 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert
         if (Array.isArray(checked)) {                                   
             setCheckedKeys(checked.map(key => String(key)));
+            console.log('checked:', checked);
         } else {
             setCheckedKeys(checked.checked.map(key => String(key)));
         }
     }       // Unterscheidung half and full checked 
 
     useEffect(() => {                                                       // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
+        
+        // TODO map getLayers -> layers filter nach 'enableSlider') !== true und das mappen s.u.)
+        const layers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true); // etc. 
         map.getLayers().forEach(layer => {                                  // Iteration über alle Layer in der Karte 
             const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
             const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
@@ -148,6 +154,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
                     title: (
                         <span>
                             {layerNode.title}
+                            {layerNode && layerNode.layer && <Legende layers={[layerNode.layer]} />}
+
                         </span>
                     ),
                 })),

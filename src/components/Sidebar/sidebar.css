@@ -11,6 +11,11 @@
     bottom: 28px !important; 
 
     box-shadow: 0 0 0 !important;
+   
+}
+
+.ant-drawer{
+    z-index: 1 !important;
 }
 
 .openButton {

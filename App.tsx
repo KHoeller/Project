@@ -25,6 +25,7 @@ import NominatimSearch from './src/components/Search/search';
 
 
 
+
 export default function App () {
     console.log(mapView);
 
@@ -56,6 +57,7 @@ export default function App () {
             <Toolbar/>
             <Sidebar map={map}/>
             <FeatureInfo map={map}/>
+            
             <Baseboard map={map}/>            
             <MapComp map={map} />  
 

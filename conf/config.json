@@ -17,19 +17,22 @@
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Landwirtschaftliche Flächen",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }, {
                     "name": "Forest_DE",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Waldflächen",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }, {
                     "name": "Water_bodies_DE",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Wasserflächen",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         },
@@ -46,73 +49,68 @@
                     "title": "NO2 2014",
                     "year": 2014,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2015",
                     "title": "NO2 2015",
                     "year": 2015,
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2016",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2016",
                     "year": 2016,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2017",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2017",
                     "year": 2017,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2018",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2018",
                     "year": 2018,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2019",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2019",
                     "year": 2019,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2020",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2020",
                     "year": 2020,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NO2_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NO2 2021",
                     "year": 2021,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }
             ]
         },
-        {
-            "groupName": "V_NO2",
-            "info": false,
-            "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
-            "infoText": "Die Daten stammen von....",
-            "layers": [
-                {
-                    "name": "V_NO2_2021",
-                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
-                    "title": "Vector NO2 2021",
-                    "queryable": true
-                }
-            ]
-        },
+        
         
         {
             "groupName": "NOx",
@@ -127,49 +125,56 @@
                     "title": "NOx 2014",
                     "year": 2014,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2015",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2015",
                     "year": 2015,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2016",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2016",
                     "year": 2016,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2017",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2017",
                     "year": 2017,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2018",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2018",
                     "year": 2018,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2020",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2020",
                     "year": 2020,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_NOx_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "NOx 2021",
                     "year": 2021,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }
             ]
         }, 
@@ -186,90 +191,103 @@
                     "title": "PM10 2006",
                     "year": 2006,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2007",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2007",
                     "year": 2007,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2008",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2008",
                     "year": 2008,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2009",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2009",
                     "year": 2009,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2010",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2010",
                     "year": 2010,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2011",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2011",
                     "year": 2011,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2012",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2012",
                     "year": 2012,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2013",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2013",
                     "year": 2013,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2014",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2014",
                     "year": 2014,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2015",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2015",
                     "year": 2015,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2016",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2016",
                     "year": 2016,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2017",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2017",
                     "year": 2017,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2018",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2018",
                     "year": 2018,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
             
                 }, {
                     "name": "R_PM10_2019",
@@ -277,37 +295,24 @@
                     "title": "PM10 2019",
                     "year": 2019,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2020",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2020",
                     "year": 2020,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM10_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM10 2021",
                     "year": 2021,
-                    "visible": true,
-                    "queryable": true
-                }
-            ]
-        },
-
-        {
-            "groupName": "V_PM10",
-            "info": false,
-            "infoTextTitle": "Informationen zu Feinstaub (PM10)",
-            "infoText": "Die Daten stammen von....",
-            "layers": [
-                {
-                    "name": "V_PM10_2021",
-                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
-                    "title": "Vector PM10 2021",
-                    "visible": true,
-                    "queryable": true
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
                 }
             ]
         },
@@ -325,105 +330,119 @@
                     "title": "PM2.5 2007",
                     "year": 2007,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2008",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2008",
                     "year": 2008,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2010",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2010",
                     "year": 2010,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2011",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2011",
                     "year": 2011,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2012",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2012",
                     "year": 2012,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2013",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2013",
                     "year": 2013,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2014",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2014",
                     "year": 2014,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2015",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2015",
                     "year": 2015,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2016",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2016",
                     "year": 2016,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2017",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2017",
                     "year": 2017,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2018",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2018",
                     "year": 2018,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2019",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2019",
                     "year": 2019,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2020",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2020",
                     "year": 2020,
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }, {
                     "name": "R_PM25_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "PM2.5 2021",
                     "year": 2021,
                     "visible":false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "raster"
                 }
             ]
         },
 
         {
             "groupName": "V_PM2.5",
-            "info": false,
+            "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
             "infoText": "Die Daten stammen von....",
             "layers": [
@@ -431,26 +450,45 @@
                     "name": "V_PM2.5_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Vector PM2.5 2021",
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        {
+            "groupName": "V_NO2",
+            "info": true,
+            "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
+            "infoText": "Die Daten stammen von....",
+            "layers": [
+                {
+                    "name": "V_NO2_2021",
+                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
+                    "title": "Vector NO2 2021",
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         },
 
         {
-            "groupName": "SO2",
+            "groupName": "V_PM10",
             "info": true,
-            "infoTextTitle": "Informationen zu Schwefeldioxid (SO2)",
+            "infoTextTitle": "Informationen zu Feinstaub (PM10)",
             "infoText": "Die Daten stammen von....",
             "layers": [
                 {
-                    "name": "V_SO2_2021",
+                    "name": "V_PM10_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
-                    "title": "Vector SO2 2021",
+                    "title": "Vector PM10 2021",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         },
+        
+       
         {
             "groupName": "CO",
             "info": true,
@@ -461,7 +499,8 @@
                     "name": "V_CO_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Vector CO 2021",
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         },
@@ -475,7 +514,24 @@
                     "name": "V_O3_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Vector O3 2021",
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        }, 
+        {
+            "groupName": "SO2",
+            "info": true,
+            "infoTextTitle": "Informationen zu Schwefeldioxid (SO2)",
+            "infoText": "Die Daten stammen von....",
+            "layers": [
+                {
+                    "name": "V_SO2_2021",
+                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
+                    "title": "Vector SO2 2021",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         },
@@ -491,13 +547,15 @@
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Gemeindegrenzen",
                     "visible": false,
-                    "queryable": false
+                    "queryable": false,
+                    "layerType": "vector"
                 }, {
                     "name": "Nationalgrenze_DE",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Grenze Deutschlands",
                     "visible": true,
-                    "queryable": false
+                    "queryable": false,
+                    "layerType": "vector"
                 }
             ]
         },
@@ -513,7 +571,9 @@
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "visible": false,
                     "queryable": true,
+                    "layerType": "vector",
                     "info": "Lorem ipsum…"
+                    
                     
                 }
             ]
@@ -530,20 +590,23 @@
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Fahrtzeit bis zum nächsten Krankenhaus",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }, {
                     "name": "Hospitals_DE",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Standorte Krankenhäuser",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 },
                 {
                     "name": "Hospitals_2_dach",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "title": "Standorte Krankenhäuser_Dach",
                     "visible": false,
-                    "queryable": true
+                    "queryable": true,
+                    "layerType": "vector"
                 }
             ]
         }

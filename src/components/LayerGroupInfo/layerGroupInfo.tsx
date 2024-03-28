@@ -39,8 +39,16 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
     return (
         <span className='layer-tree-info'> 
             <Button type={type} icon={<InfoCircleOutlined style={{ color: '#1890ff' }} />} shape='default' size={size} onClick={handleButtonClick}/>
-            <Modal title={infoTextTitle} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}> 
-                <p>{infoText}</p>
+            <Modal 
+                className='info-modal' 
+                wrapClassName='info-modal-wrap'
+                title={infoTextTitle} 
+                open={isModalOpen} 
+                onOk={handleOk} 
+                onCancel={handleCancel}
+                maskClosable={false}
+                mask={false}> 
+                    <p>{infoText}</p>
             </Modal>
         </span>
     );

@@ -32,8 +32,6 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
     
     const [inputValue, setInputValue] = useState<number | null>(0);
     
-
-
     useEffect(() => {
         if (checked) {
             
@@ -67,34 +65,12 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
         console.log('inputValue:', inputValue);
     }, [checked, group, inputValue, groupName, onGroupCollapse]);
        
-
     const years = group.map(layer => layer.year);
-
-    // const visible = group.map(layer => layer.visible);
-
-    // console.log(group);
-
    
     const handleChange = (newValue: number) => {
         
         setInputValue(newValue);
-       
-        // group.forEach((layer, index) => {
-        //     if (index === newValue) {
-        //         layer.layer.setVisible(true);
-        //     } else {
-        //         layer.layer.setVisible(false);
-        //     }
-        // });
     }
-
-    
-    // const handleSliderClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    //     // Hier verhindern wir, dass der Klick auf den Slider andere Ereignisse auslöst
-    //     e.stopPropagation();
-    //     // Führe den Klick-Handler für den Slider aus
-        
-    // };
 
     const marks: { [key: number]: string } = years.reduce
         <{ [key: number]: string }>((acc, year, index) => {
@@ -103,10 +79,12 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
         return acc;
     }, {});
 
+    const minYear = years.length > 0 ? years[0] : 0;
+    const maxYear = years.length > 0 ? years[years.length - 1] : 0;
 
     return (
         <div>
-            <h3> Jahresmittelwerte {groupName}</h3>
+            <h4 style={{ fontWeight: 'normal' }}> Jahresmittelwerte {groupName} <br/> von {minYear} bis {maxYear} </h4>
             <Slider
                 value={inputValue !== null ? inputValue : 0}
                 onChange={handleChange}
@@ -120,6 +98,8 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
         </div>
     );
 }
+
+// fontWeight: normal -> normal, nicht dick oder kursiv 
 
 
 // import React, { useState, useEffect } from 'react';

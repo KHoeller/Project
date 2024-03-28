@@ -24,10 +24,19 @@ export default function About (){
         <Button className='buttonAbout' type="default" onClick={showModal}>
             About
         </Button>
-        <Modal title="About the Project" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+        <Modal 
+            wrapClassName="Modal-About"
+            title="About the Project" 
+            open={isModalOpen} 
+            onOk={handleOk} 
+            onCancel={handleCancel}
+            mask={true}
+            maskClosable={false}
+            centered={true}
+            >
+                <p>Some contents...</p>
+                <p>Some contents...</p>
+                <p>Some contents...</p>
         </Modal>
     </>
     );

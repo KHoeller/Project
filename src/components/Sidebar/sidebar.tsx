@@ -1,6 +1,4 @@
 
-// drawer bleibt geöffnet auch wenn zoom o.ä. geclickt wird / es gibt keinen MaskLayer mehr, wenn drawer offen ist 
-// drawer kann mit button oder x geschlossen werden  
 
 import React, { useState, useEffect } from "react";
 import Map from 'ol/Map';  
@@ -9,9 +7,10 @@ import './sidebar.css';
 import { Button, Drawer } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-import LayerTree from "../LayerTree/layerTree";
-import RasterSlider from "../Slider_RasterData/slider";
-import FeatureInfo from "../FeatureInfo/featureInfo";
+// import LayerTree from "../LayerTree/layerTree";
+// import LayerTreeSlider from '../LayerTree/layerTreeSlider';
+import LayerManager from "../LayerTree/layerTreeManager";
+
 
 export type SidebarProps = {
     map: Map;
@@ -26,10 +25,6 @@ export default function Sidebar ({map}:SidebarProps){
         setOpen(!open)
     }
 
-    // const showDrawer = () => {
-    //     setOpen(true)
-    // }
-
     const onClose = () => {
         setOpen(false);
     };
@@ -37,22 +32,20 @@ export default function Sidebar ({map}:SidebarProps){
     return(
         <div className="sidebarContainer" >
              <Drawer
+                className="sidebarDrawer"
                 title='Themenbaum'
                 onClose={onClose}
                 open={open}
                 placement="right"
-                className="sidebarDrawer"
                 maskClosable={false}
                 mask={false}
                 keyboard={true}
             >
-                <LayerTree map={map}/>
+                {/* <LayerTree map={map}/>
+                <LayerTreeSlider map={map}/> */}
 
-                <RasterSlider map={map}/>
+                <LayerManager map={map} />
 
-                {/* <FeatureInfo map={map}/> */}
-
-                {/* <p> Hier kommen die verschiedenen Layer hin </p> im LayerTree*/}
             </Drawer>
             <Button
                 type="default"
