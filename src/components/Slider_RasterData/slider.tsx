@@ -2,13 +2,9 @@
 // SliderCode - 4 Slider, die man mit Checkbox an und ausschalten kann und mit verschieben des pucks auch zwischen Jahren Switchen kann
 
 
-// TODO -> Einbindung in LayerTree an die entsprechende Stelle
-// TODO -> Übergang bei changes geschmeidiger 
-
-
 import React, { useState, useEffect } from 'react';
 import { Slider } from 'antd';
-import Map from 'ol/Map';
+// import Map from 'ol/Map';
 
 
 export type Layer = {
@@ -22,18 +18,30 @@ export type Layer = {
     enableSlider: boolean;
     queryable: boolean;
     layerType: string;
-    layer: any; // Der Typ des Layers in OpenLayers kann vielfältig sein, daher wird any verwendet
+    layer: any; 
 }
 
 export type SliderProps = {
     group: Layer[];
     groupName: string;
     checked: boolean;
-    
+    onGroupCollapse: (groupName: string) => void;    
 }
 
-export default function RasterSlider({ group, groupName, checked }: SliderProps) {
+export default function RasterSlider({ group, groupName, checked, onGroupCollapse }: SliderProps) {
+    
     const [inputValue, setInputValue] = useState<number | null>(0);
+    
+
+
+    useEffect(() => {
+        if (checked) {
+            
+            const initialIndex = group.findIndex(layer => layer.year === 2021); // Finde Index des Jahres 2021
+            
+            setInputValue(initialIndex !== -1 ? initialIndex : 0); // initialen Wert auf den Index von 2021 oder 0 setzen, falls 2021 nicht gefunden wird
+        }
+    }, [checked, group]);
 
     console.log('group:', group);
     console.log('checked:', checked)
@@ -45,14 +53,19 @@ export default function RasterSlider({ group, groupName, checked }: SliderProps)
                     layer.layer.setVisible(true);
                 } else {
                     layer.layer.setVisible(false);
+                    
                 }
             });
         } else {
             group.forEach(layer => layer.layer.setVisible(false));
-            setInputValue(null);
+            setInputValue(group.length);
+            
+            onGroupCollapse(groupName);
+            
+            console.log('length:', group.length);
         }
-        console.log(inputValue);
-    }, [checked, group, inputValue]);
+        console.log('inputValue:', inputValue);
+    }, [checked, group, inputValue, groupName, onGroupCollapse]);
        
 
     const years = group.map(layer => layer.year);
