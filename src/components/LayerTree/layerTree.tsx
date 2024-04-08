@@ -129,7 +129,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
         
         // TODO map getLayers -> layers filter nach 'enableSlider') !== true und das mappen s.u.)
         const layers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true); // etc. 
-        map.getLayers().forEach(layer => {                                  // Iteration über alle Layer in der Karte 
+        map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true).forEach(layer => {                                  // Iteration über alle Layer in der Karte 
             const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
             const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
             layer.setVisible(shouldBeVisible);                              // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
