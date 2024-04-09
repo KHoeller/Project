@@ -3,8 +3,6 @@
 // -> sofern Raster initial state visible = true ein Problem 
 
 
-
-
 import React, { useState, useEffect } from 'react';
 import Map from 'ol/Map';
 import { Tree } from 'antd';
@@ -24,9 +22,10 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
 
     useEffect(() => {
         const layers = map.getLayers().getArray();
+        const reversedLayers = layers.slice().reverse();
         const updatedLayerGroups: { [groupName: string]: any[] } = {};
 
-        layers.forEach(layer => {
+        reversedLayers.forEach(layer => {
             const groupName = layer.get('groupName');
             const enableSlider = layer.get('enableSlider');
 
@@ -46,7 +45,9 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
                     enableSlider: enableSlider || false,
                     queryable: layer.get('queryable') || false, 
                     layerType: layer.get('layerType'),
-                    layer: layer
+                    layer: layer,
+                    urlLegend: layer.get('urlLegend'),
+                    legend: layer.get('legend'),
                 });
             }
         });
@@ -55,38 +56,48 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
         console.log(updatedLayerGroups);
     }, [map]);
 
-    
-    const onCheck = (checked: React.Key[] | { checked: React.Key[]; }) => {
-        const checkedGroupNames = Array.isArray(checked) ? 
-            checked.map(key => String(key)) : 
-            checked.checked.map(key => String(key));
 
-        setCheckedGroups(checkedGroupNames);
-        
-        console.log('checkedGroups', checkedGroupNames); 
+    const onCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; }) => {
+        const checkedKeysArray = Array.isArray(checkedKeys) ? checkedKeys.map(key => String(key)) : checkedKeys.checked.map(key => String(key));
+        setCheckedGroups(checkedKeysArray);
 
+        // Update layer visibility based on checked groups
+        Object.keys(layerGroups).forEach(groupName => {
+            const groupVisible = checkedKeysArray.includes(groupName);
+            layerGroups[groupName].forEach(layerInfo => {
+                layerInfo.layer.setVisible(groupVisible);
+            });
+        });
+
+        // Update expanded groups to include newly checked groups
         const newExpandedGroups = [...expandedGroups];
-        checkedGroupNames.forEach(groupName => {
+        checkedKeysArray.forEach(groupName => {
             if (!newExpandedGroups.includes(groupName)) {
-            newExpandedGroups.push(groupName);
-        }
-    });
-
+                newExpandedGroups.push(groupName);
+            }
+        });
         setExpandedGroups(newExpandedGroups);
     };
 
-    const handleGroupCollapse = (groupName: string) => {
-        setExpandedGroups(prevExpandedGroups => prevExpandedGroups.filter(group => group !== groupName));
-    };
+
+    // Filter out groups that are not checked and set their visibility to false
+    useEffect(() => {
+        const uncheckedGroups = Object.keys(layerGroups).filter(groupName => !checkedGroups.includes(groupName));
+        uncheckedGroups.forEach(groupName => {
+            layerGroups[groupName].forEach(layerInfo => {
+                layerInfo.layer.setVisible(false);
+            });
+        });
+    }, [checkedGroups, layerGroups]);
     
 
     // Erstellen treeData-Struktur 
     const treeData = Object.keys(layerGroups).map(groupName => ({
         title: (
-            <span>
+            <>
                 {groupName}
                 <InfoIcon infoTextTitle={layerGroups[groupName][0].infoTextTitle} infoText={layerGroups[groupName][0].infoText} /> 
-            </span>
+            </>
             // InfoModal mithilfe des InfoIcons oeffnen -> einfuegen neben dem groupName 
         ),
         key: groupName,
@@ -99,13 +110,11 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
                         group={layerGroups[groupName]} 
                         groupName={groupName} 
                         checked={checkedGroups.includes(groupName)} 
-                        onGroupCollapse={handleGroupCollapse}
                     />
                     <Legende 
                         group={layerGroups[groupName]} 
                         groupName={groupName} 
                         checked={checkedGroups.includes(groupName)} 
-                        onGroupCollapse={handleGroupCollapse}
                     />
                 </>,
             key: `slider_${groupName}`, 
