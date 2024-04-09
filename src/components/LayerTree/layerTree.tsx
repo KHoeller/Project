@@ -48,6 +48,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 enableSlider: layer.values_.enableSlider || false,
                 urlLegend: layer.values_.urlLegend,
                 legend: layer.values_.legend, 
+                layer:layer,
             });
 
         });
@@ -89,53 +90,90 @@ export default function LayerTree({ map }: LayerTreeProps) {
     const [firstRenderComplete, setFirstRenderComplete] = useState<boolean>(false);
     const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
 
-    useEffect(() => {
-        const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);   
-        // const layers = map.getLayers().getArray();
-        
-        const generatedTreeData = generateTreeData(layersTree);             // mithilfe der obigen Funktion die strukturierten Daten erstellen auf Basis der Daten der map 
-        setTreeData(generatedTreeData);                                 // function zur Aktualisierung der Daten 
 
-        console.log('treeData.', generatedTreeData); 
-      
-        const initialCheckedKeys = layersTree
-            .filter(layer => layer.getVisible())
-            .map(layer => (layer as BaseLayer).getProperties().name);
-        setCheckedKeys(initialCheckedKeys);                            // die auusgewählten Checkboxen des initial state 
-        setExpandedGroups(initialCheckedKeys);
-        console.log(initialCheckedKeys);
+    // Layer, die initial auf der Map ausgewählt sind checked und group ausgeklappt 
+    useEffect(() => {
+        const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);
+
+        const reversedLayersTree = layersTree.slice().reverse();
+        
+        // Generiert die Struktur für den LayerTree basierend auf den aktuellen Layern
+        const generatedTreeData = generateTreeData(reversedLayersTree);
+        setTreeData(generatedTreeData);
+
+        console.log('generatedData:', generatedTreeData)
+        
+        // Extrahiert alle Layer-Namen, Gruppen-Namen und initial sichtbaren Gruppen
+        const initialCheckedKeys: string[] = [];
+        const expandedGroups: string[] = [];
+    
+        layersTree.forEach(layer => {
+            const layerName = (layer as BaseLayer).getProperties().name;
+            const groupName = layer.get('groupName') || 'Basiskarte';
+            const isVisible = layer.getVisible();
+    
+            // Wenn der Layer sichtbar ist, füge den Layer-Namen zu den initialCheckedKeys hinzu
+            // und füge den entsprechenden Gruppen-Namen zu den expandedGroups hinzu
+            if (isVisible) {
+                initialCheckedKeys.push(layerName);
+                expandedGroups.push(groupName);
+            }
+        });
+    
+        // Entfernt Duplikate aus expandedGroups, um sicherzustellen, dass jeder Gruppen-Name nur einmal vorkommt
+        const uniqueExpandedGroups = Array.from(new Set(expandedGroups));
+       
+        // Setze die initial ausgewählten und erweiterten Gruppen
+        setCheckedKeys(initialCheckedKeys);
+        setExpandedGroups(uniqueExpandedGroups);
+    
+        // Markiere den ersten Rendervorgang als abgeschlossen
         setFirstRenderComplete(true);
     }, [map]);
 
 
-    const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }, info: any) => { // Abruf sobald sich der Status einer Checkbox verändert
-        console.log(info)
-        if (Array.isArray(checked)) {                                   
-            setCheckedKeys(checked.map(key => String(key)));
-            console.log('checked:', checked);
-        } else {
-            setCheckedKeys(checked.checked.map(key => String(key)));
-        }
+// mit dieser Funktion wird NICHT automatisch Group ausgeklappt, wenn group checked ist 
+    // const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }, info: any) => { // Abruf sobald sich der Status einer Checkbox verändert
+    //     console.log(info)
+    //     if (Array.isArray(checked)) {                                   
+    //         setCheckedKeys(checked.map(key => String(key)));
+    //         console.log('checked:', checked);
+    //     } else {
+    //         setCheckedKeys(checked.checked.map(key => String(key)));
+    //     }
     
-    }       // Unterscheidung half and full checked 
-    // //     // const newExpandedGroups = [...expandedGroups]; // Kopie der aktuellen erweiterten Gruppen
+    // }       // Unterscheidung half and full checked 
+    //     // const newExpandedGroups = [...expandedGroups]; // Kopie der aktuellen erweiterten Gruppen
 
-    // //     // // Füge ausgewählte Gruppen zu den erweiterten Gruppen hinzu, falls sie nicht bereits enthalten sind
-    // //     // checkedKeys.forEach(groupName => {
-    // //     //     if (!newExpandedGroups.includes(groupName)) {
-    // //     //         newExpandedGroups.push(groupName);
-    // //     //     }
-    // //     // });
+    //     // // Füge ausgewählte Gruppen zu den erweiterten Gruppen hinzu, falls sie nicht bereits enthalten sind
+    //     // checkedKeys.forEach(groupName => {
+    //     //     if (!newExpandedGroups.includes(groupName)) {
+    //     //         newExpandedGroups.push(groupName);
+    //     //     }
+    //     // });
 
-    // //     // setExpandedGroups(newExpandedGroups);
+    //     // setExpandedGroups(newExpandedGroups);
     
-    // const handleCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
-    //     const keys = Array.isArray(checkedKeys) ? checkedKeys.map(String) : checkedKeys.checked.map(String);
-    //     setCheckedKeys(keys);
-
-    //     // Update expanded groups based on checked keys
-    //     setExpandedGroups(keys);
-    // };
+   
+    const handleCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
+        const keys = Array.isArray(checkedKeys) ? checkedKeys.map(String) : checkedKeys.checked.map(String);
+    
+        // Aktualisiert die ausgewählten Schlüssel
+        setCheckedKeys(keys);
+    
+        // Aktualisiert die erweiterten Gruppen basierend auf den neu ausgewählten Gruppen
+        const updatedExpandedGroups = [...expandedGroups];
+    
+        // Füge neu ausgewählte Gruppen automatisch zur erweiterten Liste hinzu
+        keys.forEach(key => {
+            if (!updatedExpandedGroups.includes(key)) {
+                updatedExpandedGroups.push(key);
+            }
+        });
+    
+        // Setze die aktualisierten erweiterten Gruppen
+        setExpandedGroups(updatedExpandedGroups);
+    };
 
 
 
@@ -179,9 +217,12 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 // }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
             //////
 
-    const handleExpand = (expandedKeys: string[]) => {
-        setExpandedGroups(expandedKeys);
-    };     
+    const handleExpand = (expandedKeys: React.Key[], info: any) => {
+        const expandedKeyStrings = expandedKeys.map(key => String(key));
+        setExpandedGroups(expandedKeyStrings);
+    };    
+
+   
 
     return (
         <Tree
@@ -211,9 +252,9 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 }),
             }))}
             checkedKeys={checkedKeys}       // list of the checked layers 
-            onCheck={onCheck}               // function for the case that the status of a checkbox changes 
-            // expandedKeys={expandedGroups}
-            // onExpand={handleExpand}
+            onCheck={handleCheck}               // function for the case that the status of a checkbox changes 
+            expandedKeys={expandedGroups}
+            onExpand={handleExpand}
         />
     );
 }
