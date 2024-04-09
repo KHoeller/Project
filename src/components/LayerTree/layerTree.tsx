@@ -19,28 +19,9 @@ export type LayerTreeProps = {
     map: Map;
 }
 
-export type Layer = {
-    name: string;
-    title: string;
-    visible?: boolean;
-    info?: boolean;
-    infoText?: string; 
-    infoTextTitle?: string; 
-    enableSlider?: boolean;
-}
+import { Layer, TreeNode } from '../../../types/types';
+import { compact } from 'lodash';
 
-type TreeNode = {
-    title: string ;
-    key: string;
-    children?: TreeNode[]; // sofern children vorhanden sind
-    layer?: Layer;
-    visible: boolean;      // sofern Angabe zu visible vorhanden ist
-    info: boolean;
-    infoText?: string;
-    infoTextTitle?: string;
-    enableSlider?: boolean;
-    
-}
 
 export default function LayerTree({ map }: LayerTreeProps) {
     
@@ -57,6 +38,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
             }
 
             layerGroups[groupName].push({                                   // zum Gruppennamen hinzufügen:
+                groupName: groupName,
                 name: layer.values_.name,                                   // layername, title, information to visible, info, infoText and infoTextTitle, enableSlider
                 title: layer.values_.title,                                  
                 visible: layer.values_.visible || false,
@@ -64,6 +46,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
                 infoText: layer.values_.infoText || false,
                 infoTextTitle: layer.values_.infoTextTitle || false,
                 enableSlider: layer.values_.enableSlider || false,
+                urlLegend: layer.values_.urlLegend,
+                legend: layer.values_.legend, 
             });
 
         });
@@ -83,6 +67,8 @@ export default function LayerTree({ map }: LayerTreeProps) {
                         info: !!layer.info,
                         infoText: layer.infoText || undefined,
                         infoTextTitle: layer.infoTextTitle || undefined,
+                        urlLegend: layer.urlLegend || undefined,
+                        legend: layer.legend || undefined,
                     })),
                     visible: groupLayers.some(layer => !!layer.visible),        // wenn mind. ein Layer visible ist, dann Groupe visible= true
                     info: groupLayers[0]?.info || false,                        // Eigenschaft info von erster Ebene/erstem Layer (da es in der config groupEigenschaft ist, bei allen Layern gleich)
@@ -100,42 +86,102 @@ export default function LayerTree({ map }: LayerTreeProps) {
     
     const [treeData, setTreeData] = useState<TreeNode[]>([]);
     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
+    const [firstRenderComplete, setFirstRenderComplete] = useState<boolean>(false);
+    const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
 
     useEffect(() => {
         const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);   
-        const layers = map.getLayers().getArray();
-        console.log('layersl',layers); 
+        // const layers = map.getLayers().getArray();
+        
         const generatedTreeData = generateTreeData(layersTree);             // mithilfe der obigen Funktion die strukturierten Daten erstellen auf Basis der Daten der map 
         setTreeData(generatedTreeData);                                 // function zur Aktualisierung der Daten 
 
-        const initialCheckedKeys = generateTreeData(layers).flatMap(group =>
-            group.children?.filter(layer => layer.visible)              // aktuell sichtbaren Layer filtern und speichern in initialCheckedKeys 
-            .map(layer => layer.key) || [] 
-        );
-        setCheckedKeys(initialCheckedKeys);                             // die auusgewählten Checkboxen des initial state 
-    }, []);
+        console.log('treeData.', generatedTreeData); 
+      
+        const initialCheckedKeys = layersTree
+            .filter(layer => layer.getVisible())
+            .map(layer => (layer as BaseLayer).getProperties().name);
+        setCheckedKeys(initialCheckedKeys);                            // die auusgewählten Checkboxen des initial state 
+        setExpandedGroups(initialCheckedKeys);
+        console.log(initialCheckedKeys);
+        setFirstRenderComplete(true);
+    }, [map]);
 
 
-    const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert
+    const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }, info: any) => { // Abruf sobald sich der Status einer Checkbox verändert
+        console.log(info)
         if (Array.isArray(checked)) {                                   
             setCheckedKeys(checked.map(key => String(key)));
             console.log('checked:', checked);
         } else {
             setCheckedKeys(checked.checked.map(key => String(key)));
         }
+    
     }       // Unterscheidung half and full checked 
+    // //     // const newExpandedGroups = [...expandedGroups]; // Kopie der aktuellen erweiterten Gruppen
 
-    useEffect(() => {                                                       // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
+    // //     // // Füge ausgewählte Gruppen zu den erweiterten Gruppen hinzu, falls sie nicht bereits enthalten sind
+    // //     // checkedKeys.forEach(groupName => {
+    // //     //     if (!newExpandedGroups.includes(groupName)) {
+    // //     //         newExpandedGroups.push(groupName);
+    // //     //     }
+    // //     // });
+
+    // //     // setExpandedGroups(newExpandedGroups);
+    
+    // const handleCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => {
+    //     const keys = Array.isArray(checkedKeys) ? checkedKeys.map(String) : checkedKeys.checked.map(String);
+    //     setCheckedKeys(keys);
+
+    //     // Update expanded groups based on checked keys
+    //     setExpandedGroups(keys);
+    // };
+
+
+
+    useEffect(() => {                                                                    // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
+        if (firstRenderComplete) {                                                         // abrufen des UseEffect erst beim zweiten Abruf, sodass die Karte nicht neugerendert wird beim Öffnen des Drawers
+    
+            map.getLayers().getArray().forEach(layer => {
+                const layerName = (layer as BaseLayer).getProperties().name;
+                const isLayerVisible = layer.getVisible();
+                const shouldBeVisible = checkedKeys.includes(layerName);
         
-        // TODO map getLayers -> layers filter nach 'enableSlider') !== true und das mappen s.u.)
-        const layers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true); // etc. 
-        map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true).forEach(layer => {                                  // Iteration über alle Layer in der Karte 
-            const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
-            const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
-            layer.setVisible(shouldBeVisible);                              // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
-        });
-    }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
+                // Nur nicht-sliderbare Layer bearbeiten
+                if (!layer.get('enableSlider')) {
+                    if (shouldBeVisible !== isLayerVisible) {
+                        // Sichtbarkeit entsprechend der checkedKeys aktualisieren
+                        layer.setVisible(shouldBeVisible);
+                    }
+                }
+            }); 
+        }
+    }, [checkedKeys, map]);
 
+
+            ///////
+                // Alternative: (hier müsste firstRenderComplete hinzugefuegt werden, damit Map nicht neugerendert wird beim erstmaligen Aufruf!)
+                // useEffect(() => {                                                 
+                        
+                //     map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true).forEach(layer => {                                  // Iteration über alle Layer in der Karte 
+                //         const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
+                //         const isLayerVisible = layer.getVisible(); 
+                //          // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
+                //         let shouldBeVisible;
+                //         if (!isLayerVisible && !layer.get('enableSlider')) {        // Wenn der Layer bislang auf der Karte nicht sichtbar ist und nicht den 'enableSlider'-Wert hat
+                //             shouldBeVisible = checkedKeys.includes(layerName);
+                //             layer.setVisible(shouldBeVisible);                      // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
+                //         } 
+                //         // else if (!shouldBeVisible){
+                //         //     layer.setVisible(false);                                // wenn der Layer nicht sichtbar sein soll, dann wird er auf visible false gesetzt und verschwindet von der Karte
+                //         // }                  
+                //     });
+                // }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
+            //////
+
+    const handleExpand = (expandedKeys: string[]) => {
+        setExpandedGroups(expandedKeys);
+    };     
 
     return (
         <Tree
@@ -149,189 +195,28 @@ export default function LayerTree({ map }: LayerTreeProps) {
                         {node.info && !node.layer && <InfoIcon infoTextTitle={node.infoTextTitle} infoText={node.infoText}/>}  
                     </span>
                 ),
-                children: node.children?.map(layerNode => ({
-                    ...layerNode,
-                    title: (
-                        <span>
-                            {layerNode.title}
-                            {layerNode && layerNode.layer && <Legende layers={[layerNode.layer]} />}
-
-                        </span>
-                    ),
-                })),
+                children: node.children?.map(layerNode => {
+                    const { layer } = layerNode;
+                    const shouldDisplayLegend = layer?.legend === true; // anzeige von Legend nur bei Legend === true
+    
+                    return {
+                        ...layerNode,
+                        title: (
+                            <span>
+                                {layerNode.title}
+                                {shouldDisplayLegend && <Legende layers={[layer]} />}
+                            </span>
+                        ),
+                    };
+                }),
             }))}
             checkedKeys={checkedKeys}       // list of the checked layers 
             onCheck={onCheck}               // function for the case that the status of a checkbox changes 
+            // expandedKeys={expandedGroups}
+            // onExpand={handleExpand}
         />
     );
 }
-
-
-// import React, { useState, useEffect } from 'react';
-// import Map from 'ol/Map';
-// import { Tree } from 'antd';
-
-// import BaseLayer from 'ol/layer/Base';
-// import InfoIcon from '../LayerGroupInfo/layerGroupInfo';
-
-// // import RasterSlider from '../Slider_RasterData/slider';
-
-// export type LayerTreeProps = {
-//     map: Map;
-// }
-
-// type Layer = {
-//     name: string;
-//     title: string;
-//     visible?: boolean;
-//     info?: boolean;
-//     infoText?: string; 
-//     infoTextTitle?: string; 
-//     enableSlider?: boolean;
-// }
-
-// type TreeNode = {
-//     title: string ;
-//     key: string;
-//     children?: TreeNode[]; // sofern children vorhanden sind
-//     layer?: Layer;
-//     visible: boolean;      // sofern Angabe zu visible vorhanden ist
-//     info: boolean;
-//     infoText?: string;
-//     infoTextTitle?: string;
-//     enableSlider?: boolean;
-    
-// }
-
-// export default function LayerTree({ map }: LayerTreeProps) {
-    
-
-//     const generateTreeData = (layers: any[]): TreeNode[] => {
-//         const layerGroups: { [groupName: string]: Layer[] } = {};
-//         const groupsWithSlider: string[] = [];
-
-//         layers.forEach(layer => {
-//             const groupName = layer.values_.groupName || 'Basiskarte';
-//             if (!layerGroups[groupName]) {
-//                 layerGroups[groupName] = [];
-//             }
-//             layerGroups[groupName].push({
-//                 name: layer.values_.name,
-//                 title: layer.values_.title,
-//                 visible: layer.values_.visible || false,
-//                 info: layer.values_.info || false, 
-//                 infoText: layer.values_.infoText || false,
-//                 infoTextTitle: layer.values_.infoTextTitle || false,
-//                 enableSlider: layer.values_.enableSlider || false,
-//             });
-//             if (layer.values_.enableSlider) {
-//                 groupsWithSlider.push(groupName);
-//             }
-//         });
-    
-//         const treeData: TreeNode[] = Object.keys(layerGroups)
-
-//         .map(groupName => {
-//             const groupLayers = layerGroups[groupName];
-//             // const slider = groupsWithSlider.includes(groupName) ? <RasterSlider  /> : undefined;
-//             const groupNode: TreeNode = {
-//                 title: groupName,
-//                 key: groupName,
-//                 children: groupLayers.map(layer => ({
-//                     title: layer.title,
-//                     key: layer.name,
-//                     layer: layer,
-//                     visible: !!layer.visible,
-//                     info: !!layer.info,
-//                     infoText: layer.infoText || undefined,
-//                     infoTextTitle: layer.infoTextTitle || undefined,
-//                 })),
-//                 visible: groupLayers.some(layer => !!layer.visible),
-//                 info: groupLayers[0]?.info || false,
-//                 infoText: groupLayers[0]?.infoText || undefined,
-//                 infoTextTitle: groupLayers[0]?.infoTextTitle || undefined,
-//                 enableSlider: groupLayers[0]?.enableSlider || false,
-//             };
-           
-
-//             // if (slider) {
-//             //     groupNode.children = [
-//             //         ...(groupNode.children ?? []),
-//             //         { 
-//             //             ...groupNode.children![0], 
-//             //             title: slider,
-//             //             key: groupNode.children![0].key + "_slider" // Eindeutigen Schlüssel für den Slider erstellen
-//             //         }
-//             //     ];
-//             // }
-
-
-
-//             return groupNode;
-//         });
-    
-//         return treeData;
-//     };
-    
-//     const [treeData, setTreeData] = useState<TreeNode[]>([]);
-//     const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
-
-//     useEffect(() => {
-//         const layers = map.getLayers().getArray();                        // aktuelle Layers der map verwenden 
-//         const generatedTreeData = generateTreeData(layers);             // mithilfe der obigen Funktion die strukturierten Daten erstellen 
-//         setTreeData(generatedTreeData);
-
-//         const initialCheckedKeys = generatedTreeData.flatMap(group =>
-//             group.children?.filter(layer => layer.visible)              // aktuell sichtbaren Layer filtern 
-//             .map(layer => layer.key) || [] 
-//         );
-//         setCheckedKeys(initialCheckedKeys);                             // die auusgewählten Checkboxen des initial state 
-//     }, []);
-
-
-//     const onCheck = (checked: React.Key[] | { checked: React.Key[]; halfChecked: React.Key[]; }) => { // Abruf sobald sich der Status einer Checkbox verändert 
-//         if (Array.isArray(checked)) {                                   // sofern es sich um einen Array handelt - keine halbgeprüften Checkboxen und alle ausgewählten keys enthalten
-//             setCheckedKeys(checked.map(key => String(key)));
-//         } else {
-//             setCheckedKeys(checked.checked.map(key => String(key)));
-//         }
-//     }       // Unterscheidung half and full checked 
-
-//     useEffect(() => {                                                       // sideeffect (bei Änderung im Layertree auch Änderung der Karte)
-//         map.getLayers().forEach(layer => {                                  // Iteration über alle Layer in der Karte 
-//             const layerName = (layer as BaseLayer).getProperties().name;    // Name des Layers
-//             const shouldBeVisible = checkedKeys.includes(layerName);        // es wird geprüft, ob Layer checked ist und damit visible sein sollte 
-//             layer.setVisible(shouldBeVisible);                              // wenn der Layer in checkedKeys vorhanden ist, wird er auf visible gesetzt 
-//         });
-//     }, [checkedKeys, map]); // ändert sich bei Änderungen in checkedKeys oder map 
-
-
-//     return (
-//         <Tree
-//             checkable
-//             selectable={false}
-//             treeData={treeData.map(node => ({
-//                 ...node,
-//                 title: (
-//                     <span>
-//                         {node.title}
-//                         {node.info && !node.layer && <InfoIcon infoTextTitle={node.infoTextTitle} infoText={node.infoText}/>}  
-//                     </span>
-//                 ),
-//                 children: node.children?.map(layerNode => ({
-//                     ...layerNode,
-//                     title: (
-//                         <span>
-//                             {layerNode.title}
-//                         </span>
-//                     ),
-//                 })),
-//             }))}
-//             checkedKeys={checkedKeys}
-//             onCheck={onCheck}
-//         />
-//     );
-// }
 
 
 
