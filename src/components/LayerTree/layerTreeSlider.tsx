@@ -53,25 +53,23 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
         });
 
         setLayerGroups(updatedLayerGroups);
-        console.log(updatedLayerGroups);
+        // console.log('updatedLayerGroups:', updatedLayerGroups);
     }, [map]);
 
 
     const onCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; }) => {
+        
         const checkedKeysArray = Array.isArray(checkedKeys) ? checkedKeys.map(key => String(key)) : checkedKeys.checked.map(key => String(key));
-        setCheckedGroups(checkedKeysArray);
+        const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]
 
-        // Update layer visibility based on checked groups
-        Object.keys(layerGroups).forEach(groupName => {
-            const groupVisible = checkedKeysArray.includes(groupName);
-            layerGroups[groupName].forEach(layerInfo => {
-                layerInfo.layer.setVisible(groupVisible);
-            });
-        });
+        console.log('checkedKeys:', checkedKeyArray); 
+        
+        setCheckedGroups(checkedKeyArray);
+
 
         // Update expanded groups to include newly checked groups
         const newExpandedGroups = [...expandedGroups];
-        checkedKeysArray.forEach(groupName => {
+        checkedKeyArray.forEach(groupName => {
             if (!newExpandedGroups.includes(groupName)) {
                 newExpandedGroups.push(groupName);
             }
