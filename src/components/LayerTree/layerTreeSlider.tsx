@@ -60,7 +60,7 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
     const onCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; }) => {
         
         const checkedKeysArray = Array.isArray(checkedKeys) ? checkedKeys.map(key => String(key)) : checkedKeys.checked.map(key => String(key));
-        const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]
+        const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]         // kann man mit Sicherheit auch schöner machen; derzeit wird immer der zuletzt hinzugefügt verwendet und weitergegeben, damit immer nur ein Layer checked und visible ist!
 
         console.log('checkedKeys:', checkedKeyArray); 
         
