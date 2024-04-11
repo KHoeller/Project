@@ -6,13 +6,15 @@ import TileWMS from 'ol/source/TileWMS.js';
 import TileLayer from 'ol/layer/Tile';
 import { MapBrowserEvent } from 'ol';
 import Map from 'ol/Map';
-import { Modal, Drawer } from 'antd';
+import { Drawer } from 'antd';
 
-import Draggable from 'react-draggable';
-import type { DraggableData, DraggableEvent } from 'react-draggable';
+
 
 import './featureInfo.css';
 import TimeChart from '../TimeChart/TimeChart';
+
+
+import Toolbar from '../Toolbar/toolbar';
 
 export type FeatureInfoProps = {
     map: Map;
@@ -118,8 +120,6 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
         };
 
 
-        
-
         map.on('singleclick', handleClick); 
 
         return () => {
@@ -132,6 +132,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
         setModalVisible(false);
     };
     
+
 
     return (
         <div>
@@ -167,6 +168,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                     map={map}
                 />
             </Drawer>
+            <Toolbar modalVisible={modalVisible}/>
         </div>
     );
 };
