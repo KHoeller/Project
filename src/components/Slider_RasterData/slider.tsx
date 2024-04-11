@@ -4,45 +4,32 @@
 
 import React, { useState, useEffect } from 'react';
 import { Slider } from 'antd';
-// import Map from 'ol/Map';
 
-
-export type Layer = {
-    name: string;
-    title: string;
-    visible: boolean;
-    info: boolean;
-    infoText: boolean;
-    infoTextTitle: boolean;
-    year: number;
-    enableSlider: boolean;
-    queryable: boolean;
-    layerType: string;
-    layer: any; 
-}
+import { Layer } from '../../../types/types';
 
 export type SliderProps = {
     group: Layer[];
     groupName: string;
     checked: boolean;
-    onGroupCollapse: (groupName: string) => void;    
 }
 
-export default function RasterSlider({ group, groupName, checked, onGroupCollapse }: SliderProps) {
+export default function RasterSlider({ group, groupName, checked }: SliderProps) {
     
     const [inputValue, setInputValue] = useState<number | null>(0);
+    const [previousIndex, setPreviousIndex] = useState<number | null>(0);
+
     
     useEffect(() => {
         if (checked) {
-            
             const initialIndex = group.findIndex(layer => layer.year === 2021); // Finde Index des Jahres 2021
             
-            setInputValue(initialIndex !== -1 ? initialIndex : 0); // initialen Wert auf den Index von 2021 oder 0 setzen, falls 2021 nicht gefunden wird
+            setInputValue(previousIndex !== null ? previousIndex : initialIndex); // sofern es einen previousIndex gibt wird dieser verwendet 
+            
         }
-    }, [checked, group]);
+    }, [group, checked]);
 
-    console.log('group:', group);
-    console.log('checked:', checked)
+    // console.log('group:', group);
+    
     useEffect(() => {
         if (checked) {
             
@@ -55,27 +42,33 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
                 }
             });
         } else {
-            group.forEach(layer => layer.layer.setVisible(false));
-            setInputValue(group.length);
-            
-            onGroupCollapse(groupName);
-            
-            console.log('length:', group.length);
+            group.forEach(layer => layer.layer.setVisible(false));          
+            if (inputValue !== null) {
+                setPreviousIndex(inputValue); // der zuletzt angezeigt Index wird gespeichert 
+            }
+            // console.log('length:', group.length);
         }
-        console.log('inputValue:', inputValue);
-    }, [checked, group, inputValue, groupName, onGroupCollapse]);
+        // console.log('inputValue:', inputValue);
+    }, [checked, group, inputValue, groupName, previousIndex]);
        
+    
+    const handleChange = (newValue: number) => {
+        if (checked && newValue !== inputValue) {
+            setInputValue(newValue); // inputvalue wird nur aktualisiert, wenn ein neuer Index ausgewählt wird und group checked ist 
+        }
+    };
+
     const years = group.map(layer => layer.year);
    
-    const handleChange = (newValue: number) => {
-        
-        setInputValue(newValue);
-    }
-
-    const marks: { [key: number]: string } = years.reduce
-        <{ [key: number]: string }>((acc, year, index) => {
-        const shortYear = year.toString().slice(-2);
-        acc[index] = shortYear;
+    const marks: { [key: number]: React.ReactNode } = years.reduce<{ [key: number]: React.ReactNode }>((acc, year, index) => {
+        const shortYear = year?.toString().slice(-2);
+        acc[index] = (
+            <span>
+                <sup>'</sup>
+                {shortYear}
+                
+            </span>
+        );
         return acc;
     }, {});
 
@@ -98,6 +91,11 @@ export default function RasterSlider({ group, groupName, checked, onGroupCollaps
         </div>
     );
 }
+
+
+
+
+
 
 // fontWeight: normal -> normal, nicht dick oder kursiv 
 
