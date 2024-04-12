@@ -11,7 +11,7 @@
             "info": true,
             "infoTextTitle": "Information zu den Daten der Landbedeckung",
             "infoText": "Die Daten stammen aus den CORINE Land Cover Data 2018 von Copernicus",
-        
+            "attribution": "<a href=\"https://land.copernicus.eu/en/products/corine-land-cover/clc2018\">Copernicus LandMonitoringService.</a>",
             "layers": [
                 {
                     "name": "Agriculture_DE",
@@ -45,11 +45,12 @@
             "groupName": "Bevölkerungsdaten",
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Bevölkerungsdaten",
-            "infoText": "Die Daten stammen von und zeigen....",
+            "infoText": "Die Daten stammen von und zeigen....Die Daten geben die Einwohnerdichte pro Quadratkilometer auf Gemeindeebene an. Als Basis der Berechnung diente die Katasterfläche sowie die Einwohnerzahl vom 31.12.2021.",
+            "attribution":"<a href=\"https://gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">BKG.</a>",
             "layers": [
                 {
                     "name": "EwDichte",
-                    "title": "Einwohnerdichte",
+                    "title": "Einwohnerdichte (Ew/km²)",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
                     "visible": false,
@@ -66,8 +67,8 @@
             "groupName": "Gesundheitsdaten",
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Gesundheitsdaten",
-            "infoText": "Die Daten stammen von...., die Krankenhaus-Standorte sind aus OpenStreetMap",
-            "attribution":"<a href=\"https://overpass-turbo.eu/\">Test</a> und https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a",
+            "infoText": "Die Daten zu den Standorten der Krankenhäuser wurden mithilfe der 'overpass turbo' Abfrage von OSM ermittelt, indem nach 'hospitals' in Deutschland gesucht wurde. Es wurden anschließend alle Objekte mit Typ Polygon oder Point berücksichtigt. Die Daten können nicht als vollständig angesehen werden...., \n die Krankenhaus-Standorte sind aus OpenStreetMap [overpass turbo: https://overpass-turbo.eu/]",
+            "attribution":"<a href=\"https://overpass-turbo.eu/\">overpass turbo OSM </a> <a href=\"https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">EEA GeospatialDataCatalogue.</a>",
             "layers": [
                 {
                     "name": "TravelTime",
@@ -99,9 +100,10 @@
         },
         {
             "groupName": "Verwaltungsgrenzen",
-            "info": false,
+            "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Daten Gemeindegrenzen und Nationalgrenze",
-            "infoText":"Die Geodaten stammen von...",
+            "infoText":"Die Geodaten stammen von Bundesamt für Kartographie und Geodäsie. [BKG: https://gdz.bkg.bund.de/] ...",
+            "attribution":"<a href=\"https://gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">BKG.</a>",
             "layers": [
                 {
                     "name": "Gemeindegrenzen",
@@ -129,7 +131,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoff (NOx)",
             "infoText": "Die Daten stammen von....",
-            "attribution": "https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
                     "name": "R_NOx_2014",
@@ -204,7 +206,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffdioxid (NO2)",
             "infoText": "Die Daten stammen von....",
-            "attribution": "https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
                     "name": "R_NO2_2014",
@@ -291,7 +293,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Feinstuab (PM10)",
             "infoText": "Die Daten stammen von....",
-            "attribution": "https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
                     "name": "R_PM10_2006",
@@ -448,7 +450,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
             "infoText": "Die Daten stammen von....",
-            "attribution": "https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
                     "name": "R_PM25_2007",
@@ -584,7 +586,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Lärmdaten",
             "infoText": "Die Daten stammen von....https://gis.uba.de/maps/resources/apps/laermkartierung/",
-            "attribution": "https://gis.uba.de/maps/resources/apps/laermkartierung/index.html?lang=de&vm=2D&l=4200%7Bt%3A40%7D%284210%7Bt%3A0%7D%29%2C5000%2C5200%7Bt%3A40%7D%285210%7Bt%3A0%7D%29%2C6200%7Bt%3A40%7D%286210%7Bt%3A0%7D%29%2C%7E7200%7Bt%3A40%7D%287210%7Bt%3A0%7D%29&s=39245.53728171658&r=0&c=788758.6252443913%2C6574827.006129956",
+            "attribution": "<a href=\"https://gis.uba.de/maps/resources/apps/laermkartierung/index.html?lang=de&vm=2D&l=4200%7Bt%3A40%7D%284210%7Bt%3A0%7D%29%2C5000%2C5200%7Bt%3A40%7D%285210%7Bt%3A0%7D%29%2C6200%7Bt%3A40%7D%286210%7Bt%3A0%7D%29%2C%7E7200%7Bt%3A40%7D%287210%7Bt%3A0%7D%29&s=39245.53728171658&r=0&c=788758.6252443913%2C6574827.006129956\">Umweltbundesamt.</a>",
             "layers": [
                 {
                     "name": "8",
@@ -749,6 +751,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Kohlenstoff (CO)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_CO_2021",
@@ -765,6 +768,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Ozon (O3)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_O3_2021",
@@ -781,6 +785,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Schwefeldioxid (SO2)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_SO2_2021",
@@ -798,6 +803,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_NO2_2021",
@@ -815,6 +821,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM10)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_PM10_2021",
@@ -833,6 +840,7 @@
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
             "infoText": "Die Daten stammen von....",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
                     "name": "V_PM2.5_2021",
