@@ -2,16 +2,19 @@
 import React, {useEffect, useState} from "react";
 import './toolbar.css';
 import { Button, Flex } from 'antd';
-import { ToolTwoTone, AimOutlined, DownloadOutlined } from '@ant-design/icons';
-import {Zoom} from 'ol/control.js';
-import { Map } from "ol";
+import { ToolTwoTone, AimOutlined, DownloadOutlined, InfoCircleOutlined } from '@ant-design/icons';
+
+import ToggleButton from "../ToogleButton/toggleButton";
+
 
 
 export type ToolbarProps = {
     drawerVisible: boolean,
+    setInfoButtonClicked: (clicked: boolean) => void;
+    infoButtonClicked:boolean,
 }
 
-export default function Toolbar ({drawerVisible}: ToolbarProps){
+export default function Toolbar ({drawerVisible, setInfoButtonClicked, infoButtonClicked}: ToolbarProps){
 
     const size = 'middle';
     const typeB = 'default';
@@ -35,7 +38,9 @@ export default function Toolbar ({drawerVisible}: ToolbarProps){
         ScaleLine.style.transition = 'left 0.33s';
     }
   
-   
+    const handleInfoButtonClick = () => {
+        setInfoButtonClicked(!infoButtonClicked); // Kehre den Zustand von infoButtonClicked um
+    };
 
     return(
         <>
@@ -48,12 +53,29 @@ export default function Toolbar ({drawerVisible}: ToolbarProps){
                 />
                 <Button className= 'tool' type={typeB}  icon= { <AimOutlined style={{ color: 'black'}}/>} shape='default' size={size} />
                 <Button type={typeB} className='tool' icon= { <DownloadOutlined style={{ color: 'black'}}/>} size={size} shape='default'  />
-                <Button className= 'tool' type={typeB} shape ='default' size ={size}/> 
+                {/* <Button className= 'InfoFeatureButton' type={typeB} shape ='default' size ={size} icon= { <InfoCircleOutlined style={{ color: 'black'}}/>} onClick={handleInfoButtonClick}/>  */}
+                <ToggleButton className= 'InfoFeatureButton' 
+                    type={typeB} 
+                    shape ='default' 
+                    size ={size} 
+                    icon= { <InfoCircleOutlined 
+                        style={{ color: 'black'}}/>} 
+                    onClick={handleInfoButtonClick} 
+                    pressed={infoButtonClicked} 
+                    pressedIcon={ <InfoCircleOutlined 
+                        style={{ color: 'black'}}/>} 
+                /> 
+                <ToggleButton/>
             </div>
            
         </>
     )
 } 
+
+
+
+
+
 
 
 // import React, { useState } from "react";

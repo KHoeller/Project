@@ -1,5 +1,5 @@
 
-.ant-drawer-content-wrapper {
+/* .ant-drawer-content-wrapper {
     z-index: 5;
 }
 
@@ -30,6 +30,10 @@
 .feature-info-container {
     display: flex;
     flex-direction: column;
+} */
+
+.ant-drawer{
+    z-index: 50; 
 }
 
 .attribute-row {
@@ -47,6 +51,7 @@
     text-align: right;
     margin-bottom: 5px;
 }
+
 
 
 

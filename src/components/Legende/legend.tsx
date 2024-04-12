@@ -23,7 +23,7 @@ export default function Legende({ layers }: LegendeProps) {
                         {/* Prüfe, ob der Layernamen am Ende der URL erforderlich ist */}
                         <Image
                             src={
-                                layer.groupName === 'WMS-Laerm'
+                                layer.groupName === 'Lärmbelastung'
                                     ? layer.urlLegend
                                     : `${layer.urlLegend}${layer.name}`
                             }

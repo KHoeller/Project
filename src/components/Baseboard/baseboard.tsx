@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import './baseboard.css';
 import MousePosition, { MousePositionProps } from "../MousePosition/mousePosition"; // Übrlegung die Angabe in die Fußleiste zu packen 
-import { CopyrightCircleOutlined } from "@ant-design/icons";
 import Map from 'ol/Map';
 import About from '../About/about';
-import { Attribution } from "ol/control";
+
 
 
 export type BaseboardProp = {
@@ -32,7 +31,6 @@ export default function Baseboard({map}: BaseboardProp) {
             <div className="attribution"></div>
                 
             <div >
-                {/* <CopyrightCircleOutlined />  */}
                 
             </div>
             

@@ -15,20 +15,12 @@
 }
 
 .ol-control.ol-attribution {
-    bottom: 80px;
+    bottom: 5px;
 }
 
 .ol-scale-line{
-    position: absolute;
-    bottom: 80px;
-    left: 50%; 
-    transform: translate(-50%);
-
- 
-    /* background: transparent; */
+    bottom: 5px;  
 } 
 
-.ol-scale-line.drawerLeft-open{
-    margin-left: var(--drawerWidth);
-}
+
 

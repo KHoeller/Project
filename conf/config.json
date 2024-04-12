@@ -68,13 +68,13 @@
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Gesundheitsdaten",
             "infoText": "Die Daten zu den Standorten der Krankenhäuser wurden mithilfe der 'overpass turbo' Abfrage von OSM ermittelt, indem nach 'hospitals' in Deutschland gesucht wurde. Es wurden anschließend alle Objekte mit Typ Polygon oder Point berücksichtigt. Die Daten können nicht als vollständig angesehen werden...., \n die Krankenhaus-Standorte sind aus OpenStreetMap [overpass turbo: https://overpass-turbo.eu/]",
-            "attribution":"<a href=\"https://overpass-turbo.eu/\">overpass turbo OSM </a> <a href=\"https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">EEA GeospatialDataCatalogue.</a>",
+            "attribution":"<a href=\"https://overpass-turbo.eu/\">overpass turbo OSM. </a> <a href=\"https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">EEA GeospatialDataCatalogue.</a>",
             "layers": [
                 {
                     "name": "TravelTime",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Fahrtzeit bis zum nächsten Krankenhaus",
+                    "title": "Fahrtzeit bis zum nächsten Krankenhaus (min)",
                     "visible": false,
                     "queryable": true,
                     "layerType": "vector"
@@ -125,11 +125,11 @@
             ]
         },
         {
-            "groupName": "NOx",
+            "groupName": "Flächendeckende Stickstoffoxidbelastung (NOx)",
             "legendGroupName": "NOx", 
             "enableSlider": true,
             "info": true,
-            "infoTextTitle": "Informationen zu Stickstoff (NOx)",
+            "infoTextTitle": "Informationen zu Stickstoffoxiden (NOx)",
             "infoText": "Die Daten stammen von....",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
@@ -200,7 +200,7 @@
             ]
         }, 
         {
-            "groupName": "NO2",
+            "groupName": "Flächendeckende Stickstoffdioxidbelastung (NO2)",
             "legendGroupName": "NO2", 
             "enableSlider": true,
             "info": true,
@@ -287,11 +287,11 @@
         
         
         {
-            "groupName": "PM10",
+            "groupName": "Flächendeckende Feinstaubbelastung (PM10)",
             "legendGroupName": "PM10", 
             "enableSlider": true,
             "info": true,
-            "infoTextTitle": "Informationen zu Feinstuab (PM10)",
+            "infoTextTitle": "Informationen zu Feinstaub (PM10)",
             "infoText": "Die Daten stammen von....",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
@@ -582,7 +582,7 @@
             ]
         },
         {
-            "groupName": "WMS-Laerm",
+            "groupName": "Lärmbelastung",
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Lärmdaten",
             "infoText": "Die Daten stammen von....https://gis.uba.de/maps/resources/apps/laermkartierung/",
@@ -747,7 +747,7 @@
         },
        
         {
-            "groupName": "CO",
+            "groupName": "Messstationen Kohlenmonoxid (CO)",
             "info": true,
             "infoTextTitle": "Informationen zu Kohlenstoff (CO)",
             "infoText": "Die Daten stammen von....",
@@ -757,7 +757,7 @@
                     "name": "V_CO_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Vector CO 2021",
+                    "title": "Kohlenmonoxid-Belastung in 2021",
                     "queryable": true,
                     "layerType": "vector"
                 }
@@ -799,7 +799,7 @@
             ]
         },
         {
-            "groupName": "V_NO2",
+            "groupName": "Messstationen Stickstoffdioxid (NO2)",
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
             "infoText": "Die Daten stammen von....",
@@ -809,7 +809,7 @@
                     "name": "V_NO2_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Vector NO2 2021",
+                    "title": "Stickstoffdioxid-Belastung in 2021",
                     "queryable": true,
                     "visible": true,
                     "layerType": "vector"
@@ -817,7 +817,7 @@
             ]
         }, 
         {
-            "groupName": "V_PM10",
+            "groupName": "Messstationen Feinstaub (PM10)",
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM10)",
             "infoText": "Die Daten stammen von....",
@@ -827,7 +827,7 @@
                     "name": "V_PM10_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Vector PM10 2021",
+                    "title": "Feinstaub-Belastung in 2021",
                     "visible": false,
                     "queryable": true,
                     "layerType": "vector"
@@ -836,7 +836,7 @@
         },
         
         {
-            "groupName": "V_PM2.5",
+            "groupName": "Messstationen Feinstaub (PM2.5)",
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
             "infoText": "Die Daten stammen von....",
@@ -846,7 +846,7 @@
                     "name": "V_PM2.5_2021",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Vector PM2.5 2021",
+                    "title": "Feinstaub-Belastung in 2021",
                     "queryable": true,
                     "layerType": "vector"
                 }

@@ -20,6 +20,7 @@ export const TimeChart: React.FC<TimeChartProps> = ({ map }) => {
 
     useEffect(() => {
         const handleClick = async (evt: MapBrowserEvent<any>) => {
+            
             const viewResolution = map.getView().getResolution() ?? 0;
 
             const layerNamesByGroup: { [key: string]: string[] } = {};

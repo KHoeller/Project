@@ -42,7 +42,7 @@ async function fetchData() {
             // console.log('Online Resource:', onlineResource);
             // console.log('------------------');
         
-            const wmsLaermGroup = jsondata.groups.find(group => group.groupName === 'WMS-Laerm');
+            const wmsLaermGroup = jsondata.groups.find(group => group.groupName === 'Lärmbelastung');
 
             if (wmsLaermGroup) {
                 // Check if a layer with the same title already exists in the group

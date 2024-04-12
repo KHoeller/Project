@@ -21,13 +21,15 @@ export default function RasterSlider({ group, groupName, checked, initialValue, 
     const [inputValue, setInputValue] = useState<number | null>(initialValue);             // derzeit flackert es beim einklappen kurz, weil Inputvalue auf 0 gesetzt wird 
     const [previousIndex, setPreviousIndex] = useState<number | null>(0);
 
-    useEffect(() => {
-        console.log('mount');
+    //// mit diesem UseEffect kann man sich in der Console ausgeben lassen, wann die function gerendert wird (oder ob sie immer nur updated wird)
+        useEffect(() => {
+            console.log('mount');
 
-        return () => {
-            console.log('unmount')
-        };
-    }, []);
+            return () => {
+                console.log('unmount')
+            };
+        }, []);
+    ////
     
     useEffect(() => {
         if (checked) {

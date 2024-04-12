@@ -3,7 +3,7 @@
 // imports from OSM 
 import Map from 'ol/Map';   
 import View from 'ol/View.js';
-import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
+import {Attribution, ScaleLine, defaults as defaultControls} from 'ol/control.js';
 
 import React, { useMemo, useState } from 'react';
 
@@ -20,15 +20,13 @@ import FeatureInfo from './src/components/FeatureInfo/featureInfoDrawer';
 import Sidebar from './src/components/Sidebar/sidebar';
 import Baseboard from './src/components/Baseboard/baseboard';
 import NominatimSearch from './src/components/Search/search';
+import GeolocationComp from './src/components/Geolocation/geolocation';
 
 
 export default function App () {
-    console.log(mapView);
-
+    console.log('mapView', mapView);
 
    
-
-
     const scaleControl = useMemo(() => new ScaleLine(
         // className: drawerLeft ? 'ol-scale-line drawerLeft-open' : 'ol-scale-line',
     ), []);
@@ -43,6 +41,7 @@ export default function App () {
             }),
         });
     }, [scaleControl]) 
+
     
 
     // const [isLengthButtonClicked, setIsLengthButtonClicked] = useState(false);
@@ -56,17 +55,17 @@ export default function App () {
     return ( 
         <> 
     
-         <NominatimSearch map={map}/>
+            <NominatimSearch map={map}/>
             <MapComp map={map} />
             <Sidebar map={map}/>
-            <FeatureInfo map={map} />
-            {/* <Measurement map={map}/> */}
-            <Baseboard map={map}/>            
-             
+            <FeatureInfo map={map} />         
 
         </>
     )
 }
+
+
+
 
 
 
