@@ -27,6 +27,7 @@
 .Copyright{
     justify-content: end;
     margin-right: 5px; 
+    background-color: transparent;
 }
 
 .buttonAbout{

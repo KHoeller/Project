@@ -1,11 +1,10 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import './baseboard.css';
 import MousePosition, { MousePositionProps } from "../MousePosition/mousePosition"; // Übrlegung die Angabe in die Fußleiste zu packen 
 import { CopyrightCircleOutlined } from "@ant-design/icons";
 import Map from 'ol/Map';
 import About from '../About/about';
-
-import Attribution from 'ol/control/Attribution.js';
+import { Attribution } from "ol/control";
 
 
 export type BaseboardProp = {
@@ -13,6 +12,7 @@ export type BaseboardProp = {
 };
 
 export default function Baseboard({map}: BaseboardProp) {
+
 
     return (
         <>
@@ -29,12 +29,11 @@ export default function Baseboard({map}: BaseboardProp) {
                 <About/>
             </div>
             
-            <div></div>
-            
-            <div className='Copyright'>
-                <CopyrightCircleOutlined /> 
-                &nbsp;
-                OpenStreetMap contributors
+            <div className="attribution"></div>
+                
+            <div >
+                {/* <CopyrightCircleOutlined />  */}
+                
             </div>
             
         </div>
