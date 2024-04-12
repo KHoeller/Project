@@ -17,7 +17,6 @@ import './General.css';
 // import Components 
 import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfoDrawer';
-import Toolbar from './src/components/Toolbar/toolbar';
 import Sidebar from './src/components/Sidebar/sidebar';
 import Baseboard from './src/components/Baseboard/baseboard';
 import NominatimSearch from './src/components/Search/search';
@@ -46,7 +45,7 @@ export default function App () {
     }, [scaleControl]) 
     
 
-    const [isLengthButtonClicked, setIsLengthButtonClicked] = useState(false);
+    // const [isLengthButtonClicked, setIsLengthButtonClicked] = useState(false);
 
     // const handleLengthButtonClick = (clicked) => {
     //     setIsLengthButtonClicked(clicked);
@@ -56,9 +55,7 @@ export default function App () {
 
     return ( 
         <> 
-            {/* <Toolbar/> */}
-            
-
+    
          <NominatimSearch map={map}/>
             <MapComp map={map} />
             <Sidebar map={map}/>
