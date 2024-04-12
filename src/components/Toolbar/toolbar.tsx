@@ -1,32 +1,45 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './toolbar.css';
 import { Button, Flex } from 'antd';
 import { ToolTwoTone, AimOutlined, DownloadOutlined } from '@ant-design/icons';
 import {Zoom} from 'ol/control.js';
+import { Map } from "ol";
 
 
 export type ToolbarProps = {
-    modalVisible: boolean,
+    drawerVisible: boolean,
 }
 
-export default function Toolbar ({modalVisible}: ToolbarProps){
+export default function Toolbar ({drawerVisible}: ToolbarProps){
 
     const size = 'middle';
     const typeB = 'default';
     
 
+    // Damit ZoomButtons bei Öffnen von DrawerLeft nach rechts in die Map verschoben werden 
     const ZoomButtons = document.getElementsByClassName("ol-zoom ol-unselectable ol-control") //.forEach(element:HTMLE => element.style('left: 380') )
     for (let i = 0; i < ZoomButtons.length; i++) {
         const ZoomButton = ZoomButtons.item(i) as HTMLElement;
         console.log('css:', ZoomButton.style)
-        ZoomButton.style.left = modalVisible ? '380px' : '8px';
+        ZoomButton.style.left = drawerVisible ? '380px' : '8px';
         ZoomButton.style.transition = 'left 0.33s';
     }
 
+    // Damit ScaleLine bei Öffnen von DrawerLeft nach rechts in die Map verschoben werden 
+    const ScaleLines = document.getElementsByClassName("ol-scale-line ol-unselectable") //.forEach(element:HTMLE => element.style('left: 380') )
+    for (let i = 0; i < ScaleLines.length; i++) {
+        const ScaleLine = ScaleLines.item(i) as HTMLElement;
+        console.log('css:', ScaleLine.style);
+        ScaleLine.style.left = drawerVisible ? '380px' : '8px';
+        ScaleLine.style.transition = 'left 0.33s';
+    }
+  
+   
+
     return(
         <>
-            <div className="buttonContainer" style={{ left: modalVisible ? '380px' : '8px' }}>
+            <div className="buttonContainer" style={{ left: drawerVisible ? '380px' : '8px' }}>
                 <Button 
                     type={typeB} 
                     className= 'tool' //className={DrawerLeft open ? "Toolbar ToolbarDrawerOpen" : "Toolbar"} // TODO 
