@@ -27,6 +27,14 @@ export default function Sidebar ({map}:SidebarProps){
         setOpen(false);
     };
 
+    const AttributionsOl = document.getElementsByClassName("ol-attribution ol-unselectable ol-control ol-uncollapsible") //.forEach(element:HTMLE => element.style('left: 380') )
+    for (let i = 0; i < AttributionsOl.length; i++) {
+        const AttributionOl = AttributionsOl.item(i) as HTMLElement;
+        console.log('css:', AttributionOl.style);
+        AttributionOl.style.right = open ? '380px' : '8px';
+        AttributionOl.style.transition = 'right 0.33s';
+    }
+
     return(
         <div className="sidebarContainer" >
              <Drawer
