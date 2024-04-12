@@ -24,7 +24,7 @@ export type FeatureInfoProps = {
 export default function FeatureInfo ({ map }: FeatureInfoProps) {
     
     const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]); // Zustandsvariable für ausgewählten Feature-Informationen
-    const [modalVisible, setModalVisible] = useState(false); // Zustandsvariable für Sichtbarkeit des Modals 
+    const [drawerVisible, setDrawerVisible] = useState(false); // Zustandsvariable für Sichtbarkeit des Modals 
 
     useEffect(() => {
         const handleClick = async (evt: MapBrowserEvent<any>) => {          // EventListener für Klick-Ereignisse; jedes Mal bei Click auf die Karte abgerufen
@@ -115,7 +115,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
 
             if (tempSelectedFeatureInfo.length > 0) {
                 setSelectedFeatureInfo(tempSelectedFeatureInfo); // wird nur aktualisiert, wenn tatsächlich gültige FeatureInfos vorhanden sind
-                setModalVisible(true);
+                setDrawerVisible(true);
             }
         };
 
@@ -129,7 +129,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
     }, [map]); 
 
     const handleModalCancel = () => { // function for closing the modal 
-        setModalVisible(false);
+        setDrawerVisible(false);
     };
     
 
@@ -140,7 +140,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 className='featureInfo-container'
                
                 title="Feature Information"         // title in the modal 
-                open={modalVisible}                 // open when modal isVisible
+                open={drawerVisible}                 // open when modal isVisible
                 onClose={handleModalCancel}        // function for canceling modal 
                 placement="left"
                 footer={null}                       // no footer in the modal 
@@ -169,7 +169,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                     map={map}
                 />
             </Drawer>
-            <Toolbar modalVisible={modalVisible}/>
+            <Toolbar drawerVisible={drawerVisible} />
         </div>
     );
 };
