@@ -1,9 +1,9 @@
-.ol-zoom .ol-zoom-in,
+/* .ol-zoom .ol-zoom-in,
 .ol-zoom .ol-zoom-out {
     border-radius: 6px 6px 6px 6px;
     width: 32px; 
     height: 32px;   
-}
+} */
 
 
 .ol-control{
@@ -14,10 +14,21 @@
     margin: 4px; 
 }
 
+.ol-control.ol-attribution {
+    bottom: 80px;
+}
+
 .ol-scale-line{
     position: absolute;
     bottom: 80px;
-    left: 5px; 
+    left: 50%; 
+    transform: translate(-50%);
+
  
     /* background: transparent; */
 } 
+
+.ol-scale-line.drawerLeft-open{
+    margin-left: var(--drawerWidth);
+}
+

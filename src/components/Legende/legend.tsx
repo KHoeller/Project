@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Image } from 'antd';
 
-import {Layer} from'../LayerTree/layerTree';
+
+import { Layer } from '../../../types/types';
 import './legendSlider.css';
 
 
@@ -12,15 +13,22 @@ export type LegendeProps = {
     
 
 export default function Legende({ layers }: LegendeProps) {
-    
-    
 
+   
     return (
         <div>
             {layers.map((layer, index) => (
                 <div key={index} className='legend-item'>
                     <div className='legend-image'>
-                        <Image src={`http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=${layer.name}`} preview={false}/>
+                        {/* Prüfe, ob der Layernamen am Ende der URL erforderlich ist */}
+                        <Image
+                            src={
+                                layer.groupName === 'WMS-Laerm'
+                                    ? layer.urlLegend
+                                    : `${layer.urlLegend}${layer.name}`
+                            }
+                            preview={false}
+                        />
                     </div>
                 </div>
             ))}

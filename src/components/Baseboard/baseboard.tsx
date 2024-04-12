@@ -5,6 +5,8 @@ import { CopyrightCircleOutlined } from "@ant-design/icons";
 import Map from 'ol/Map';
 import About from '../About/about';
 
+import Attribution from 'ol/control/Attribution.js';
+
 
 export type BaseboardProp = {
     map: Map;
@@ -19,7 +21,9 @@ export default function Baseboard({map}: BaseboardProp) {
                 Koordianten: <MousePosition map = {map}/>
             </div> 
             
-            <div></div>
+            <div>
+                {/* <Attribution/> */}
+            </div>
             { /* ESPG 3857*/ }
             <div className="buttonAbout">
                 <About/>

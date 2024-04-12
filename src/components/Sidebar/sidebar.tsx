@@ -7,8 +7,6 @@ import './sidebar.css';
 import { Button, Drawer } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 
-// import LayerTree from "../LayerTree/layerTree";
-// import LayerTreeSlider from '../LayerTree/layerTreeSlider';
 import LayerManager from "../LayerTree/layerTreeManager";
 
 

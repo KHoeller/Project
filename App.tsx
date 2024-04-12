@@ -5,7 +5,7 @@ import Map from 'ol/Map';
 import View from 'ol/View.js';
 import {ScaleLine, defaults as defaultControls} from 'ol/control.js';
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 // import Object with Layers 
 import Layers from "./src/utils/LayerN/LayerN";
@@ -16,20 +16,23 @@ import './General.css';
 
 // import Components 
 import MapComp from './src/components/Map/Map';
-import FeatureInfo from './src/components/FeatureInfo/featureInfo';
+import FeatureInfo from './src/components/FeatureInfo/featureInfoDrawer';
 import Toolbar from './src/components/Toolbar/toolbar';
 import Sidebar from './src/components/Sidebar/sidebar';
 import Baseboard from './src/components/Baseboard/baseboard';
-import Base from 'antd/es/typography/Base';
 import NominatimSearch from './src/components/Search/search';
-
-
 
 
 export default function App () {
     console.log(mapView);
 
-    const scaleControl = useMemo(() => new ScaleLine(), []);
+
+   
+
+
+    const scaleControl = useMemo(() => new ScaleLine(
+        // className: drawerLeft ? 'ol-scale-line drawerLeft-open' : 'ol-scale-line',
+    ), []);
    
     const map = useMemo(() => { 
         return new Map({  
@@ -42,24 +45,27 @@ export default function App () {
         });
     }, [scaleControl]) 
     
-//    console.log(map);
+
+    const [isLengthButtonClicked, setIsLengthButtonClicked] = useState(false);
+
+    // const handleLengthButtonClick = (clicked) => {
+    //     setIsLengthButtonClicked(clicked);
+    // };
+
+    // Hier wird die Kartenreferenz erstellt oder abgerufen
 
     return ( 
         <> 
             {/* <Toolbar/> */}
             
 
-            {/* <NominatimSearch map={map}/> */}
-            {/* <FeatureInfo
-                map={map} />    */}
-            
-            <NominatimSearch map={map}/>
-            <Toolbar/>
+         <NominatimSearch map={map}/>
+            <MapComp map={map} />
             <Sidebar map={map}/>
-            <FeatureInfo map={map}/>
-            
+            <FeatureInfo map={map} />
+            {/* <Measurement map={map}/> */}
             <Baseboard map={map}/>            
-            <MapComp map={map} />  
+             
 
         </>
     )

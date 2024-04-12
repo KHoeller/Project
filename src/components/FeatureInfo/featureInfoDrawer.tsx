@@ -147,6 +147,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 mask={false}                        // no mask about the map 
                 maskClosable={false}                // closable only on cross
                 keyboard={true}                     // or close with keyboard 
+                forceRender={true}
                 
             >                                       
                 {/*content-body: */} 

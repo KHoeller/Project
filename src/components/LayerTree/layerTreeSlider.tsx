@@ -19,6 +19,7 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
     const [layerGroups, setLayerGroups] = useState<{ [groupName: string]: any[] }>({});
     const [checkedGroups, setCheckedGroups] = useState<string[]>([]);
     const [expandedGroups, setExpandedGroups] = useState<string[]>([]);
+    const [groupSelectedIndices, setGroupSelectedIndices] = useState<{ [groupName: string]: number | null }>({});
 
     useEffect(() => {
         const layers = map.getLayers().getArray();
@@ -60,21 +61,40 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
     const onCheck = (checkedKeys: React.Key[] | { checked: React.Key[]; }) => {
         
         const checkedKeysArray = Array.isArray(checkedKeys) ? checkedKeys.map(key => String(key)) : checkedKeys.checked.map(key => String(key));
-        const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]         // kann man mit Sicherheit auch schöner machen; derzeit wird immer der zuletzt hinzugefügt verwendet und weitergegeben, damit immer nur ein Layer checked und visible ist!
-
-        console.log('checkedKeys:', checkedKeyArray); 
         
-        setCheckedGroups(checkedKeyArray);
+        const checkedKey = checkedKeysArray[checkedKeysArray.length - 1];
 
+        if (checkedKey) {
+            setCheckedGroups([checkedKey]);
+            const newExpandedGroups = [...expandedGroups];
+            [checkedKey].forEach(groupName => {
+                if (!newExpandedGroups.includes(groupName)) {
+                    newExpandedGroups.push(groupName);
+                }
+            });
+            setExpandedGroups(newExpandedGroups);
+        } else {
+            setCheckedGroups([]);
+        }
+        //const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]         // kann man mit Sicherheit auch schöner machen; derzeit wird immer der zuletzt hinzugefügt verwendet und weitergegeben, damit immer nur ein Layer checked und visible ist!
+
+        //console.log('checkedKeys:', checkedKeyArray); 
 
         // Update expanded groups to include newly checked groups
-        const newExpandedGroups = [...expandedGroups];
-        checkedKeyArray.forEach(groupName => {
-            if (!newExpandedGroups.includes(groupName)) {
-                newExpandedGroups.push(groupName);
-            }
-        });
-        setExpandedGroups(newExpandedGroups);
+        // const newExpandedGroups = [...expandedGroups];
+        // checkedKeyArray.forEach(groupName => {
+        //     if (!newExpandedGroups.includes(groupName)) {
+        //         newExpandedGroups.push(groupName);
+        //     }
+        // });
+        // setExpandedGroups(newExpandedGroups);
+    };
+
+    const updateGroupSelectedIndex = (groupName: string, index: number) => {
+        setGroupSelectedIndices(prevState => ({
+            ...prevState,
+            [groupName]: index
+        }));
     };
 
 
@@ -108,6 +128,9 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
                         group={layerGroups[groupName]} 
                         groupName={groupName} 
                         checked={checkedGroups.includes(groupName)} 
+                        initialValue={groupSelectedIndices[groupName]}
+                        onIndexChange={(index: number) => updateGroupSelectedIndex(groupName, index)}
+
                     />
                     <Legende 
                         group={layerGroups[groupName]} 

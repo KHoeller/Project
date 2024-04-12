@@ -18,13 +18,13 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
         setIsModalOpen(true);
     }
 
-    const handleOk = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        e.stopPropagation(); // Stoppt die Ausbreitung des Klickereignisses zum übergeordneten Element
+    const handleOk = () => {
+       
         setIsModalOpen(false);
     }
 
-    const handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-        e.stopPropagation(); 
+    const handleCancel = () => {
+        
         setIsModalOpen(false);
       };
     
@@ -32,7 +32,7 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
     const type = 'text';
 
     const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        e.stopPropagation(); // sStoppt die Ausbreitung des Klickereignisses zum übergeordneten Button
+        e.stopPropagation(); // Stoppt die Ausbreitung des Klickereignisses zum übergeordneten Button
         showModal(); // Öffnet das Modal
     }
 
@@ -46,8 +46,9 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
                 open={isModalOpen} 
                 onOk={handleOk} 
                 onCancel={handleCancel}
+                centered={true}
                 maskClosable={false}
-                mask={false}> 
+                mask={true}> 
                     <p>{infoText}</p>
             </Modal>
         </span>

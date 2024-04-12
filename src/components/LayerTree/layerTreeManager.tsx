@@ -11,21 +11,22 @@ export type LayerManagerProps = {
 
 export default function LayerManager ({ map }: LayerManagerProps) {
     const layers = map.getLayers().getArray();
-    console.log("Layers:", layers); 
 
     const sliderLayers = layers.filter(layer => layer.get('enableSlider') === true); // Layers with enableSlider === true
     const normalLayers = layers.filter(layer => layer.get('enableSlider') !== true); // Layers with enableSlider !== true
 
     return (
         <>
-            {normalLayers.length > 0 ? (
-                <LayerTree map={map} 
-                />
-            ) : null} 
+            
             
             {sliderLayers.length > 0 ? (
                 <LayerTreeSlider map={map} />
             ) : null}
+            
+            {normalLayers.length > 0 ? (
+                <LayerTree map={map} 
+                />
+            ) : null} 
         </>
     );
 };

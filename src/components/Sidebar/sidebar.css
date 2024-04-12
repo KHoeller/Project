@@ -1,7 +1,8 @@
 
 
 .sidebarContainer {
-    position: relative;       
+    position: relative;   
+    z-index: 2;     
 }
 
 .ant-drawer-content-wrapper{
@@ -14,8 +15,8 @@
    
 }
 
-.ant-drawer{
-    z-index: 1 !important;
+.ant-drawer.ant-drawer-right.no-mask.css-dev-only-do-not-override-1ae8k9u.ant-drawer-open{
+    z-index: 5;
 }
 
 .openButton {

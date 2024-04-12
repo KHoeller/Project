@@ -2,7 +2,7 @@
 
 // Arbeit mit groups: funktioniert noch nicht!
         // notwendige Imports:
-    import OSM from 'ol/source/OSM.js';
+    import OSM, {ATTRIBUTION} from 'ol/source/OSM.js';
     import TileLayer from 'ol/layer/Tile.js';
     import TileSource from 'ol/source/Tile.js';
     import TileWMS from 'ol/source/TileWMS.js';
@@ -21,6 +21,11 @@
         osmLayer.set('name', 'osm');                // zum Layer Informationen wie Name, Title, Visibility hinzufügen 
         osmLayer.set('title', 'OpenStreetMap');
         osmLayer.set('visible', true);
+        osmLayer.set('legend', false);
+        osmLayer.set('attribution',  [
+            'All maps © <a href="https://www.openstreetmap.org/copyright/en">OpenSeaMap</a>',
+            ATTRIBUTION,
+          ],); 
         
         layers.push(osmLayer)
             
@@ -36,6 +41,9 @@
             const infoTextTitle = group.infoTextTitle !== undefined ? group.infoTextTitle : 'undefined';
             const infoText = group.infoText !== undefined ? group.infoText : 'undefined';
             const enabeleSlider = group.enableSlider !== undefined ? group.enableSlider : false;
+            const legendGroupName = group.legendGroupName !== undefined ? group.legendGroupName : 'undefined';
+            const attribution = group.attribution !== undefined ? group.attribution : undefined;
+            
 
             // Für jeden Layer in der Gruppe
             group.layers.forEach(layerConfig => {
@@ -46,12 +54,16 @@
                 const url = layerConfig.url || 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms';
                 const year = layerConfig.year !== undefined ? layerConfig.year : false;
                 const layerType = layerConfig.layerType;
+                const urlLegend = layerConfig.urlLegend !== undefined ? layerConfig.urlLegend : false;
+                const legend = layerConfig.legend === undefined ? true : layerConfig.legend; // alle Layer, für die es nicht explizit anders festgelegt ist, haben legend === true; (nur OSM soll keine Legende haben!)
+                
                 
     
                 let newLayer = new TileLayer({
                     source: new TileWMS({
                         url: url,
                         params: { 'LAYERS': name },
+                        attributions: attribution
                     }),
                     visible: isVisible,
                 });
@@ -66,14 +78,21 @@
                 newLayer.set('enableSlider', enabeleSlider);
                 newLayer.set('year', year);
                 newLayer.set('layerType', layerType);
+                newLayer.set('urlLegend', urlLegend);
+                newLayer.set('legend', legend);
+                //newLayer.set('attribution', attribution);
+                newLayer.set('legendGroupName', legendGroupName); 
     
                 layers.push(newLayer); // Füge den Layer dem Array hinzu
             });
-            // console.log(layers);
+            // console.log('LayerN layers:',layers);
         });
         
         return layers;
     }
+
+
+    
 
 
 

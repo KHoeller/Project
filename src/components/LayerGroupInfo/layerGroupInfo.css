@@ -11,7 +11,7 @@
     align-items: flex-start !important;
     z-index: 10000; */
 
-.ant-modal-wrap.info-modal-wrap {
+/* .ant-modal-wrap.info-modal-wrap {
     all: unset; 
 }
 
@@ -26,4 +26,21 @@
     max-width: calc(100vw - 100px);
     padding-bottom: 0;
   
+} */
+/* .ant-modal-wrap.info-modal-wrap.ant-modal-centered{
+    all: unset; 
+} */
+
+.ant-modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+.ant-modal-wrap {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
 }

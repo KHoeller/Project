@@ -169,7 +169,7 @@ export const TimeChart: React.FC<TimeChartProps> = ({ map }) => {
         }
     }, [chartData]);
 
-    return <div id="main" style={{ width: '100%', height: '300px'}}></div>;
+    return <div id="main" style={{ width: '300px', height: '300px'}}></div>;
 };
 
 export default TimeChart;

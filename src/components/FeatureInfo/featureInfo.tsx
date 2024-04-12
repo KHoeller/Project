@@ -12,6 +12,7 @@ import Draggable from 'react-draggable';
 import type { DraggableData, DraggableEvent } from 'react-draggable';
 
 import './featureInfo.css';
+import TimeChart from '../TimeChart/TimeChart';
 
 export type FeatureInfoProps = {
     map: Map;
@@ -33,8 +34,11 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 if (layer instanceof TileLayer) {                                   // wenn es ein TileLayer ist: 
                     const isLayerQueryable = layer.get('queryable') ?? false;       // queryable abrufen (falls nicht vorhanden = false)
                     const isLayerVisible = layer.get('visible') ?? false;           // visible abrufen (falls nicht vorhanden false)
-                    const name = layer.get('title');                                // save the title 
+                    const title = layer.get('title');                                // save the title 
                     const layerType = layer.get('layerType');
+
+
+                    const name = layer.get('name');    
 
                     if (isLayerQueryable && isLayerVisible) {                       // if Layer is queryable and visible
                         const source = layer.getSource();                           // get Source of the layer 
@@ -47,6 +51,7 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                                 'EPSG:3857',
                                 { 'INFO_FORMAT': 'application/json', 'BUFFER': hitTolerance.toString() } // response as json
                             );
+
 
                             if (url) {                                          // if the url is true                             
                                 try {
@@ -82,8 +87,9 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                                         });
 
                                         if (layerAttributes.length > 0) {
-                                            tempSelectedFeatureInfo.push({ layerName: name, attributes: layerAttributes, layerType: layerType });
+                                            tempSelectedFeatureInfo.push({ layerName: title, attributes: layerAttributes, layerType: layerType });
                                         }
+                                        // console.log('selected:', tempSelectedFeatureInfo)
                                     }
                                 } catch (error) {               // if there is an error than it would be catched 
                                     console.log('my error is ', error);
@@ -110,6 +116,9 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 setModalVisible(true);
             }
         };
+
+
+        
 
         map.on('singleclick', handleClick); 
 
@@ -138,20 +147,24 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 keyboard={true}                     // or close with keyboard 
                 
             >                                       
-            {/*content-body: */} 
-                {selectedFeatureInfo.map((featureInfo, index) => ( 
-                    <div key={index}>
-                        <h3>{featureInfo.layerName}</h3>
-                        {featureInfo.attributes.map((attribute, attrIndex) => (
-                            <div key={attrIndex} className="feature-info-container">
-                                <div className='attribute-row'>
-                                    <span className="attribute-name">{attribute.attributeName}:</span>
-                                    <span className="attribute-value">{attribute.value}</span>
+                {/*content-body: */} 
+                    {selectedFeatureInfo.map((featureInfo, index) => ( 
+                        <div key={index}>
+                            <h3>{featureInfo.layerName}</h3>
+                            {featureInfo.attributes.map((attribute, attrIndex) => (
+                                <div key={attrIndex} className="feature-info-container">
+                                    <div className='attribute-row'>
+                                        <span className="attribute-name">{attribute.attributeName}:</span>
+                                        <span className="attribute-value">{attribute.value}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                ))}
+                            ))}
+                        </div>
+                    ))
+                }
+                <TimeChart
+                    map={map}
+                />
             </Modal>
         </div>
     );

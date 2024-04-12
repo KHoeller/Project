@@ -94,6 +94,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
     // Layer, die initial auf der Map ausgewählt sind checked und group ausgeklappt 
     useEffect(() => {
         const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);
+        console.log('layers:', layersTree); 
 
         const reversedLayersTree = layersTree.slice().reverse();
         
@@ -101,7 +102,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
         const generatedTreeData = generateTreeData(reversedLayersTree);
         setTreeData(generatedTreeData);
 
-        console.log('generatedData:', generatedTreeData)
+        // console.log('generatedData:', generatedTreeData)
         
         // Extrahiert alle Layer-Namen, Gruppen-Namen und initial sichtbaren Gruppen
         const initialCheckedKeys: string[] = [];
@@ -225,6 +226,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
    
 
     return (
+        
         <Tree
             checkable   // possibility for users to check layer/group 
             selectable={false}      // cannot click on nodes in the Layertree 

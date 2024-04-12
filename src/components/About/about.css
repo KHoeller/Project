@@ -4,15 +4,6 @@
 }
 
 
-
-.ant-modal-wrap.Modal-About{
-    position: relative !important;
-    top: 200px !important; /* Vom oberen Rand des Bildschirms um 200 Pixel nach unten versetzt */
-    z-index: 500 !important;
-    
-}
-
-
 .ant-modal-mask{
     z-index: 500 !important;
 }

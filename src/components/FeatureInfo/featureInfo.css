@@ -1,28 +1,19 @@
-  /* .info {
-    z-index: 10050;
-    position: fixed;
-    bottom: 30px;
-    left: 15px;
-       
-    width:auto; 
-       
-    padding: 5px;
-    border: 1px solid black; 
-    z-index: 100; 
-    background-color: cornsilk;
-    
-  }   */
-.ant-modal-wrap.Modal-Feature{
-    
-    all: unset;
-      
+
+.ant-drawer-content-wrapper {
+    z-index: 5;
 }
 
+.ant-drawer.ant-drawer-left.no-mask.css-dev-only-do-not-override-1ae8k9u.ant-drawer-open{
+    z-index: 0;
+}
+
+.ant-modal-wrap.Modal-Feature{
+    all: unset;
+}
 
 .ant-modal.featureInfo-container {
     position: fixed;
     top: 50%;
-    transform: translateY(-25%);
     left: 50px; 
     width: 350px !important;
     padding: 0 0 0 0;
@@ -34,8 +25,6 @@
     overflow: auto;
     max-height: 50vh;
 }
-
-
 
 
 .feature-info-container {
@@ -56,19 +45,12 @@
 .attribute-value {
     flex: 1;
     text-align: right;
+    margin-bottom: 5px;
 }
 
 
 
 
-/* .ant-modal-wrap{
-    position: static; 
-    inset: auto; 
-    z-index: 0 !important; 
-    overflow: initial;  
-    outline: none; 
-    -webkit-overflow-scrolling: initial; 
-} */ 
 
 
 

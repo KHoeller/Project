@@ -8,6 +8,7 @@
     top: 150px; 
     margin: 4px;
     z-index: 1;
+    transition: left 0.33s; 
 }
 /* .button {
     /* width: 30px;
@@ -22,6 +23,13 @@
     z-index:50;
 
 } 
+
+.ol-zoom .ol-zoom-in,
+.ol-zoom .ol-zoom-out {
+    border-radius: 6px 6px 6px 6px;
+    width: 32px; 
+    height: 32px;   
+}
 
 /* .tool:hover {
     background-color: lightgrey !important; 
