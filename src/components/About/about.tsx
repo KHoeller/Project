@@ -25,24 +25,30 @@ export default function About (){
             About
         </Button>
         <Modal 
+            className="class-Modal-About"
             wrapClassName="Modal-About"
-            title="About the Project" 
+            title="Informationen zur Webapplikation" 
             open={isModalOpen} 
             onOk={handleOk} 
             onCancel={handleCancel}
             maskClosable={false}
             centered={true}
             >
-                <p> Die hier zusehende Webapplikation ist im Rahmen eines dreimonatigen Praktikums 
+                <p> 
+                    Die hier zusehende Webapplikation ist im Rahmen eines dreimonatigen Praktikums 
                     bei 'terrestris GmbH & Co. KG' (https://www.terrestris.de/de/) entstanden und verwendet ausschließlich Open Source Daten aus verschiedenen
                     Quellen. Aufgrund der zeitlichen Begrenzung kann es gegebenenfalls zu Fehlern in der Anwendung kommen
                     und es konnte nur eine begrenzte Zahl an Features programmiert werden. 
+                </p> 
 
+                <p> 
                     Übergeordnetes methodisches Ziel war das Kennenlernen und Nachvollziehen 
                     der Schritte bei der Programmierung einer Webapplikation mit dem inhaltlichen Ziel Informationen zur 
                     Schadstoff- und Lärmbelastung sowie den Zugang zu Gesundheitseinrichtungen in Deutschland darzustellen 
                     und für die Problematik und alltägliche Konfrontation zu sensibilisieren.
+                </p> 
 
+                <p>
                     Die Webapplikation bietet die Möglichkeit sich die mittlere jährliche Belastung () verschiedener Schadstoffe für das Jahr 2021
                     an unterschiedlichen Standorten in Deutschland anzuschauen und Verläufe der letzten Jahre zu betrachten. Bei 
                     der Standortsuche kann unter anderem auch die Suchleiste behilflich sein. Außerdem kann die Lärmbelastung 
@@ -62,12 +68,16 @@ export default function About (){
                     seelischen und sozialen Wohlbefinden des Menschens, stört einen erholsamen Schlaf
                     und kann Auswirkungen auf Stress und Nervosität haben, die zu Risikofaktoren für
                     Herz-Kreislauferkrankungen zählen. (https://www.lfu.bayern.de/laerm/laerm_allgemein/wirkung_auf_menschen/index.html)
+                </p> 
 
+                <p>
                     Die Europäische Umweltagentur berichtet, dass Umweltverschmutzung für jeden zehnten vorzeitigen Todesfall in der EU verantwortlich ist. 
                     Sie führt zu einer Vielzahl von Krankheiten wie Atemwegs- und Herz-Kreislauf-Erkrankungen. 
                     Trotz Maßnahmen zur Reduzierung der Schadstoffbelastung bleiben die Grenzwerte für gesundheitliche Sicherheit unerreicht. 
                     Zusätzlich beeinträchtigt anhaltender Lärm das körperliche und seelische Wohlbefinden, stört den Schlaf und erhöht das Risiko für Herz-Kreislauf-Erkrankungen.
+                </p> 
 
+                <p>
                     Ausgangspunkt war eine weiße, leere Website, die nach und nach mit Daten, Informationen und Features gefüllt 
                     wurde. 
 
@@ -84,9 +94,9 @@ export default function About (){
                     lastungen an den verschiedenen Messstationen vor allem für diese bestimmte geographische Position und 
                     es kann kleinräumig je nach Lage zu Abweichungen kommen. Die ausgegebenen Werte für die schadstoffbelastung 
                     kann zwischen den Raster- und Vectordaten leicht abweichen, da die Rasterdaten eine Interpolation an Werten 
-                    darstellen. </p>
-                {/* <p>Some contents...</p>
-                <p>Some contents...</p> */}
+                    darstellen.
+                 </p>
+                
         </Modal>
     </>
     );

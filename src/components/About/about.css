@@ -12,3 +12,23 @@
     z-index: 0 !important;
 } */
 
+/* .ant-modal-wrap.Modal-About.ant-modal-centered{
+    max-height: 100%;
+    position: relative; /* Fest positioniert, bleibt an der gleichen Stelle */
+    /*max-height: 80%; /* Maximale Höhe des Modals */
+    /* right: 700px;
+    max-width: 80%; */
+    /*top: 15%;
+    overflow: auto;
+} */
+
+
+
+.class-Modal-About {
+    position: relative; /* Fest positioniert, bleibt an der gleichen Stelle */
+    max-height: 80%; /* Maximale Höhe des Modals */
+    /* right: 700px;
+    max-width: 80%; */
+    top: 15%;
+    overflow: auto;
+} 
