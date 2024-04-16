@@ -10,12 +10,13 @@ import { LineString, Polygon } from 'ol/geom';
 import { Feature, MapBrowserEvent } from 'ol';
 import { unByKey } from 'ol/Observable';
 import {getArea, getLength} from 'ol/sphere.js';
+import { Map } from 'ol';
 
 type MeasurementProps = {
-  map: Map,
-  source: any,
-  active: boolean,
-  measureType: 'line' | 'polygon'
+  map: Map;
+  source: any;
+  active: boolean;
+  measureType: 'line' | 'polygon';
 };
 
 const Measurement: React.FC<MeasurementProps> = 
@@ -34,8 +35,15 @@ const Measurement: React.FC<MeasurementProps> =
   useEffect(() => {
     let draw: Draw | null = null;
     let helpTooltipElement: HTMLElement | null = null;
-    let measureTooltipElement: HTMLElement | null = null;
-    let sketch;
+    let sketch: Feature <LineString | Polygon>;
+
+    helpTooltipElement = document.createElement('div');
+    helpTooltipElement.className = 'ol-tooltip hidden';
+    const helpTooltip = new Overlay({
+      element: helpTooltipElement,
+      offset: [15, 0],
+      positioning: 'center-left',
+    });
 
     const continueLineMsg = 'Click to continue drawing the line';
     const continuePolygonMsg = 'Click to continue drawing the polygon';
@@ -106,7 +114,7 @@ const Measurement: React.FC<MeasurementProps> =
 
         const geometry = sketch.getGeometry();
 
-        const listener = geometry.on('change', (evt) => {
+        const listener = geometry?.on('change', (evt) => {
           const geom = evt.target as LineString | Polygon;
           let output = geometry instanceof LineString ? formatLength(geom) : formatArea(geom);
 
@@ -130,16 +138,6 @@ const Measurement: React.FC<MeasurementProps> =
           unByKey(listener);
         });
       });
-
-      const helpTooltipElement = document.createElement('div');
-      helpTooltipElement.className = 'ol-tooltip hidden';
-      const helpTooltip = new Overlay({
-        element: helpTooltipElement,
-        offset: [15, 0],
-        positioning: 'center-left',
-      });
-
-      // console.log('helpTooletip',helpTooltip);
 
       map.addOverlay(helpTooltip);
       setHelpTooltip(helpTooltip);
