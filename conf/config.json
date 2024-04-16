@@ -122,7 +122,7 @@
             "enableSlider": true,
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffoxiden (NOx)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "Stickstoffoxide gelten als Sammelbezeichnung für gasförmige Verbindungen bestehend aus Stickstoff und Sauerstoff. Dazu zählen in erster Linie Stickstoffmonoxid NO und Stickstoffdioxid NO2. Stickstoffoxide können zu einer Vielzahl negativer Umweltwirkungen führen. Zusammen mit Kohlenwasserstoff sind sie für die sommerliche Ozonbildung verantwortlich und tragen zur Feinstaubbelastung bei. <br> Anthropogene Hauptemittenten sind Verbrennungsmotoren und Feuerungsanlagen für Kohle, Öl, Gas, Holz und Abfall. In Ballungsgebieten ist der Straßenverkehr eine der bedeutendsten Quellen. Eine dauerhafte bzw. jahrzehntelange Belastung kann das Sterberisiko an Herz-Kreislauferkrankungen erhöhen. Für weitere Informationen zu Stickstoffdioxid und den Gesundheitsrisiken, schaue Sie beim Layer 'Messstationen Stickstoffdioxid (NO2)' oder 'Flächendeckende Stickstoffdioxidbelastung'. Im Vergleich zu Stickstoffdioxid, reagiert Stickstoffmonoxid in geringerem Maße mit dem Lungengeweben, weshalb das Gas besser mit dem Blut im Körper verteilt werden kann. Dies hat Auswirkung auf die Blutgefäßspannung, sodass es zum Beispiel zu einer Gefäßerweiterung kommen kann. Darüber hinaus können Regelungsmechanismen des Körpers durch die externe Aufnahme beeinflusst werden, da es sich bei Stickstoffmonoxid auch um einen körpereigen gebildeten Botenstoff handelt. (<a href=\"https://www.umweltbundesamt.de/service/uba-fragen/wie-wirken-sich-stickstoffoxide-auf-die-menschliche\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten zeigen die interpolierte Jahresdurchschnittskozentration (µg/m3) von NOx für ein 2-Quadratkilometer-Gitter (bis 2017) und ein 1-Quadratmeter-Gitter (ab 2018) für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).  ",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
@@ -197,7 +197,8 @@
             "enableSlider": true,
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffdioxid (NO2)",
-            "infoText": "Die Daten stammen von....",
+            "infoText":  "<h4>Empfohlener Richtwert (max.): WHO: 10 μg/m3; EU: 40 μg/m3 (Stand 1999); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag</a> EU: 20 μg/m3 (2022) </h4> Stickstoffdioxid ist ein gesundheitsschädliches Reizgas, das nach Inhalation problematische Reaktionen im Körper auslösen und zu Funktionsstörungen und entzündlichen Prozessen im Atemtrakt führen kann. In der Folge kann es zu Atemnot, Husten, Bronchitis und zur Lungenfunktionsminderung kommen. Bei wiederholtem Auftreten lassen sich chronische Atemwegs- und Lungenerkrankungen nicht ausschließen. <br> Freigesetzt wird das Gas vor allem bei Verbrennungsprozessen in Anlagen bzw. bei der Energieerzeugung sowie in der Landwirtschaft. In Deutschland zählen zu den anthropogenen Hauptemissionsquellen der Verkehr und die (Metall-, Chemie-) Industrie. Stickstoffdioxid fördert außerdem die atmosphärischen Bildung von bodennahen Ozon und Feinstaub, die weitere gesundheitsschädliche Auswirkungen auf den menschlichen Körper haben können. (<a href=\"https://www.umwelt.nrw.de/themen/umwelt/umwelt-und-gesundheit/luft/luftschadstoffe-und-ihre-gesundheitliche-wirkung\">MUNV NRW</a> & <a href=\"https://www.bmuv.de/themen/luft/faktencheck-zu-messstellen-stickstoffdioxid-und-luftschadstoffe\">BMUV</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von NO2 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
+            
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
@@ -286,7 +287,7 @@
             "infoTextTitle": "Informationen zu Feinstaub (PM10)",
             
             
-            "infoText": "<h4>Empfohlener Richtwert: WHO: 15 μg/m3; EU: 40 μg/m3 (Stand: 2005)</h4> In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub (PM10) beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen Verbrennungsvorgänge, vor allem des Verkehrs. Zu geringerem Anteil hat auch die Landwirtschaft Einfluss auf die Belastung. Feinstaub kann sowohl direkt emittiert werden als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> In menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei Belastung über längeren Zeitraum auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System , der Stoffwechsel und das Nervensystem. Außerdem wird die Sterblichkeit erhöht. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern ist noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) in Form eines 1-Quadratkilometer-Gitter für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten und stammen von der European Environment Agency (EEA).",
+            "infoText": "<h4>Empfohlener Richtwert: WHO: 15 μg/m3; EU: 40 μg/m3 (Stand: 2005)</h4> In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub (PM10) beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen Verbrennungsvorgänge, vor allem des Verkehrs. Zu geringerem Anteil hat auch die Landwirtschaft Einfluss auf die Belastung. Feinstaub kann sowohl direkt emittiert werden als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> Im menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei längerfristiger Belastung auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System, der Stoffwechsel und das Nervensystem. Außerdem erhöht sich das Sterberisiko. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern befindet sich noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br> (Umweltbundesamt: <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Infos</a> & <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Gesundheitsrisiken</a>)  <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
@@ -443,7 +444,7 @@
             "enableSlider": true,
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "<h4>Empfohlener Richtwert (max.): WHO: 5 μg/m3; EU: 25 μg/m3 (Stand 20??)</h4> Es handelt sich dabei um Feinstaub mit einem Durchmesser von weniger als 2,5 Mikrometer, der vor allem aufgrund seiner geringen Größe ein Gesundheitsrisiko darstellt. Ebenso wie bei PM10 wird der meiste Feinstaub durch Verbrennungsvorgänge in Haushalten, Kleinverbrauchern und dem Straßenverkehr freigesetzt. Weitere Emissionen entstehen bei der von Metallen und mineralischen Produkten, durch Gewerbe und Handel sowie in der. Genauso wie PM10 kann PM2,5 entweder direkt emittiert werden oder aber  anderen Stoffen, wie Schwefeldioxid, Stickstoffdioxid und Ammonikak gebildet werden. besonders kleine Partikelgröße führt dazu, dass die Teilchen tiefer in unseren Körper, allem unsere Atemwege eindringen können und dort länger verbleiben. Dadurch kann es zu  an der Lunge kommen. Herz-Kreislauf- und Atemwegserkrankungen können die Folge sein. <br> (<a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm25#-was-ist-feinstaub\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von NO2 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
@@ -579,12 +580,12 @@
             "groupName": "Lärmbelastung",
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Lärmdaten",
-            "infoText": "Die Daten stammen von....https://gis.uba.de/maps/resources/apps/laermkartierung/",
+            "infoText": "Die Daten stammen vom <a href=\"https://gis.uba.de/maps/resources/apps/laermkartierung/\">Umweltbundesamt</a> und werden in die Webapplikation als WMS-Dienst eingeladen. Die Lärmbelastung wird für die verschiedenen Lärmquellen Straßen-, Schienen- und Luftverkehr sowie Industrie und Häfen dargestellt.  Dabei werden Hauptverkehrsstraßen mit einem Verkehrsaufkommen von mehr als 3 Millionen Kraftfahrzeugen pro Jahr, Haupteisenbahnstrecken mit mehr als 30.000 Zügen pro Jahr und Großflughäfen mit mehr als 50.000 Bewegungen pro Jahr berücksichtigt. <br> Zu dem Begriff Ballungsräume zählen alle Städte mit mehr als 100.000 Einwohnern. In den Daten mit dem Zusatz „Hauptlärmquellen“ wurde der Umgebungslärm innerhalb und außerhalb von Ballungsräumen für besonders relevante Lärmquellen ermittelt. Im Vergleich dazu sind die Daten innerhalb der Ballungsräume etwas detaillierter. <br> Es wird zwischen Nachtlärmindex und Tag-Abend-Nacht-Lärmindex unterschieden. Ersteres beschreibt die durchschnittliche Lärmbelästigung zwischen 22 und 6 Uhr in der Nacht und letzteres die durchschnittliche allgemeine Lärmbelästigung über einen Tag, 24 Stunden. Für die Berechnung von Lärmindizes gibt es EU-weite Berechnungsverfahren, um die Vergleichbarkeit der Ergebnisse zu ermöglichen. Weitere Informationen zur  Lärmkartierung können in <a href=\"https://www.lai-immissionsschutz.de/documents/lai-hinweise-laermkartierung-2022_1654006649.pdf\" >LAI-Hinweise zur Lärmkartierung</a> (Stand: 2022) nachgeschaut werden. <br><br/><a href=\"https://www.eba.bund.de/SharedDocs/FAQs/DE/Laerm_an_Schienenwegen/faq11.html/\">(Eisenbahn-Bundesamt, </a><a href=\" https://www.umweltbundesamt.de/themen/laerm/umgebungslaermrichtlinie/laermkarten\">Umweltbundesamt Lärmkarte)</a>",
             "attribution": "<a href=\"https://gis.uba.de/maps/resources/apps/laermkartierung/index.html?lang=de&vm=2D&l=4200%7Bt%3A40%7D%284210%7Bt%3A0%7D%29%2C5000%2C5200%7Bt%3A40%7D%285210%7Bt%3A0%7D%29%2C6200%7Bt%3A40%7D%286210%7Bt%3A0%7D%29%2C%7E7200%7Bt%3A40%7D%287210%7Bt%3A0%7D%29&s=39245.53728171658&r=0&c=788758.6252443913%2C6574827.006129956\">Umweltbundesamt.</a>",
             "layers": [
                 {
                     "name": "8",
-                    "title": "LK_BLR_ind_Night",
+                    "title": "Industrie & Häfen: Nachtlärmindx innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=8",
                     "visible": false,
@@ -593,7 +594,7 @@
                 },
                 {
                     "name": "9",
-                    "title": "LK_BLR_ind_Den",
+                    "title": "Industrie & Häfen: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=9",
                     "visible": false,
@@ -602,7 +603,7 @@
                 },
                 {
                     "name": "12",
-                    "title": "LK_BLR_air_Night",
+                    "title": "Luftverkehr: Nachtlärmindx innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=12",
                     "visible": false,
@@ -611,7 +612,7 @@
                 },
                 {
                     "name": "13",
-                    "title": "LK_BLR_air_Den",
+                    "title": "Luftverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=13",
                     "visible": false,
@@ -620,7 +621,7 @@
                 },
                 {
                     "name": "15",
-                    "title": "LK_HLQ_air_Night",
+                    "title": "Luftverkehr: Nachtlärmindx von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=15",
                     "visible": false,
@@ -629,7 +630,7 @@
                 },
                 {
                     "name": "16",
-                    "title": "LK_HLQ_air_Den",
+                    "title": "Luftverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=16",
                     "visible": false,
@@ -638,7 +639,7 @@
                 },
                 {
                     "name": "19",
-                    "title": "LK_BLR_rail_Night",
+                    "title": "Schienenverkehr: Nachtlärmindx innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=19",
                     "visible": false,
@@ -647,7 +648,7 @@
                 },
                 {
                     "name": "20",
-                    "title": "LK_BLR_rail_Den",
+                    "title": "Schienenverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=20",
                     "visible": false,
@@ -656,7 +657,7 @@
                 },
                 {
                     "name": "22",
-                    "title": "LK_HLQ_rail_Night",
+                    "title": "Schienenverkehr: Nachtlärmindex von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=22",
                     "visible": false,
@@ -665,7 +666,7 @@
                 },
                 {
                     "name": "23",
-                    "title": "LK_HLQ_rail_Den",
+                    "title": "Schienenverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=23",
                     "visible": false,
@@ -674,7 +675,7 @@
                 },
                 {
                     "name": "26",
-                    "title": "LK_BLR_road_Night",
+                    "title": "Straßenverkehr: Nachtlärmindx innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=26",
                     "visible": false,
@@ -683,7 +684,7 @@
                 },
                 {
                     "name": "27",
-                    "title": "LK_BLR_road_Den",
+                    "title": "Straßenverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=27",
                     "visible": false,
@@ -692,7 +693,7 @@
                 },
                 {
                     "name": "29",
-                    "title": "LK_HLQ_road_Night",
+                    "title": "Straßenverkehr: Nachtlärmindex von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=29",
                     "visible": false,
@@ -701,37 +702,9 @@
                 },
                 {
                     "name": "30",
-                    "title": "LK_HLQ_road_Den",
+                    "title": "Straßenverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
                     "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
                     "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=30",
-                    "visible": false,
-                    "queryable": false
-                    
-                },
-                
-                {
-                    "name": "33",
-                    "title": "Bundeslaender_BZ",
-                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
-                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=33",
-                    "visible": false,
-                    "queryable": false
-                    
-                },
-                {
-                    "name": "32",
-                    "title": "Ballungsraeume_BZ",
-                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
-                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=32",
-                    "visible": false,
-                    "queryable": false
-                    
-                },
-                {
-                    "name": "35",
-                    "title": "LK_BLR_Abfrage",
-                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
-                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=35",
                     "visible": false,
                     "queryable": false
                     
@@ -778,7 +751,7 @@
             "groupName": "Messstationen Schwefeldioxid (SO2)",
             "info": true,
             "infoTextTitle": "Informationen zu Schwefeldioxid (SO2)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "Schwefeldioxid ist ein farbloses, stechend riechendes, wasserlösliches Gas. Emissionen entstehen vor allem bei Verbrennungsvorgängen fossiler Energieträger wie Kohle und Öl. Das Gas reizt die Schleimhäute und kann zu Augenreizungen und Atemwegsproblemen führen. Da die Konzentration in Deutschland deutlich unter dem empfohlenen Grenzwert zum Schutz der menschlichen Gesundheit liegt, sind in Deutschland dadurch entstehende Gesundheitsprobleme wenig zu befürchten. Allerdings kann es Pflanzen schädigen und durch Ablagerung Böden und Gewässer versauern. <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von CO (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt. ",
             "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
@@ -796,7 +769,8 @@
             "groupName": "Messstationen Stickstoffdioxid (NO2)",
             "info": true,
             "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "<h4>Empfohlener Richtwert (max.): WHO: 10 μg/m3; EU: 40 μg/m3 (Stand 1999); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag</a> EU: 20 μg/m3 (2022) </h4> Stickstoffdioxid ist ein gesundheitsschädliches Reizgas, das nach Inhalation problematische Reaktionen im Körper auslösen und zu Funktionsstörungen und entzündlichen Prozessen im Atemtrakt führen kann. In der Folge kann es zu Atemnot, Husten, Bronchitis und zur Lungenfunktionsminderung kommen. Bei wiederholtem Auftreten lassen sich chronische Atemwegs- und Lungenerkrankungen nicht ausschließen. <br> Freigesetzt wird das Gas vor allem bei Verbrennungsprozessen in Anlagen bzw. bei der Energieerzeugung sowie in der Landwirtschaft. In Deutschland zählen zu den anthropogenen Hauptemissionsquellen der Verkehr und die (Metall-, Chemie-) Industrie. Stickstoffdioxid fördert außerdem die atmosphärischen Bildung von bodennahen Ozon und Feinstaub, die weitere gesundheitsschädliche Auswirkungen auf den menschlichen Körper haben können. (<a href=\"https://www.umwelt.nrw.de/themen/umwelt/umwelt-und-gesundheit/luft/luftschadstoffe-und-ihre-gesundheitliche-wirkung\">MUNV NRW</a> & <a href=\"https://www.bmuv.de/themen/luft/faktencheck-zu-messstellen-stickstoffdioxid-und-luftschadstoffe\">BMUV</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von NO2 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
+           
             "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
@@ -814,7 +788,7 @@
             "groupName": "Messstationen Feinstaub (PM10)",
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM10)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub (PM10) beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen Verbrennungsvorgänge, vor allem des Verkehrs. Zu geringerem Anteil hat auch die Landwirtschaft Einfluss auf die Belastung. Feinstaub kann sowohl direkt emittiert werden als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> Im menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei längerfristiger Belastung auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System, der Stoffwechsel und das Nervensystem. Außerdem erhöht sich das Sterberisiko. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern befindet sich noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br> (Umweltbundesamt: <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Infos</a> & <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Gesundheitsrisiken</a>)  <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
             "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {
@@ -833,7 +807,7 @@
             "groupName": "Messstationen Feinstaub (PM2.5)",
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
-            "infoText": "Die Daten stammen von....",
+            "infoText": "<h4>Empfohlener Richtwert (max.): WHO: 5 μg/m3; EU: 25 μg/m3 (Stand 20??)</h4> Es handelt sich dabei um Feinstaub mit einem Durchmesser von weniger als 2,5 Mikrometer, der vor allem aufgrund seiner geringen Größe ein Gesundheitsrisiko darstellt. Ebenso wie bei PM10 wird der meiste Feinstaub durch Verbrennungsvorgänge in Haushalten, Kleinverbrauchern und dem Straßenverkehr freigesetzt. Weitere Emissionen entstehen bei der von Metallen und mineralischen Produkten, durch Gewerbe und Handel sowie in der. Genauso wie PM10 kann PM2,5 entweder direkt emittiert werden oder aber  anderen Stoffen, wie Schwefeldioxid, Stickstoffdioxid und Ammonikak gebildet werden. besonders kleine Partikelgröße führt dazu, dass die Teilchen tiefer in unseren Körper, allem unsere Atemwege eindringen können und dort länger verbleiben. Dadurch kann es zu  an der Lunge kommen. Herz-Kreislauf- und Atemwegserkrankungen können die Folge sein. <br> (<a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm25#-was-ist-feinstaub\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in der EU bereitstellt.",
             "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
             "layers": [
                 {

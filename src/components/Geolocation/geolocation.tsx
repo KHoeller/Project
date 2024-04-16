@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import Feature from 'ol/Feature.js';
 import Geolocation from 'ol/Geolocation.js';
@@ -10,33 +12,62 @@ import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer.js';
 
 export type GeolocationCompProps = {
   map: Map; 
-  active: boolean;
+  activeGeoloc: boolean;
 }
 
 
-export default function GeolocationComp ({map, active}: GeolocationCompProps) {
+export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompProps) {
   const [tracking, setTracking] = useState(false);
   const [geolocation, setGeolocation] = useState<Geolocation | null>(null);
 
+  // console.log('map', map); // ist auch da
+  // console.log('button',activeGeoloc);  // active prop wird richtig weitergegeben 
+
+  // useEffect(() => { // wird gemountet
+  //   console.log('geolocation: mount');
+
+  //   return () => {
+  //       console.log('geolocation: unmount')
+  //   };
+  // }, []);
+
+
   useEffect(() => {
-    if (active) {
-      const geo = new Geolocation({
+
+    if (activeGeoloc) {
+
+      const geolocation = new Geolocation({
         trackingOptions: {
           enableHighAccuracy: true,
         },
         projection: map.getView().getProjection(),
       });
+
+
+      // function el(id: string) {
+      //   return document.getElementById(id);
+      // }
+      
+      // el('track').addEventListener('change', function () {
+      //   geolocation.setTracking(this.checked);
+      // });
+      
+
+      // // update the HTML page when the position changes.
+      // geolocation.on('change', function () {
+      //   el('accuracy').innerText = geolocation.getAccuracy() + ' [m]';
+      //   el('altitude').innerText = geolocation.getAltitude() + ' [m]';
+      //   el('altitudeAccuracy').innerText = geolocation.getAltitudeAccuracy() + ' [m]';
+      //   el('heading').innerText = geolocation.getHeading() + ' [rad]';
+      //   el('speed').innerText = geolocation.getSpeed() + ' [m/s]';
+      // });
   
-      geo.on('change:position', () => {
-        const coordinates = geo.getPosition();
-        if (coordinates) {
-          map.getView().setCenter(coordinates);
-        }
-      });
+      
   
-      setGeolocation(geo);
+      setGeolocation(geolocation);
       setTracking(true); // Starte die Geolokationsverfolgung
   
+      // for geolocationError 
       geolocation?.on('error', function (error) {
         const info = document.getElementById('info');
         info.innerHTML = error.message;
@@ -44,10 +75,11 @@ export default function GeolocationComp ({map, active}: GeolocationCompProps) {
       });
 
       const accuracyFeature = new Feature();
-      geo.on('change:accuracyGeometry', () => {
-        accuracyFeature.setGeometry(geo.getAccuracyGeometry());
+      geolocation.on('change:accuracyGeometry', () => {
+        accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
       });
   
+      // Aussehen Symbol for showing location 
       const positionFeature = new Feature();
       positionFeature.setStyle(
         new Style({
@@ -64,17 +96,22 @@ export default function GeolocationComp ({map, active}: GeolocationCompProps) {
         })
       );
   
-      const vectorSource = new VectorSource({
-        features: [accuracyFeature, positionFeature],
+      geolocation.on('change:position', () => {
+        const coordinates = geolocation.getPosition();
+        positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+        // if (coordinates) {
+        //   map.getView().setCenter(coordinates);
+        // }
       });
-  
+
       const vectorLayer = new VectorLayer({
         map: map,
-        source: vectorSource,
+        source: new VectorSource({
+          features: [accuracyFeature, positionFeature],
+        }),
       });
-
+      
       console.log('hat funktioniert?')
-
 
       return () => {
         if (geolocation) {
@@ -87,67 +124,8 @@ export default function GeolocationComp ({map, active}: GeolocationCompProps) {
         // Cleanup: Entferne die Geolokationskomponenten beim Deaktivieren
         
     }
-  }, [map, active]);
+  }, [map, activeGeoloc]);
 
-  // useEffect(() => {
-  //   if(active){
-    
-  //   const geo = new Geolocation({
-  //     trackingOptions: {
-  //       enableHighAccuracy: true,
-  //     },
-  //     projection: map.getView().getProjection(),
-  //   });
-  //   setGeolocation(geo);
-
-  //   const accuracyFeature = new Feature();
-  //   geo.on('change:accuracyGeometry', () => {
-  //     accuracyFeature.setGeometry(geo.getAccuracyGeometry());
-  //   });
-
-  //   const positionFeature = new Feature();
-  //   positionFeature.setStyle(
-  //     new Style({
-  //       image: new CircleStyle({
-  //         radius: 6,
-  //         fill: new Fill({
-  //           color: '#3399CC',
-  //         }),
-  //         stroke: new Stroke({
-  //           color: '#fff',
-  //           width: 2,
-  //         }),
-  //       }),
-  //     })
-  //   );
-
-  //   geo.on('change:position', () => {
-  //     const coordinates = geo.getPosition();
-  //     positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-  //   });
-
-  //   new VectorLayer({
-  //     map: map,
-  //     source: new VectorSource({
-  //       features: [accuracyFeature, positionFeature],
-  //     }),
-  //   });
-
-  //   return () => {
-  //     // Cleanup when component unmounts
-  //     map.setTarget(null);
-  //     map.removeLayer(vectorLayer);
-  //   };
-  
-  // }
-  // }, [map, active]);
-
-  const handleTrackToggle = () => {
-    if (geolocation) {
-      geolocation.setTracking(!tracking);
-      setTracking(!tracking);
-    }
-  };
 
 
   return null;

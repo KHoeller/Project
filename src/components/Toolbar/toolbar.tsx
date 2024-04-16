@@ -100,7 +100,7 @@ export default function Toolbar (
 
                 <ToggleButton 
                     type={typeB} 
-                    className='measurement' 
+                    className='Measurement' 
                     icon= { <EditOutlined /> } 
                     size={size} 
                     shape='default'  

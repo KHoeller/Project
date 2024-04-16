@@ -17,7 +17,7 @@ export default function Baseboard({map}: BaseboardProp) {
         <>
         <div className='baseboard'>
             <div className="Koordinaten">
-                Koordianten: <MousePosition map = {map}/>
+                Koordinaten: <MousePosition map = {map}/>
             </div> 
             
             <div>

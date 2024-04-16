@@ -31,7 +31,7 @@ const Measurement: React.FC<MeasurementProps> =
   const [helpTooltip, setHelpTooltip] = useState<Overlay | null>(null);
   const [measureTooltip, setMeasureTooltip] = useState<Overlay | null>(null);
 
-  // console.log('active:', active);
+
   //   useEffect(() => {
   //         console.log('measurement: mount');
   

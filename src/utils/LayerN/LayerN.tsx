@@ -22,6 +22,7 @@
         osmLayer.set('title', 'OpenStreetMap');
         osmLayer.set('visible', true);
         osmLayer.set('legend', false);
+        osmLayer.set('groupName', 'Basiskarte');
         
         layers.push(osmLayer) 
             

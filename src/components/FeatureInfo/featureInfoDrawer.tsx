@@ -210,7 +210,7 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
 
             <GeolocationComp 
                 map={map} 
-                active={locationButtonClicked}/>
+                activeGeoloc={locationButtonClicked}/>
         </div>
     );
 };

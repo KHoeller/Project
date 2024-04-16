@@ -25,7 +25,7 @@ import NominatimSearch from './src/components/Search/search';
 
 
 export default function App () {
-    console.log('mapView', mapView);
+    // console.log('mapView', mapView);
 
    
     const scaleControl = useMemo(() => new ScaleLine(
@@ -48,15 +48,17 @@ export default function App () {
     const source = new VectorSource();
 
     const vector = new VectorLayer({
-    source: source,
-        style: {
-        'fill-color': 'rgba(255, 255, 255, 0.2)',
-        'stroke-color': '#ffcc33',
-        'stroke-width': 2,
-        'circle-radius': 7,
-        'circle-fill-color': '#ffcc33',
-        },
+        source: source,
+            style: {
+            'fill-color': 'rgba(255, 255, 255, 0.2)',
+            'stroke-color': '#ffcc33',
+            'stroke-width': 2,
+            'circle-radius': 7,
+            'circle-fill-color': '#ffcc33',
+            },
     });
+
+    vector.set('name', 'measurement');
 
     map.addLayer(vector)
 

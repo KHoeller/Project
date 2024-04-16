@@ -96,8 +96,9 @@ export const ToggleButton: React.FC<ToggleButtonProps> = ({
     if (pressed) {
     pressedClass = ' btn-pressed';
     }
-    console.log(pressedClass);
-    console.log(pressed)
+    // console.log(pressedClass);
+    // console.log(pressed)
+    
     return (
         <Tooltip
             title={tooltip}

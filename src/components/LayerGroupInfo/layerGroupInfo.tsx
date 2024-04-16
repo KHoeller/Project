@@ -34,10 +34,12 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
     const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.stopPropagation(); // Stoppt die Ausbreitung des Klickereignisses zum übergeordneten Button
         showModal(); // Öffnet das Modal
+        return(false)
     }
 
     return (
-        <span className='layer-tree-info'> 
+        <span className='layer-tree-info' onClick={event => event.stopPropagation()}> 
+        
             <Button type={type} icon={<InfoCircleOutlined style={{ color: '#1890ff' }} />} shape='default' size={size} onClick={handleButtonClick}/>
             <Modal 
                 className='info-modal' 
@@ -49,6 +51,7 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
                 centered={true}
                 maskClosable={false}
                 mask={true}
+                
             >
                 {
                     infoText && (
@@ -66,3 +69,5 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
 };
 
 export default InfoIcon;
+
+//onClick={event => event.stopPropagation} -> führt dazu, dass auf dem Modal keine Clicks mehr zu Veränderung des Layertrees führen
