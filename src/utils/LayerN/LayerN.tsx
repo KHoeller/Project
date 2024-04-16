@@ -22,12 +22,8 @@
         osmLayer.set('title', 'OpenStreetMap');
         osmLayer.set('visible', true);
         osmLayer.set('legend', false);
-        osmLayer.set('attribution',  [
-            'All maps © <a href="https://www.openstreetmap.org/copyright/en">OpenSeaMap</a>',
-            ATTRIBUTION,
-          ],); 
         
-        layers.push(osmLayer)
+        layers.push(osmLayer) 
             
 
         const groups = jsondata.groups; // Gruppen aus der JSON-Datei
@@ -58,7 +54,6 @@
                 const legend = layerConfig.legend === undefined ? true : layerConfig.legend; // alle Layer, für die es nicht explizit anders festgelegt ist, haben legend === true; (nur OSM soll keine Legende haben!)
                 
                 
-    
                 let newLayer = new TileLayer({
                     source: new TileWMS({
                         url: url,
@@ -80,7 +75,6 @@
                 newLayer.set('layerType', layerType);
                 newLayer.set('urlLegend', urlLegend);
                 newLayer.set('legend', legend);
-                //newLayer.set('attribution', attribution);
                 newLayer.set('legendGroupName', legendGroupName); 
     
                 layers.push(newLayer); // Füge den Layer dem Array hinzu

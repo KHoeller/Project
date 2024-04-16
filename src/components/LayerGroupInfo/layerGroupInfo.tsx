@@ -48,8 +48,18 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
                 onCancel={handleCancel}
                 centered={true}
                 maskClosable={false}
-                mask={true}> 
-                    <p>{infoText}</p>
+                mask={true}
+            >
+                {
+                    infoText && (
+                        <p 
+                            dangerouslySetInnerHTML={{
+                                __html: infoText
+                            }}
+                        />
+                    )
+                }
+               
             </Modal>
         </span>
     );

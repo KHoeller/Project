@@ -24,9 +24,9 @@ export const TimeChart: React.FC<TimeChartProps> = ({ map }) => {
             const viewResolution = map.getView().getResolution() ?? 0;
 
             const layerNamesByGroup: { [key: string]: string[] } = {};
-            console.log('layerperGrouip', layerNamesByGroup); 
+            // console.log('layerperGrouip', layerNamesByGroup); 
             const allLayers = map.getLayers().getArray().filter(layer => layer.get('enableSlider') === true);
-            console.log(allLayers);
+            // console.log(allLayers);
 
             allLayers.forEach(layer => {
                 const layerGroupName = layer.get('legendGroupName');
@@ -128,7 +128,7 @@ export const TimeChart: React.FC<TimeChartProps> = ({ map }) => {
     }, [map]);
 
     useEffect(() => {
-        console.log(chartData);
+        // console.log(chartData);
         if (chartData.year.length > 0 && chartData.grayIndex.length > 0) {
             const chartDom = document.getElementById('main');
             if (!chartDom) return;

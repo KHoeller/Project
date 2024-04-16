@@ -44,3 +44,7 @@
     left: 0;
     overflow: auto;
 }
+
+.ant-modal-content{
+    text-align: justify;
+}

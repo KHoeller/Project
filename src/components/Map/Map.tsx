@@ -290,12 +290,15 @@ import Baseboard from '../Baseboard/baseboard';
 // import style for MapComp
 import './Map.css';
 
+
 // Define Types for Component function 
 export type MapCompProps = {
     map: Map;
 };
 
 export default function MapComp ({ map }: MapCompProps) {
+
+    
 
     useEffect(() => {       // function wird nur einmal initial aufgerufen; in den eckigen Klammern kann man eine Bedingung eingeben, bei der es erneut aufgerufen wird z.B. map, wenn sich die map ändert
         map.setTarget('map');

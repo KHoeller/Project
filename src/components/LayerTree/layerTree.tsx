@@ -20,7 +20,6 @@ export type LayerTreeProps = {
 }
 
 import { Layer, TreeNode } from '../../../types/types';
-import { compact } from 'lodash';
 
 
 export default function LayerTree({ map }: LayerTreeProps) {
@@ -94,7 +93,7 @@ export default function LayerTree({ map }: LayerTreeProps) {
     // Layer, die initial auf der Map ausgewählt sind checked und group ausgeklappt 
     useEffect(() => {
         const layersTree = map.getLayers().getArray().filter(layer => layer.get('enableSlider') !== true);
-        console.log('layers:', layersTree); 
+        // console.log('layers:', layersTree); 
 
         const reversedLayersTree = layersTree.slice().reverse();
         

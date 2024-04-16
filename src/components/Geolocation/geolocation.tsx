@@ -8,72 +8,139 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style.js';
 import { OSM, Vector as VectorSource } from 'ol/source.js';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer.js';
 
-const MapComponent: React.FC = () => {
+export type GeolocationCompProps = {
+  map: Map; 
+  active: boolean;
+}
+
+
+export default function GeolocationComp ({map, active}: GeolocationCompProps) {
   const [tracking, setTracking] = useState(false);
   const [geolocation, setGeolocation] = useState<Geolocation | null>(null);
 
   useEffect(() => {
-    const view = new View({
-      center: [0, 0],
-      zoom: 2,
-    });
+    if (active) {
+      const geo = new Geolocation({
+        trackingOptions: {
+          enableHighAccuracy: true,
+        },
+        projection: map.getView().getProjection(),
+      });
+  
+      geo.on('change:position', () => {
+        const coordinates = geo.getPosition();
+        if (coordinates) {
+          map.getView().setCenter(coordinates);
+        }
+      });
+  
+      setGeolocation(geo);
+      setTracking(true); // Starte die Geolokationsverfolgung
+  
+      geolocation?.on('error', function (error) {
+        const info = document.getElementById('info');
+        info.innerHTML = error.message;
+        info.style.display = '';
+      });
 
-    const map = new Map({
-      layers: [
-        new TileLayer({
-          source: new OSM(),
-        }),
-      ],
-      target: 'map',
-      view: view,
-    });
-
-    const geo = new Geolocation({
-      trackingOptions: {
-        enableHighAccuracy: true,
-      },
-      projection: view.getProjection(),
-    });
-    setGeolocation(geo);
-
-    const accuracyFeature = new Feature();
-    geo.on('change:accuracyGeometry', () => {
-      accuracyFeature.setGeometry(geo.getAccuracyGeometry());
-    });
-
-    const positionFeature = new Feature();
-    positionFeature.setStyle(
-      new Style({
-        image: new CircleStyle({
-          radius: 6,
-          fill: new Fill({
-            color: '#3399CC',
+      const accuracyFeature = new Feature();
+      geo.on('change:accuracyGeometry', () => {
+        accuracyFeature.setGeometry(geo.getAccuracyGeometry());
+      });
+  
+      const positionFeature = new Feature();
+      positionFeature.setStyle(
+        new Style({
+          image: new CircleStyle({
+            radius: 6,
+            fill: new Fill({
+              color: '#3399CC',
+            }),
+            stroke: new Stroke({
+              color: '#fff',
+              width: 2,
+            }),
           }),
-          stroke: new Stroke({
-            color: '#fff',
-            width: 2,
-          }),
-        }),
-      })
-    );
-
-    geo.on('change:position', () => {
-      const coordinates = geo.getPosition();
-      positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-    });
-
-    new VectorLayer({
-      map: map,
-      source: new VectorSource({
+        })
+      );
+  
+      const vectorSource = new VectorSource({
         features: [accuracyFeature, positionFeature],
-      }),
-    });
+      });
+  
+      const vectorLayer = new VectorLayer({
+        map: map,
+        source: vectorSource,
+      });
 
-    return () => {
-      // Cleanup when component unmounts
-      map.setTarget(null);
-    };
-  }, []);
+      console.log('hat funktioniert?')
+
+
+      return () => {
+        if (geolocation) {
+          geolocation.setTracking(false); // Stoppe die Geolokationsverfolgung
+          setGeolocation(null); // Setze die Geolokations-Instanz zurück
+        }
+        map.removeLayer(vectorLayer);
+        setTracking(false);
+      };
+        // Cleanup: Entferne die Geolokationskomponenten beim Deaktivieren
+        
+    }
+  }, [map, active]);
+
+  // useEffect(() => {
+  //   if(active){
+    
+  //   const geo = new Geolocation({
+  //     trackingOptions: {
+  //       enableHighAccuracy: true,
+  //     },
+  //     projection: map.getView().getProjection(),
+  //   });
+  //   setGeolocation(geo);
+
+  //   const accuracyFeature = new Feature();
+  //   geo.on('change:accuracyGeometry', () => {
+  //     accuracyFeature.setGeometry(geo.getAccuracyGeometry());
+  //   });
+
+  //   const positionFeature = new Feature();
+  //   positionFeature.setStyle(
+  //     new Style({
+  //       image: new CircleStyle({
+  //         radius: 6,
+  //         fill: new Fill({
+  //           color: '#3399CC',
+  //         }),
+  //         stroke: new Stroke({
+  //           color: '#fff',
+  //           width: 2,
+  //         }),
+  //       }),
+  //     })
+  //   );
+
+  //   geo.on('change:position', () => {
+  //     const coordinates = geo.getPosition();
+  //     positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+  //   });
+
+  //   new VectorLayer({
+  //     map: map,
+  //     source: new VectorSource({
+  //       features: [accuracyFeature, positionFeature],
+  //     }),
+  //   });
+
+  //   return () => {
+  //     // Cleanup when component unmounts
+  //     map.setTarget(null);
+  //     map.removeLayer(vectorLayer);
+  //   };
+  
+  // }
+  // }, [map, active]);
 
   const handleTrackToggle = () => {
     if (geolocation) {
@@ -82,32 +149,10 @@ const MapComponent: React.FC = () => {
     }
   };
 
-  return (
-    <div>
-      <div id="geolocation" ></div>
-      <div>
-        <label htmlFor="track">
-          Track position
-          <input
-            id="track"
-            type="checkbox"
-            checked={tracking}
-            onChange={handleTrackToggle}
-          />
-        </label>
-      </div>
-      <p>
-        Position accuracy: <code id="accuracy"></code>&nbsp;&nbsp;
-        Altitude: <code id="altitude"></code>&nbsp;&nbsp;
-        Altitude accuracy: <code id="altitudeAccuracy"></code>&nbsp;&nbsp;
-        Heading: <code id="heading"></code>&nbsp;&nbsp;
-        Speed: <code id="speed"></code>
-      </p>
-    </div>
-  );
+
+  return null;
 };
 
-export default MapComponent;
 
 
 // import Feature from 'ol/Feature.js';

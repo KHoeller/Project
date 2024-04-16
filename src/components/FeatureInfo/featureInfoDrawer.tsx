@@ -8,24 +8,33 @@ import { MapBrowserEvent } from 'ol';
 import Map from 'ol/Map';
 import { Drawer } from 'antd';
 
-
+import Measurement from '../Measurement/measurement';
 
 import './featureInfo.css';
 import TimeChart from '../TimeChart/TimeChart';
 
 
 import Toolbar from '../Toolbar/toolbar';
+import VectorSource from 'ol/source/Vector';
+import GeolocationComp from '../Geolocation/geolocation';
 
 export type FeatureInfoProps = {
     map: Map;
+    source: VectorSource
 };
 
 
-export default function FeatureInfo ({ map }: FeatureInfoProps) {
+export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
     
     const [selectedFeatureInfo, setSelectedFeatureInfo] = useState<{ layerName: string, attributes: { attributeName: string, value: string }[] }[]>([]); // Zustandsvariable für ausgewählten Feature-Informationen
     const [drawerVisible, setDrawerVisible] = useState(false); // Zustandsvariable für Sichtbarkeit des Modals 
+    
     const [infoButtonClicked, setInfoButtonClicked] = useState(false);
+    const [areaButtonClicked, setAreaButtonClicked] = useState(false);
+    const [locationButtonClicked, setLocationButtonClicked] = useState(false);
+
+
+    const [measureButtonClicked, setMeasureButtonClicked] = useState(false);
 
     useEffect(() => {
         const handleClick = async (evt: MapBrowserEvent<any>) => {     
@@ -135,7 +144,15 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
         setDrawerVisible(false);
     };
     
+    const [measureType, setMeasureType] = useState<'line' | 'polygon'>('line'); // Default ist 'line'
 
+    useEffect(() => {
+        if (measureButtonClicked) {
+        setMeasureType('line'); // Wenn der Measure-Button gedrückt wurde, Typ auf 'line' setzen
+        } else if (areaButtonClicked) {
+        setMeasureType('polygon'); // Wenn der Area-Button gedrückt wurde, Typ auf 'polygon' setzen
+        }
+    }, [measureButtonClicked, areaButtonClicked]);
 
     return (
         <div>
@@ -170,7 +187,30 @@ export default function FeatureInfo ({ map }: FeatureInfoProps) {
                 }
                 {infoButtonClicked && <TimeChart map={map} />} {/* Render TimeChart nur wenn infoButtonClicked true ist */}
             </Drawer>
-            <Toolbar drawerVisible={drawerVisible} setInfoButtonClicked={setInfoButtonClicked} infoButtonClicked={infoButtonClicked}/>
+            
+            
+            <Toolbar 
+                drawerVisible={drawerVisible} 
+                setInfoButtonClicked={setInfoButtonClicked} 
+                infoButtonClicked={infoButtonClicked} 
+                measureButtonClicked={measureButtonClicked} 
+                setMeasureButtonClicked={setMeasureButtonClicked}
+                areaButtonClicked={areaButtonClicked}
+                setAreaButtonClicked={setAreaButtonClicked}
+                locationButtonClicked={locationButtonClicked}
+                setLocationButtonClicked={setLocationButtonClicked}
+            />
+                
+            <Measurement
+                map={map} 
+                source={source}
+                active={measureButtonClicked || areaButtonClicked}
+                measureType={measureType}
+            />
+
+            <GeolocationComp 
+                map={map} 
+                active={locationButtonClicked}/>
         </div>
     );
 };

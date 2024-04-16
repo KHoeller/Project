@@ -49,52 +49,82 @@ export default function About (){
                 </p> 
 
                 <p>
-                    Die Webapplikation bietet die Möglichkeit sich die mittlere jährliche Belastung () verschiedener Schadstoffe für das Jahr 2021
+                    Die Webapplikation bietet die Möglichkeit sich die mittlere jährliche Belastung verschiedener Schadstoffe für das Jahr 2021
                     an unterschiedlichen Standorten in Deutschland anzuschauen und Verläufe der letzten Jahre zu betrachten. Bei 
                     der Standortsuche kann unter anderem auch die Suchleiste behilflich sein. Außerdem kann die Lärmbelastung 
                     betrachtet werden und verschiedene Informationen zu der Einwohnerdichte pro Gemeinde, den Standorten von Krankenhäusern sowie der 
-                    durchschnittliche Reisedauerentfernung abgerufen werden. 
+                    durchschnittliche Reisedauerentfernung zum nächst liegenden Krankenhaus abgerufen werden. 
+                </p> 
 
+                <p>
                     Laut der Europäischen Umweltagentur ist jeder zehnte vorzeitige Todesfall in der EU auf
                     die Verschmutzung der Umwelt zurückzuführen. Auch leiden zahlreiche Bürger an Krankenheiten wie Atem-
-                    wegs- und Herz-Kreislauf-Erkrankungen, die um auf Umweltverschmutzung zurückzuführen sind. (EEA https://www.eea.europa.eu/de)
+                    wegs- und Herz-Kreislauf-Erkrankungen, die um auf Umweltverschmutzung zurückzuführen sind. 
                     Mit jedem Atemzug gelangen Gase und kleinste Partikel in unsere Bronchien und Lungen und dringen in unseren Körper ein. 
-                    In der Folge leiden viele Bürger*innen an Atemwegs- und HErz-Kreislauferkrankungen, die die Lebenserwartung reduzieren.
-                    (https://www.bafu.admin.ch/bafu/de/home/themen/luft/fachinformationen/auswirkungen-der-luftverschmutzung/auswirkungen-der-luftverschmutzung-auf-die-gesundheit.html)  
                     Trotz zahlreicher Maßnahmen und einem tendenziellen Rückgang der Schadstoffbelastung
-                    sind die Grenz- und Zielwerte, bei denen gesundheitliche Wirkungen ausgeschlossen werden 
-                    noch nicht erreicht. (https://www.umweltbundesamt.de/themen/luft/wirkungen-von-luftschadstoffen/wirkungen-auf-die-gesundheit#woher-stammen-die-schadstoffe-und-wie-wirken-sie-sich-auf-die-gesundheit-aus)
+                    sind die Grenz- und Zielwerte, bei denen gesundheitliche Wirkungen ausgeschlossen werden,
+                    noch nicht erreicht. 
                     Außerdem führt eine dauerhafte Lärmbelastung zur Beeinträchtigung des körperlichen, 
-                    seelischen und sozialen Wohlbefinden des Menschens, stört einen erholsamen Schlaf
-                    und kann Auswirkungen auf Stress und Nervosität haben, die zu Risikofaktoren für
-                    Herz-Kreislauferkrankungen zählen. (https://www.lfu.bayern.de/laerm/laerm_allgemein/wirkung_auf_menschen/index.html)
+                    seelischen und sozialen Wohlbefinden des Menschens und stört einen erholsamen Schlaf.
+                    Dies kann Auswirkungen auf Stress und Nervosität haben, die ebenso zu Risikofaktoren für
+                    Herz-Kreislauferkrankungen zählen. (BAFU, EEA, LfU Bayern, UBA)
                 </p> 
 
                 <p>
-                    Die Europäische Umweltagentur berichtet, dass Umweltverschmutzung für jeden zehnten vorzeitigen Todesfall in der EU verantwortlich ist. 
-                    Sie führt zu einer Vielzahl von Krankheiten wie Atemwegs- und Herz-Kreislauf-Erkrankungen. 
-                    Trotz Maßnahmen zur Reduzierung der Schadstoffbelastung bleiben die Grenzwerte für gesundheitliche Sicherheit unerreicht. 
-                    Zusätzlich beeinträchtigt anhaltender Lärm das körperliche und seelische Wohlbefinden, stört den Schlaf und erhöht das Risiko für Herz-Kreislauf-Erkrankungen.
+                Betroffen sind vor allem Menschen mit vorgeschädigten Atemwegen, Kinder und Personen in fortgeschrittenem
+                Alter. 
+                Aufgrund der potentiellen gesundheitlichen Auswirkungen für den menschlichen Körper, ist das Messen und 
+                und Überwachen von Schadstoff-Belastungen essentiell und in unserem aller Interesse. 
+
+                Neben politischen Maßnahmen kann jeder von uns versuchen einen Beitrag zur Reduzierung 
+                der Luftverschmutzung zu leisten.
+                Wichtigster Anknüpfungspunkt ist dabei das Thema Verkehr. 
+                - Wo können wir die Nutzung des Autos durch andere Verkehrsmittel wie das Rad, 
+                den öffentlichen Nahverkehr oder zu Fuß ersetzen? 
+                - Ist die Reise mit dem Flugzeug wirklich notwendig oder gibt es 
+                vielleicht auch ein anderes Reiseziel, das mich interessiert und wo 
+                ich mit anderen Verkehrsmitteln hinkomme? 
+                - Und wie ernähre ich mich? Kann ich zum Beispiel Transportwege vermindern, 
+                indem ich regionaler und/oder saisonaler einkaufe? Gibt es die Gurke vielleicht auch 
+                ohne Plastikverpackung? 
+                - Brauche ich immer das neuste technische Gerät? Oder funktioniert vielleicht
+                mein altes Smartphone auch noch einwandfrei? 
+                Es ist schwierig, wenn nicht sogar unmöglich, in allen Bereichen des Lebens 
+                die Emission von Schadstoffen zu reduzieren oder gar zu unterbinden. Dennoch
+                ist es relevant, dass wir bewusst in unsere alltäglichen 
+                Entscheidungen auch die einhergehenden Emissionen von Schadstoffen bedenken. 
                 </p> 
 
                 <p>
-                    Ausgangspunkt war eine weiße, leere Website, die nach und nach mit Daten, Informationen und Features gefüllt 
-                    wurde. 
+                Ausgangspunkt des Projekts war eine weiße, leere Website, die nach und nach mit Daten, Informationen und Features gefüllt 
+                wurde. Dabei wurden Daten von verschiedenen Quellen verwendet, in QGIS aufbereitet und mithilfe des GeoServers für die Webapplikation 
+                bereit gestellt. Nach und nach kamen Features, wie der Ebenenbaum, die Suchleiste, die FeatureInfo-Abfrage inklusive der Graphen und weitere Werkzeuge hinzu. 
+                Die Webapplikation kann zum jetzigen Zeitpunkt keinesfalls als abgeschlossen angesehen werden, 
+                sondern könnte theoretisch stetig mit weiteren Daten (wie den Standorten von Kindergärten o.ä.) 
+                und Features ergänzt werden. 
 
-                    Die Webapplikation kann keinesfalls 
-                    als abgeschlossen angesehen werden, sondern könnte theoretisch stetig 
-                    mit weiteren Daten (wie den Standorten von Kindergärten o.ä.) und weiteren Features ergänzt werden. 
+                 </p>
 
-                    Hinweis zu den Daten: 
-                    In Bezug auf die Rasterdaten ist daraufhinzuweisen, dass diese auf die Nationalgrenzen von Deutschland
-                    zugeschnitten wurden und es aus diesem Grund in Randbereichen zu fehlenden Werten und Lücken kommen kann.
-                    Die flächendeckenden Daten zur Verteilung der Schadstoffbelastung in Deutschland sind interpoliert, weshalb
-                    es zu kleinräumigen Abweichungen innerhalb der Rasterzellen kommen kann. Außerdem standen nur für die 
-                    vier Schadstoffe NO2, NOx, PM10, PM2.5 jährliche Mittelwerte zur Verfügung. Ebenso gelten die Schadstoffbe-
-                    lastungen an den verschiedenen Messstationen vor allem für diese bestimmte geographische Position und 
-                    es kann kleinräumig je nach Lage zu Abweichungen kommen. Die ausgegebenen Werte für die schadstoffbelastung 
-                    kann zwischen den Raster- und Vectordaten leicht abweichen, da die Rasterdaten eine Interpolation an Werten 
-                    darstellen.
+                 <p>
+                 Hinweis zu den Daten: 
+                In Bezug auf die Rasterdaten ist daraufhinzuweisen, dass diese auf die Nationalgrenzen von Deutschland
+                zugeschnitten wurden und es aus diesem Grund in Randbereichen zu fehlenden Werten und Lücken kommen kann.
+                Die flächendeckenden Daten zur Verteilung der Schadstoffbelastung in Deutschland sind interpoliert, weshalb
+                es in der Realität zu kleinräumigen Abweichungen innerhalb der Rasterzellen kommen kann. Außerdem standen nur für die 
+                vier Schadstoffe NO2, NOx, PM10, PM2.5 jährliche Mittelwerte zur Verfügung. Ebenso gelten die Schadstoffbe-
+                lastungen an den verschiedenen Messstationen für diese bestimmte geographische Position und 
+                es kann kleinräumig je nach Lage zu Abweichungen kommen. Die ausgegebenen Werte für die Schadstoffbelastung 
+                kann zwischen den Raster- und Vektordaten leicht abweichen, da die Rasterdaten eine Interpolation an Werten 
+                darstellen. 
+
+                 </p>
+
+                 <p>
+                  <i> AOK:</i>  https://www.aok.de/pk/magazin/nachhaltigkeit/wasser-luft/das-koennen-sie-gegen-luftverschmutzung-tun/ <br></br>
+                  <i>  BAFU: </i>  https://www.bafu.admin.ch/bafu/de/home/themen/luft/fachinformationen/auswirkungen-der-luftverschmutzung/auswirkungen-der-luftverschmutzung-auf-die-gesundheit.html<br></br>
+                  <i> EEA: </i>  EEA https://www.eea.europa.eu/de<br></br>
+                  <i> LfU Bayern: </i>  https://www.lfu.bayern.de/laerm/laerm_allgemein/wirkung_auf_menschen/index.html<br></br>
+                  <i> UBA: </i>  https://www.umweltbundesamt.de/themen/luft/wirkungen-von-luftschadstoffen/wirkungen-auf-die-gesundheit#woher-stammen-die-schadstoffe-und-wie-wirken-sie-sich-auf-die-gesundheit-aus<br></br>
                  </p>
                 
         </Modal>

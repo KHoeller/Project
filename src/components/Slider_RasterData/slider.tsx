@@ -22,13 +22,13 @@ export default function RasterSlider({ group, groupName, checked, initialValue, 
     const [previousIndex, setPreviousIndex] = useState<number | null>(0);
 
     //// mit diesem UseEffect kann man sich in der Console ausgeben lassen, wann die function gerendert wird (oder ob sie immer nur updated wird)
-        useEffect(() => {
-            console.log('mount');
+        // useEffect(() => {
+        //     console.log('mount');
 
-            return () => {
-                console.log('unmount')
-            };
-        }, []);
+        //     return () => {
+        //         console.log('unmount')
+        //     };
+        // }, []);
     ////
     
     useEffect(() => {
@@ -94,7 +94,7 @@ export default function RasterSlider({ group, groupName, checked, initialValue, 
 
     return (
         <div>
-            <h4 style={{ fontWeight: 'normal' }}> Jahresmittelwerte {groupName} <br/> von {minYear} bis {maxYear} </h4>
+            <h4 style={{ fontWeight: 'normal' }}> Jahresmittelwerte (µg/m3) {groupName} von {minYear} bis {maxYear} </h4>
             <Slider
                 value={inputValue !== null ? inputValue : 0}
                 onChange={handleChange}

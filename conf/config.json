@@ -67,7 +67,7 @@
             "groupName": "Gesundheitsdaten",
             "info": true,
             "infoTextTitle": "Informationen zu den verwendeten Gesundheitsdaten",
-            "infoText": "Die Daten zu den Standorten der Krankenhäuser wurden mithilfe der 'overpass turbo' Abfrage von OSM ermittelt, indem nach 'hospitals' in Deutschland gesucht wurde. Es wurden anschließend alle Objekte mit Typ Polygon oder Point berücksichtigt. Die Daten können nicht als vollständig angesehen werden...., \n die Krankenhaus-Standorte sind aus OpenStreetMap [overpass turbo: https://overpass-turbo.eu/]",
+            "infoText": "Die Daten zu den Standorten der Krankenhäuser wurden mithilfe der 'overpass turbo' Abfrage von OSM ermittelt, indem nach 'hospitals' in Deutschland gesucht wurde. Es wurden anschließend alle Objekte mit Typ Polygon oder Point berücksichtigt. <br></br> Die Daten können nicht als vollständig angesehen werden...., die Krankenhaus-Standorte sind aus OpenStreetMap [overpass turbo: https://overpass-turbo.eu/]",
             "attribution":"<a href=\"https://overpass-turbo.eu/\">overpass turbo OSM. </a> <a href=\"https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">EEA GeospatialDataCatalogue.</a>",
             "layers": [
                 {
@@ -78,20 +78,12 @@
                     "visible": false,
                     "queryable": true,
                     "layerType": "vector"
-                }, {
-                    "name": "Hospitals_DE",
-                    "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
-                    "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Standorte Krankenhäuser",
-                    "visible": false,
-                    "queryable": true,
-                    "layerType": "vector"
-                },
+                }, 
                 {
                     "name": "Hospitals_2_dach",
                     "url": "http://localhost:8080/geoserver/Umwelt-Gesundheit/wms",
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
-                    "title": "Standorte Krankenhäuser_Dach",
+                    "title": "Standorte Krankenhäuser",
                     "visible": false,
                     "queryable": true,
                     "layerType": "vector"
@@ -292,7 +284,9 @@
             "enableSlider": true,
             "info": true,
             "infoTextTitle": "Informationen zu Feinstaub (PM10)",
-            "infoText": "Die Daten stammen von....",
+            
+            
+            "infoText": "<h4>Empfohlener Richtwert: WHO: 15 μg/m3; EU: 40 μg/m3 (Stand: 2005)</h4> In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub (PM10) beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen Verbrennungsvorgänge, vor allem des Verkehrs. Zu geringerem Anteil hat auch die Landwirtschaft Einfluss auf die Belastung. Feinstaub kann sowohl direkt emittiert werden als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> In menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei Belastung über längeren Zeitraum auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System , der Stoffwechsel und das Nervensystem. Außerdem wird die Sterblichkeit erhöht. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern ist noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) in Form eines 1-Quadratkilometer-Gitter für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten und stammen von der European Environment Agency (EEA).",
             "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
             "layers": [
                 {
@@ -811,7 +805,7 @@
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
                     "title": "Stickstoffdioxid-Belastung in 2021",
                     "queryable": true,
-                    "visible": true,
+                    "visible": false,
                     "layerType": "vector"
                 }
             ]
@@ -848,6 +842,7 @@
                     "urlLegend": "http://localhost:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
                     "title": "Feinstaub-Belastung in 2021",
                     "queryable": true,
+                    "visible": true,
                     "layerType": "vector"
                 }
             ]

@@ -3,7 +3,7 @@
 // imports from OSM 
 import Map from 'ol/Map';   
 import View from 'ol/View.js';
-import {Attribution, ScaleLine, defaults as defaultControls} from 'ol/control.js';
+import { ScaleLine, defaults as defaultControls} from 'ol/control.js';
 
 import React, { useMemo, useState } from 'react';
 
@@ -14,13 +14,14 @@ import { mapView } from './conf/config.json';
 
 import './General.css';
 
+import {Vector as VectorSource} from 'ol/source.js';
+import {Vector as VectorLayer} from 'ol/layer.js';
+
 // import Components 
 import MapComp from './src/components/Map/Map';
 import FeatureInfo from './src/components/FeatureInfo/featureInfoDrawer';
 import Sidebar from './src/components/Sidebar/sidebar';
-import Baseboard from './src/components/Baseboard/baseboard';
 import NominatimSearch from './src/components/Search/search';
-import GeolocationComp from './src/components/Geolocation/geolocation';
 
 
 export default function App () {
@@ -42,6 +43,23 @@ export default function App () {
         });
     }, [scaleControl]) 
 
+
+    // add Vector Layer for drawing/measurement
+    const source = new VectorSource();
+
+    const vector = new VectorLayer({
+    source: source,
+        style: {
+        'fill-color': 'rgba(255, 255, 255, 0.2)',
+        'stroke-color': '#ffcc33',
+        'stroke-width': 2,
+        'circle-radius': 7,
+        'circle-fill-color': '#ffcc33',
+        },
+    });
+
+    map.addLayer(vector)
+
     
 
     // const [isLengthButtonClicked, setIsLengthButtonClicked] = useState(false);
@@ -58,7 +76,7 @@ export default function App () {
             <NominatimSearch map={map}/>
             <MapComp map={map} />
             <Sidebar map={map}/>
-            <FeatureInfo map={map} />         
+            <FeatureInfo map={map} source={source}/>  
 
         </>
     )
