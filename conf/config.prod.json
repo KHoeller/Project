@@ -1,0 +1,830 @@
+{
+    "mapView": {
+        "center": [1141371, 6735169],
+        "zoom": 5
+    },
+
+    "groups": [
+        {
+            "groupName": "Landbedeckung",
+            "enableSlider": false,
+            "info": true,
+            "infoTextTitle": "Information zu den Daten der Landbedeckung",
+            "infoText": "Für die Landbedeckung wurden die sogenannten 'CORINE Land Cover'-Daten aus dem <a href=\"https://land.copernicus.eu/en/products/corine-land-cover/clc2018\">Copernicus Land Monitoring Service</a> verwendet. Diese wurden von der EEA publiziert und haben den Geltungsbereich von großen Teilen Europas. Die Originaldaten zeigen den Stand der Landbedeckung bzw. Landnutzung aus dem Jahr 2018. Die Klassifizierung der Landnutzung erfolgt in 44 thematischen Klassen auf Basis von Satellitenbildern. Für die vorliegende Webapplikation wurden die Daten auf Deutschland zugeschnitten und nur die Klassen zu Waldflächen, Wasserflächen und landwirtschaftlichen Flächen berücksichtigt. ",
+            "attribution": "<a href=\"https://land.copernicus.eu/en/products/corine-land-cover/clc2018\">Copernicus Land Monitoring Service.</a>",
+            "layers": [
+                {
+                    "name": "Agriculture_DE",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Landwirtschaftliche Flächen",
+                    "visible": false,
+                    "queryable": false,
+                    "layerType": "vector"
+                }, {
+                    "name": "Forest_DE",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Waldflächen",
+                    "visible": false,
+                    "queryable": false,
+                    "layerType": "vector"
+                }, {
+                    "name": "Water_bodies_DE",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Wasserflächen",
+                    "visible": false,
+                    "queryable": false,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        
+        {
+            "groupName": "Bevölkerungsdaten",
+            "info": true,
+            "infoTextTitle": "Informationen zu den verwendeten Bevölkerungsdaten",
+            "infoText": "Die Daten stammen vom <a href=\"https://gdz.bkg.bund.de//\">Bundesamt für Kartographie und Geodäsie</a> (BKG) und sind auf dem Stand vom 31.12.2021. Der <a href=\"https://gdz.bkg.bund.de/index.php/default/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">Originaldatensatz</a>  enthält Informationen zu den Verwaltungsgebieten auf verschiedenen hierarchischen Verwaltungsebenen für die Bundesrepublik Deutschland. Die hier vorliegenden Daten basieren auf dem Layer der Gemeinden. Mithilfe der angegebenen Einwohnerzahl (EWZ) (Stand: 31.12.2021) und der Katasterfläche  (KFL in km2) wurde darauf aufbauend die Einwohnerdichte (Ew/km2) für jede Gemeinde ermittelt. ",
+            "attribution":"<a href=\"https://gdz.bkg.bund.de/index.php/default/digitale-geodaten/verwaltungsgebiete/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">BKG.</a>",
+            "layers": [
+                {
+                    "name": "EwDichte",
+                    "title": "Einwohnerdichte (Ew/km²)",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector",
+                    "info": "Lorem ipsum…"
+                    
+                    
+                }
+            ]
+        },
+        
+        {
+            "groupName": "Gesundheitsdaten",
+            "info": true,
+            "infoTextTitle": "Informationen zu den verwendeten Gesundheitsdaten",
+            "infoText": "Aufgrund der zahlreichen Gesundheitsrisiken, die mit einer anhaltenden Luftverschmutzung und Lärmbelästigung einhergehen, ist es relevant die Standorte und Erreichbarkeit von Krankenhäusern zu betrachten. <br></br> <b>Zu den Daten:</b> <br>   - Standorte Krankenhäuser: <br> Die Daten zu den Standorten der Krankenhäuser wurden mithilfe der <a href=\"https://overpass-turbo.eu//\">'overpass turbo'</a>-Abfrage von OpenStreetMap gewonnen. Dafür wurde nach 'amenity=hospital' in Deutschland gesucht (Stand: Februar 2024). Das Ergebnis der Abfrage wurde anschließend in QGIS bearbeitet, um alle Standorte, die entweder als Typ Polygon oder als Typ Point gekennzeichnet sind, zu berücksichtigen. Da OpenStreetMap ein OpenSource-Projekt ist und die Daten von einer Community erhoben werden, besteht keine Garantie für Vollständigkeit. <br>    - Fahrtzeit bis zum nächsten Krankenhaus: <br> Der <a href=\"https://sdi.eea.europa.eu/catalogue/srv/api/records/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">originale Datensatz</a> stammt von der European Environment Agency (EEA). Er beinhaltet die mittlere Reisezeit (min) zum nächsten Krankenhaus im Jahr 2020 auf europäischer Ebene und wurde auf die Grenzen Deutschlands zugeschnitten. Die mittlere Reisezeit ist pro Kreis angegeben. Die Daten wurden von Eurostat gewonnen und berücksichtigt die Lage der Krankenhäuser und das Straßennetz nach TomTom TeleAtlas road network. Es wird darauf hingewiesen, dass die Zugänglichkeit auch über Grenzen hinweg kalkuliert wurde und dementsprechend das nächste Krankenhaus nicht zwangsläufig in Deutschland liegen muss. ",
+            "attribution":"<a href=\"https://overpass-turbo.eu/\">overpass turbo OSM. </a> <a href=\"https://sdi.eea.europa.eu/catalogue/srv/eng/catalog.search#/metadata/de17ed31-7474-4ff5-8f8c-bdd50c690a0a\">EEA GeospatialDataCatalogue.</a>",
+            "layers": [
+                {
+                    "name": "TravelTime",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Fahrtzeit bis zum nächsten Krankenhaus (min)",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector"
+                }, 
+                {
+                    "name": "Hospitals_2_dach",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Standorte Krankenhäuser",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        {
+            "groupName": "Verwaltungsgrenzen",
+            "info": true,
+            "infoTextTitle": "Informationen zu den verwendeten Gemeindegrenzen und der Nationalgrenze",
+            "infoText":"Die Daten stammen vom <a href=\"https://gdz.bkg.bund.de//\">Bundesamt für Kartographie und Geodäsie</a> (BKG) und sind auf dem Stand vom 31.12.2021. Der <a href=\"https://gdz.bkg.bund.de/index.php/default/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">Originaldatensatz</a>  enthält Informationen zu den Verwaltungsgebieten auf verschiedenen hierarchischen Verwaltungsebenen für die Bundesrepublik Deutschland. <br> Für die Webapplikation wurden lediglich der Layer der Gemeinden verwendet, um die Gemeindegrenzen zu zeigen. Mithilfe der QGIS-Funktion 'dissolve' konnte damit auch die Außengrenze Deutschlands ermittelt werden. ",
+            "attribution":"<a href=\"https://gdz.bkg.bund.de/index.php/default/verwaltungsgebiete-1-250-000-mit-einwohnerzahlen-stand-31-12-vg250-ew-31-12.html\">BKG</a> dl-de/by-2-0.",
+            "layers": [
+                {
+                    "name": "Gemeindegrenzen",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Gemeindegrenzen",
+                    "visible": false,
+                    "queryable": false,
+                    "layerType": "vector"
+                }, {
+                    "name": "Nationalgrenze_DE",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Nationalgrenze",
+                    "visible": true,
+                    "queryable": false,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        {
+            "groupName": "Flächendeckende Stickstoffoxidbelastung (NOx)",
+            "legendGroupName": "NOx", 
+            "enableSlider": true,
+            "info": true,
+            "infoTextTitle": "Informationen zu Stickstoffoxiden (NOx)",
+            "infoText": "Stickstoffoxide gelten als Sammelbezeichnung für gasförmige Verbindungen bestehend aus Stickstoff und Sauerstoff. Dazu zählen in erster Linie Stickstoffmonoxid (NO) und Stickstoffdioxid (NO2). Stickstoffoxide können zu einer Vielzahl negativer Umweltwirkungen führen. Zusammen mit Kohlenwasserstoff sind sie für die sommerliche Ozonbildung verantwortlich und tragen zur Feinstaubbelastung bei. <br> Anthropogene Hauptemittenten sind Verbrennungsmotoren und Feuerungsanlagen für Kohle, Öl, Gas, Holz und Abfall. In Ballungsgebieten ist der Straßenverkehr eine der bedeutendsten Quellen. Eine dauerhafte bzw. jahrzehntelange Belastung kann das Sterberisiko an Herz-Kreislauferkrankungen erhöhen. Für weitere Informationen zu Stickstoffdioxid und den Gesundheitsrisiken, schaue Sie beim Layer 'Messstationen Stickstoffdioxid (NO2)' oder 'Flächendeckende Stickstoffdioxidbelastung (NO2)'. Im Vergleich zu Stickstoffdioxid, reagiert Stickstoffmonoxid in geringerem Maße mit dem Lungengewebe, weshalb das Gas besser mit dem Blut im Körper verteilt werden kann. Dies hat Auswirkung auf die Blutgefäßspannung, sodass es zum Beispiel zu einer Gefäßerweiterung kommen kann. Darüber hinaus können Regelungsmechanismen des Körpers durch die externe Aufnahme beeinflusst werden, da es sich bei Stickstoffmonoxid auch um einen körpereigen gebildeten Botenstoff handelt. (<a href=\"https://www.umweltbundesamt.de/service/uba-fragen/wie-wirken-sich-stickstoffoxide-auf-die-menschliche\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten zeigen die interpolierte Jahresdurchschnittskonzentration (µg/m3) von NOx für ein 2-Quadratkilometer-Gitter (bis 2017) und ein 1-Quadratmeter-Gitter (ab 2018) für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa und wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).  ",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
+            "layers": [
+                {
+                    "name": "R_NOx_2014",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2014",
+                    "year": 2014,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2015",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2015",
+                    "year": 2015,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2016",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2016",
+                    "year": 2016,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2017",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2017",
+                    "year": 2017,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2018",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2018",
+                    "year": 2018,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2020",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2020",
+                    "year": 2020,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NOx_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NOx 2021",
+                    "year": 2021,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }
+            ]
+        }, 
+        {
+            "groupName": "Flächendeckende Stickstoffdioxidbelastung (NO2)",
+            "legendGroupName": "NO2", 
+            "enableSlider": true,
+            "info": true,
+            "infoTextTitle": "Informationen zu Stickstoffdioxid (NO2)",
+            "infoText":  "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 10 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 40 μg/m3 (Stand: 2008); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 20 μg/m3 (Stand: 2022) </h4> Stickstoffdioxid ist ein gesundheitsschädliches Reizgas, das nach Inhalation problematische Reaktionen im Körper auslösen und zu Funktionsstörungen und entzündlichen Prozessen im Atemtrakt führen kann. In der Folge kann es zu Atemnot, Husten, Bronchitis und zur Lungenfunktionsminderung kommen. Bei wiederholtem Auftreten lassen sich chronische Atemwegs- und Lungenerkrankungen nicht ausschließen. <br> Freigesetzt wird das Gas vor allem bei Verbrennungsprozessen in Anlagen bzw. bei der Energieerzeugung sowie in der Landwirtschaft. In Deutschland zählen zu den anthropogenen Hauptemissionsquellen der Verkehr und die (Metall-, Chemie-) Industrie. <br> Stickstoffdioxid fördert die atmosphärischen Bildung von bodennahen Ozon und Feinstaub, die weitere gesundheitsschädliche Auswirkungen auf den menschlichen Körper haben können. (<a href=\"https://www.umwelt.nrw.de/themen/umwelt/umwelt-und-gesundheit/luft/luftschadstoffe-und-ihre-gesundheitliche-wirkung\">MUNV NRW</a>, <a href=\"https://www.bmuv.de/themen/luft/faktencheck-zu-messstellen-stickstoffdioxid-und-luftschadstoffe\">BMUV</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von NO2 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
+            "layers": [
+                {
+                    "name": "R_NO2_2014",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2014",
+                    "year": 2014,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2015",
+                    "title": "NO2 2015",
+                    "year": 2015,
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2016",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2016",
+                    "year": 2016,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2017",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2017",
+                    "year": 2017,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2018",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2018",
+                    "year": 2018,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2019",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2019",
+                    "year": 2019,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2020",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2020",
+                    "year": 2020,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_NO2_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "NO2 2021",
+                    "year": 2021,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }
+            ]
+        },
+        
+        {
+            "groupName": "Flächendeckende Feinstaubbelastung (PM2.5)",
+            "legendGroupName": "PM2.5", 
+            "enableSlider": true,
+            "info": true,
+            "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
+            "infoText": "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 5 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 25 μg/m3 (Stand 2008);  <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 10 μg/m3 (Stand: 2022)</h4> Es handelt sich um Feinstaub mit einem Durchmesser von weniger als 2,5 Mikrometer, der vor allem aufgrund seiner geringen Größe ein Gesundheitsrisiko darstellt. Ebenso wie bei PM10 wird der meiste Feinstaub durch Verbrennungsvorgänge im Straßenverkehr freigesetzt. Weitere Emissionen entstehen bei der Herstellung von Metallen und mineralischen Produkten, durch Gewerbe und Handel sowie in der Landwirtschaft. Genauso wie PM10 kann PM2.5 entweder direkt emittiert oder aus anderen Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, gebildet werden. <br> Die besonders kleine Partikelgröße führt dazu, dass die Teilchen tiefer in unseren Körper, vor allem in unsere Atemwege, eindringen können und dort länger verbleiben. Dadurch kann es zu Schäden an der Lunge kommen. Herz-Kreislauf- und Atemwegserkrankungen können die Folge sein. (<a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm25#-was-ist-feinstaub\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM2.5 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
+            "layers": [
+                {
+                    "name": "R_PM25_2007",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2007",
+                    "year": 2007,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2008",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2008",
+                    "year": 2008,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2010",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2010",
+                    "year": 2010,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2011",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2011",
+                    "year": 2011,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2012",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2012",
+                    "year": 2012,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2013",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2013",
+                    "year": 2013,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2014",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2014",
+                    "year": 2014,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2015",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2015",
+                    "year": 2015,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2016",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2016",
+                    "year": 2016,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2017",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2017",
+                    "year": 2017,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2018",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2018",
+                    "year": 2018,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2019",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2019",
+                    "year": 2019,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2020",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2020",
+                    "year": 2020,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM25_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM2.5 2021",
+                    "year": 2021,
+                    "visible":false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }
+            ]
+        },
+        {
+            "groupName": "Flächendeckende Feinstaubbelastung (PM10)",
+            "legendGroupName": "PM10", 
+            "enableSlider": true,
+            "info": true,
+            "infoTextTitle": "Informationen zu Feinstaub (PM10)",
+            
+            
+            "infoText": "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 15 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 40 μg/m3 (Stand: 2008); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 20 μg/m3 (Stand: 2022)</h4> In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub PM10 beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen heutzutage Verbrennungsvorgänge, vor allem des Verkehrs und zu geringerem Anteil auch die Landwirtschaft. <br> Feinstaub kann sowohl direkt emittiert als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> Im menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei längerfristiger Belastung auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System, der Stoffwechsel und das Nervensystem. Außerdem erhöht sich das Sterberisiko. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern befindet sich noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. <br> Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br> (Umweltbundesamt: <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Infos</a>, <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Gesundheitsrisiken</a>; EEA: <a href=\"https://www.eea.europa.eu/publications/europes-air-quality-status-2023/europes-air-quality-status2023\">Air quality status</a>)  <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) in Form eines 1-Quadratkilometer-Gitters für die jeweils angegebenen Jahre. Die Originaldaten gelten für ganz Europa, wurden für das Projekt auf die Grenzen von Deutschland zugeschnitten. Sie stammen von der <a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef\"> European Environment Agency</a> (EEA).",
+            "attribution": "<a href=\"https://www.eea.europa.eu/en/datahub/datahubitem-view/82700fbd-2953-467b-be0a-78a520c3a7ef?activeAccordion=1087824%2C1087826%2C1087827%2C1084832\">EEA Datahub.</a>",
+            "layers": [
+                {
+                    "name": "R_PM10_2006",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2006",
+                    "year": 2006,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2007",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2007",
+                    "year": 2007,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2008",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2008",
+                    "year": 2008,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2009",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2009",
+                    "year": 2009,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2010",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2010",
+                    "year": 2010,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2011",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2011",
+                    "year": 2011,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2012",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2012",
+                    "year": 2012,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2013",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2013",
+                    "year": 2013,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2014",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2014",
+                    "year": 2014,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2015",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2015",
+                    "year": 2015,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2016",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2016",
+                    "year": 2016,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2017",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2017",
+                    "year": 2017,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2018",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2018",
+                    "year": 2018,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+            
+                }, {
+                    "name": "R_PM10_2019",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2019",
+                    "year": 2019,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2020",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2020",
+                    "year": 2020,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }, {
+                    "name": "R_PM10_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "PM10 2021",
+                    "year": 2021,
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "raster"
+                }
+            ]
+        },
+
+        {
+            "groupName": "Lärmbelastung",
+            "info": true,
+            "infoTextTitle": "Informationen zu den verwendeten Lärmdaten",
+            "infoText": "Die Daten stammen vom <a href=\"https://gis.uba.de/maps/resources/apps/laermkartierung/\">Umweltbundesamt</a> und werden in die Webapplikation als WMS-Dienst eingeladen. Die Lärmbelastung wird für die verschiedenen Lärmquellen Straßen-, Schienen- und Luftverkehr sowie Industrie und Häfen dargestellt.  Dabei werden Hauptverkehrsstraßen mit einem Verkehrsaufkommen von mehr als 3 Millionen Kraftfahrzeugen pro Jahr, Haupteisenbahnstrecken mit mehr als 30.000 Zügen pro Jahr und Großflughäfen mit mehr als 50.000 Bewegungen pro Jahr berücksichtigt. <br> Zu dem Begriff Ballungsräume zählen alle Städte mit mehr als 100.000 Einwohnern. In den Daten mit dem Zusatz „Hauptlärmquellen“ wurde der Umgebungslärm innerhalb und außerhalb von Ballungsräumen für besonders relevante Lärmquellen ermittelt. Im Vergleich dazu sind die Daten innerhalb der Ballungsräume etwas detaillierter. <br> Es wird zwischen Nachtlärmindex und Tag-Abend-Nacht-Lärmindex unterschieden. Ersteres beschreibt die durchschnittliche Lärmbelästigung zwischen 22 und 6 Uhr in der Nacht und letzteres die durchschnittliche allgemeine Lärmbelästigung über einen Tag, 24 Stunden. Für die Berechnung von Lärmindizes gibt es EU-weite Berechnungsverfahren, um die Vergleichbarkeit der Ergebnisse zu ermöglichen. Weitere Informationen zur  Lärmkartierung können in <a href=\"https://www.lai-immissionsschutz.de/documents/lai-hinweise-laermkartierung-2022_1654006649.pdf\" >LAI-Hinweise zur Lärmkartierung</a> (Stand: 2022) nachgeschaut werden. <br> (<a href=\"https://www.eba.bund.de/SharedDocs/FAQs/DE/Laerm_an_Schienenwegen/faq11.html/\">Eisenbahn-Bundesamt</a>, <a href=\" https://www.umweltbundesamt.de/themen/laerm/umgebungslaermrichtlinie/laermkarten\">Umweltbundesamt Lärmkarte</a>)",
+            "attribution": "<a href=\"https://gis.uba.de/maps/resources/apps/laermkartierung/index.html?lang=de&vm=2D&l=4200%7Bt%3A40%7D%284210%7Bt%3A0%7D%29%2C5000%2C5200%7Bt%3A40%7D%285210%7Bt%3A0%7D%29%2C6200%7Bt%3A40%7D%286210%7Bt%3A0%7D%29%2C%7E7200%7Bt%3A40%7D%287210%7Bt%3A0%7D%29&s=39245.53728171658&r=0&c=788758.6252443913%2C6574827.006129956\">Umweltbundesamt.</a>",
+            "layers": [
+                {
+                    "name": "8",
+                    "title": "Industrie & Häfen: Nachtlärmindx innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=8",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "9",
+                    "title": "Industrie & Häfen: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=9",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "12",
+                    "title": "Luftverkehr: Nachtlärmindx innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=12",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "13",
+                    "title": "Luftverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=13",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "15",
+                    "title": "Luftverkehr: Nachtlärmindx von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=15",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "16",
+                    "title": "Luftverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=16",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "19",
+                    "title": "Schienenverkehr: Nachtlärmindx innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=19",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "20",
+                    "title": "Schienenverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=20",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "22",
+                    "title": "Schienenverkehr: Nachtlärmindex von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=22",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "23",
+                    "title": "Schienenverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=23",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "26",
+                    "title": "Straßenverkehr: Nachtlärmindx innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=26",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "27",
+                    "title": "Straßenverkehr: Tag-Abend-Nacht-Lärmindex innerhalb der Ballungsräume",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=27",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "29",
+                    "title": "Straßenverkehr: Nachtlärmindex von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=29",
+                    "visible": false,
+                    "queryable": false
+                    
+                },
+                {
+                    "name": "30",
+                    "title": "Straßenverkehr: Tag-Abend-Nacht-Lärmindex von Hauptlärmquellen",
+                    "url": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer",
+                    "urlLegend": "https://datahub.uba.de/server/services/VeLa/LK/MapServer/WMSServer?request=GetLegendGraphic%26version=1.3.0%26format=image/png%26layer=30",
+                    "visible": false,
+                    "queryable": false
+                    
+                }
+            ]
+
+        },
+        {
+            "groupName": "Messstationen Ozon (O3)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Ozon (O3)",
+            "infoText": "Ozon ist ein farbloses und giftiges Reizgas und ein wichtiges Spurengas in der Atmosphäre. Die natürliche Ozonschicht in der Atmosphäre schützt die Erde vor schädlicher Ultraviolettstrahlung der Sonne. Dennoch kann das Gas die Gesundheit des Menschen schädigen. <br> Ozon wird nicht direkt durch Emittenten freigesetzt, sondern bodennah durch komplexe photochemische Prozesse aus anderen Stoffen wie beispielsweise Stickstoffoxiden gebildet. Diese sogenannten Vorläuferstoffe stammen zu großen Teilen aus anthropogenen Quellen. Eine hohe Lufttemperatur in Zusammenhang mit intensiver Sonnenstrahlung begünstigt die bodennahe Ozonbildung. <br> Im menschlichen Körper kann es durch eine erhöhte Ozonkonzentration zu einer verminderten Lungenfunktion, Reizung der Atemwege und Atemwegsbeschwerden kommen. Bei körperlicher Anstrengung kann das Ozon tiefer in das Lungengewebe eindringen und dort Entzündungen auslösen.  Die potentiell gesundheitlichen Auswirkungen werden demnach verstärkt und können sich in der Regel schlechter zurückbilden. Bei erhöhten Ozonwerten sollten deswegen insbesondere empfindliche und vorgeschädigte Personen zu bestimmten Uhrzeiten sportliche Aktivitäten im Freien vermeiden. <br> Auch für Pflanzen stellt eine längerfristig erhöhte Belastung eine Herausforderung dar. Es können Schäden an Blattorganen auftreten und das Pflanzenwachstum, die Ernteerträge und die Qualität der Produkte vermindert werden.  (Umweltbundesamt: <a href=\"https://www.umweltbundesamt.de/themen/luft/luftschadstoffe-im-ueberblick/ozon\">Info</a>, <a href=\"https://www.umweltbundesamt.de/daten/umwelt-gesundheit/gesundheitsrisiken-durch-ozon#gesundheitliche-wirkungen\"> Gesundheitsrisiken</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von O3 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_O3_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Ozon-Belastung in 2021",
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        }, 
+        {
+            "groupName": "Messstationen Kohlenmonoxid (CO)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Kohlenstoff (CO)",
+            "infoText": "Kohlenmonoxid ist ein farb-, geruch- und geschmackloses Gas. Es entsteht vor allem bei der unvollständigen Verbrennung von Brenn- und Treibstoffen. Hauptemisssionsquellen sind Kraftfahrzeuge, Industrieprozesse und Haushalte. In hoher Konzentration wirkt CO als starkes Atemgift. Kohlenmonoxid beeinträchtigt die Sauerstoffaufnahme und den Sauerstofftransport von Menschen und Tierren. Längere Belastungen mit geringer Konzentration können Auswirkungen auf das Zentralnervensystem und das Herz-Kreislauf-System haben. (<a href=\"https://www.lanuv.nrw.de/umwelt/umweltmedizin/wirkungen-von-luftschadstoffen/schadstoffe/kohlenmonoxid-co\">LANUV</a>, <a href=\"hhttps://www.umweltbundesamt.de/themen/luft/luftschadstoffe-im-ueberblick/kohlenmonoxid\"> Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von CO (mg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt. ",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_CO_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Kohlenmonoxid-Belastung in 2021",
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        },
+      
+        {
+            "groupName": "Messstationen Schwefeldioxid (SO2)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Schwefeldioxid (SO2)",
+            "infoText": "Schwefeldioxid ist ein farbloses, stechend riechendes, wasserlösliches Gas. Emissionen entstehen vor allem bei Verbrennungsvorgängen fossiler Energieträger wie Kohle und Öl. <br> Das Gas reizt die Schleimhäute und kann zu Augenreizungen und Atemwegsproblemen führen. Da die Konzentration in Deutschland deutlich unter dem empfohlenen Grenzwert zum Schutz der menschlichen Gesundheit liegt, sind in Deutschland dadurch entstehende Gesundheitsprobleme wenig zu befürchten. Allerdings kann Schwefeldioxid Pflanzen schädigen und durch Ablagerungen Böden und Gewässer versauern. (<a href=\"https://www.umweltbundesamt.de/themen/luft/luftschadstoffe-im-ueberblick/schwefeldioxid\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von SO2 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt. ",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_SO2_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Schwefeldioxid-Belastung in 2021",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        {
+            "groupName": "Messstationen Stickstoffdioxid (NO2)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Stickstoffdioxid Vector (NO2)",
+            "infoText": "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 10 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 40 μg/m3 (Stand: 2008); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 20 μg/m3 (Stand: 2022) </h4> Stickstoffdioxid ist ein gesundheitsschädliches Reizgas, das nach Inhalation problematische Reaktionen im Körper auslösen und zu Funktionsstörungen und entzündlichen Prozessen im Atemtrakt führen kann. In der Folge kann es zu Atemnot, Husten, Bronchitis und zur Lungenfunktionsminderung kommen. Bei wiederholtem Auftreten lassen sich chronische Atemwegs- und Lungenerkrankungen nicht ausschließen. <br> Freigesetzt wird das Gas vor allem bei Verbrennungsprozessen in Anlagen bzw. bei der Energieerzeugung sowie in der Landwirtschaft. In Deutschland zählen zu den anthropogenen Hauptemissionsquellen der Verkehr und die (Metall-, Chemie-) Industrie. <br> Stickstoffdioxid fördert die atmosphärischen Bildung von bodennahen Ozon und Feinstaub, die weitere gesundheitsschädliche Auswirkungen auf den menschlichen Körper haben können. (<a href=\"https://www.umwelt.nrw.de/themen/umwelt/umwelt-und-gesundheit/luft/luftschadstoffe-und-ihre-gesundheitliche-wirkung\">MUNV NRW</a>, <a href=\"https://www.bmuv.de/themen/luft/faktencheck-zu-messstellen-stickstoffdioxid-und-luftschadstoffe\">BMUV</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von NO2 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
+           
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_NO2_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Stickstoffdioxid-Belastung in 2021",
+                    "queryable": true,
+                    "visible": false,
+                    "layerType": "vector"
+                }
+            ]
+        },    
+        {
+            "groupName": "Messstationen Feinstaub (PM2.5)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Feinstaub (PM2.5)",
+            "infoText": "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 5 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 25 μg/m3 (Stand 2008);  <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 10 μg/m3 (Stand: 2022)</h4> Es handelt sich um Feinstaub mit einem Durchmesser von weniger als 2,5 Mikrometer, der vor allem aufgrund seiner geringen Größe ein Gesundheitsrisiko darstellt. Ebenso wie bei PM10 wird der meiste Feinstaub durch Verbrennungsvorgänge im Straßenverkehr freigesetzt. Weitere Emissionen entstehen bei der Herstellung von Metallen und mineralischen Produkten, durch Gewerbe und Handel sowie in der Landwirtschaft. Genauso wie PM10 kann PM2.5 entweder direkt emittiert oder aus anderen Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, gebildet werden. <br> Die besonders kleine Partikelgröße führt dazu, dass die Teilchen tiefer in unseren Körper, vor allem in unsere Atemwege, eindringen können und dort länger verbleiben. Dadurch kann es zu Schäden an der Lunge kommen. Herz-Kreislauf- und Atemwegserkrankungen können die Folge sein. (<a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm25#-was-ist-feinstaub\">Umweltbundesamt</a>) <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM2.5 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_PM2.5_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Feinstaub-Belastung in PM2.5 2021",
+                    "queryable": true,
+                    "visible": true,
+                    "layerType": "vector"
+                }
+            ]
+        },
+        {
+            "groupName": "Messstationen Feinstaub (PM10)",
+            "info": true,
+            "infoTextTitle": "Informationen zu Feinstaub (PM10)",
+            "infoText": "<h4>Empfohlener Richtwert: <a href=\"https://www.who.int/europe/de/publications/i/item/9789289056069\">WHO</a>: 15 μg/m3 (Stand: 2021); <br> <a href=\"https://eur-lex.europa.eu/legal-content/DE/TXT/PDF/?uri=CELEX:32008L0050&from=es\">EU</a>: 40 μg/m3 (Stand: 2008); <a href=\"https://www.bundestag.de/resource/blob/967604/d8777e662664192517228ec98b61f09e/20-16-197-C_Annette-Giersch.pdf\">Vorschlag EU</a>: 20 μg/m3 (Stand: 2022)</h4> In der Außenluft sind feste winzig kleine Teilchen, sogenannte Stäube, enthalten. Diese bleiben für eine gewisse Zeit in der Atmosphäre und sinken nicht unmittelbar zu Boden. Staub lässt sich je nach Größe in verschiedene Fraktionen einteilen. Feinstaub PM10 beinhalten Partikel, die einen Durchmesser von weniger als 10 Mikrometer haben. <br> In den vergangenen Jahrzehnten ist die Feinstaub-Emission in Deutschland deutlich zurückgegangen. Zu den anthropogenen Hauptemissionsquellen zählen heutzutage Verbrennungsvorgänge, vor allem des Verkehrs und zu geringerem Anteil auch die Landwirtschaft. <br> Feinstaub kann sowohl direkt emittiert als auch aus Stoffen, wie Schwefeldioxid, Stickstoffdioxid oder Ammonikak, in der Atmosphäre gebildet werden. <br> Im menschlichen Körper lösen Feinstaubpartikel Entzündungen und Stress aus, die bei längerfristiger Belastung auch zu Erkrankungen führen können. Betroffen sind besonders die Atemwege, das Herz-Kreislauf-System, der Stoffwechsel und das Nervensystem. Außerdem erhöht sich das Sterberisiko. Kinder, Menschen mit vorgeschädigten Atemwegen und ältere Personen sind besonders sensibel gegenüber einer erhöhten Feinstaub-Belastung. Die Lunge von Kindern befindet sich noch im Wachstum und kann durch die Belastung langfristig beeinträchtigt werden. <br> Im Rahmen einer Untersuchung hat die WHO festgestellt, dass es keine Feinstaubkonzentration gibt, die nicht zu gesundheitlichen Schäden führen kann. Aus diesem Grund sollte das Ziel eine weitmöglichste Minimierung der Belastung und damit der Gesundheitsrisiken sein. <br> (Umweltbundesamt: <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Infos</a>, <a href=\"https://www.umweltbundesamt.de/daten/luft/luftschadstoff-emissionen-in-deutschland/emission-von-feinstaub-der-partikelgroesse-pm10#emissionsentwicklung\">Gesundheitsrisiken</a>; EEA: <a href=\"https://www.eea.europa.eu/publications/europes-air-quality-status-2023/europes-air-quality-status2023\">Air quality status</a>)  <br></br> <b>Zu den Daten:</b> <br> Die Daten enthalten die Jahresdurchschnittskonzentration von PM10 (µg/m3) an den bestehenden Messstationen in Deutschland für das Jahr 2021. Sie stammen von der <a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics/\"> European Environment Agency</a> (EEA), die diese Daten auch für weitere Länder in Europa bereitstellt.",
+            "attribution":"<a href=\"https://www.eea.europa.eu/data-and-maps/dashboards/air-quality-statistics\">EEA Data.</a>",
+            "layers": [
+                {
+                    "name": "V_PM10_2021",
+                    "url": "https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms",
+                    "urlLegend": "https://umwegk.terrestris.de/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=15&STRICT=false&LAYER=",
+                    "title": "Feinstaub-Belastung PM10 in 2021",
+                    "visible": false,
+                    "queryable": true,
+                    "layerType": "vector"
+                }
+            ]
+        }
+        
+     
+        
+        
+       
+        
+            
+    ]
+
+   
+}

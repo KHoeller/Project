@@ -77,7 +77,7 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
                                             const properties = responseObject.features[0].properties;           // 
                                             const selectedAttributes = ['GRAY_INDEX',           // attributes that are interessting 
                                                                         'AQ Station Name', 
-                                                                        'Air Pollution Group',
+                                                                        // 'Air Pollution Group',
                                                                         'AirPollutionLevel',  
                                                                         'Unit Of Airpollution Level', 
                                                                         'GEN', 
@@ -85,19 +85,93 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
                                                                         'EWZ', 
                                                                         'NAME_LATN', 
                                                                         'Average_travel_time', 
-                                                                        'Code_18', 
+                                                                        // 'Code_18', 
                                                                         'name', 
                                                                         'addr:city',
                                                                         'addr:street']
 
+                                            // const layerAttributes: { attributeName: string, value: string }[] = []; // leerer Array 
+
+                                            // selectedAttributes.forEach(desiredAttribute => { // Schleife über die Liste der selectedAttributes
+                                            //     if (properties.hasOwnProperty(desiredAttribute)) { 
+                                            //         const value = properties[desiredAttribute]; // get Value of attribut 
+                                            //         layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` }); // push in array 
+                                            //     }
+                                            // });
+                                            
+                                            
+                                            ////
                                             const layerAttributes: { attributeName: string, value: string }[] = []; // leerer Array 
 
-                                            selectedAttributes.forEach(desiredAttribute => { // Schleife über die Liste der selectedAttributes
-                                                if (properties.hasOwnProperty(desiredAttribute)) { 
-                                                    const value = properties[desiredAttribute]; // get Value of attribut 
-                                                    layerAttributes.push({ attributeName: desiredAttribute, value: `${value}` }); // push in array 
+                                            selectedAttributes.forEach(desiredAttribute => {
+                                                if (properties.hasOwnProperty(desiredAttribute)) {
+                                                    let attributeName = desiredAttribute; // behalte den ursprünglichen Attributnamen
+                                                    let value = properties[desiredAttribute]; // Attributwert abrufen
+                                            
+                                                    // Hier kannst du die Attributnamen anpassen
+                                                    switch (desiredAttribute) {
+                                                        case 'Air Pollution Group':
+                                                            attributeName = 'Air Pollution Group';
+                                                            break;
+                                                        case 'AirPollutionLevel':
+                                                            attributeName = 'Schadstoffkonzentration';
+                                                            break;
+
+                                                        case 'GRAY_INDEX':
+                                                            attributeName = 'Schadstoffkonzentration (µg/m3)';
+                                                            break;
+
+                                                        case 'AQ Station Name':
+                                                            attributeName = 'Name Messstation';
+                                                            break;
+
+                                                        case 'Unit Of Airpollution Level':
+                                                            attributeName = 'Einheit Schadstoffkonzentration';
+                                                            break;
+
+                                                        case 'EW/KFL':
+                                                            attributeName = 'Einwohnerzahl pro Katasterfläche';
+                                                            break;
+
+                                                        case 'GEN':
+                                                            attributeName = 'Gemeinde';
+                                                            break;
+
+                                                        case 'EWZ':
+                                                            attributeName = 'Einwohnerzahl';
+                                                            break;
+
+                                                        case 'NAME_LATN':
+                                                            attributeName = 'Kreis';
+                                                            break;
+
+                                                        case 'Average_travel_time':
+                                                            attributeName = 'Durchschn. Fahrtzeit';
+                                                            break;
+
+                                                        case 'name':
+                                                            attributeName = 'Krankenhausname';
+                                                            break;
+
+                                                        case 'addr:city':
+                                                            attributeName = 'Stadt';
+                                                            break;
+
+                                                        case 'addr:street':
+                                                            attributeName = 'Straße';
+                                                            break;
+
+                                                        // Füge hier weitere Umbenennungen nach Bedarf hinzu
+                                                        default:
+                                                            // Für andere Attribute kannst du den Namen unverändert lassen
+                                                            break;
+                                                    }
+                                            
+                                                    // Füge das umbenannte Attribut in die Liste ein
+                                                    layerAttributes.push({ attributeName: attributeName, value: `${value}` });
                                                 }
                                             });
+                                            ////
 
                                             if (layerAttributes.length > 0) {
                                                 tempSelectedFeatureInfo.push({ layerName: title, attributes: layerAttributes, layerType: layerType });
@@ -108,6 +182,9 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
                                         console.log('my error is ', error);
                                         alert('Sorry, es ist ein Fehler aufgetreten');
                                     }
+
+
+                                   
                                 }
                             }
                         }
@@ -191,12 +268,16 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
             
             <Toolbar 
                 drawerVisible={drawerVisible} 
+
                 setInfoButtonClicked={setInfoButtonClicked} 
                 infoButtonClicked={infoButtonClicked} 
+
                 measureButtonClicked={measureButtonClicked} 
                 setMeasureButtonClicked={setMeasureButtonClicked}
+
                 areaButtonClicked={areaButtonClicked}
                 setAreaButtonClicked={setAreaButtonClicked}
+
                 locationButtonClicked={locationButtonClicked}
                 setLocationButtonClicked={setLocationButtonClicked}
             />

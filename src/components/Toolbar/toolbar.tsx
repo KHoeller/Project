@@ -132,7 +132,6 @@ export default function Toolbar (
                     pressedIcon={ <InfoCircleOutlined 
                         style={{ color: 'black'}}/>} 
                 /> 
-                {/* <ToggleButton/> */}
             </div>
            
         </>

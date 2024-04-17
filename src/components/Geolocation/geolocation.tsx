@@ -17,8 +17,11 @@ export type GeolocationCompProps = {
 
 
 export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompProps) {
-  const [tracking, setTracking] = useState(false);
+ 
   const [geolocation, setGeolocation] = useState<Geolocation | null>(null);
+  const [tracking, setTracking] = useState(false);
+  const [vectorLayer, setVectorLayer] = useState<VectorLayer | null>(null);
+  const [vectorSource, setVectorSource] = useState<VectorSource | null>(null);
 
   // console.log('map', map); // ist auch da
   // console.log('button',activeGeoloc);  // active prop wird richtig weitergegeben 
@@ -35,43 +38,22 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
   useEffect(() => {
 
     if (activeGeoloc) {
-
+      
+      setTracking(true);
+     
       const geolocation = new Geolocation({
         trackingOptions: {
           enableHighAccuracy: true,
         },
+        tracking: true,
         projection: map.getView().getProjection(),
-      });
-
-
-      // function el(id: string) {
-      //   return document.getElementById(id);
-      // }
+      });  
       
-      // el('track').addEventListener('change', function () {
-      //   geolocation.setTracking(this.checked);
-      // });
-      
-
-      // // update the HTML page when the position changes.
-      // geolocation.on('change', function () {
-      //   el('accuracy').innerText = geolocation.getAccuracy() + ' [m]';
-      //   el('altitude').innerText = geolocation.getAltitude() + ' [m]';
-      //   el('altitudeAccuracy').innerText = geolocation.getAltitudeAccuracy() + ' [m]';
-      //   el('heading').innerText = geolocation.getHeading() + ' [rad]';
-      //   el('speed').innerText = geolocation.getSpeed() + ' [m/s]';
-      // });
-  
-      
-  
       setGeolocation(geolocation);
-      setTracking(true); // Starte die Geolokationsverfolgung
   
       // for geolocationError 
       geolocation?.on('error', function (error) {
-        const info = document.getElementById('info');
-        info.innerHTML = error.message;
-        info.style.display = '';
+        // console.log('error', error);
       });
 
       const accuracyFeature = new Feature();
@@ -97,32 +79,58 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
       );
   
       geolocation.on('change:position', () => {
+        // console.log('change')
         const coordinates = geolocation.getPosition();
         positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-        // if (coordinates) {
-        //   map.getView().setCenter(coordinates);
-        // }
       });
 
-      const vectorLayer = new VectorLayer({
-        map: map,
-        source: new VectorSource({
-          features: [accuracyFeature, positionFeature],
-        }),
+      const newVectorSource = new VectorSource({
+        features: [accuracyFeature, positionFeature],
       });
-      
-      console.log('hat funktioniert?')
+
+      const newVectorLayer = new VectorLayer({
+        map: map,
+        source: newVectorSource,
+      });
+
+      setVectorLayer(newVectorLayer);
+      setVectorSource(newVectorSource); 
 
       return () => {
+        // Entferne die Geolokationsverfolgung und den Vektor-Layer beim Deaktivieren
         if (geolocation) {
-          geolocation.setTracking(false); // Stoppe die Geolokationsverfolgung
-          setGeolocation(null); // Setze die Geolokations-Instanz zurück
+          geolocation.setTracking(false);
+          setGeolocation(null);
         }
-        map.removeLayer(vectorLayer);
+        if (newVectorLayer) {
+          map.removeLayer(newVectorLayer);
+          setVectorLayer(null);
+        }
+        if(newVectorSource){
+          newVectorSource.clear();
+          setVectorSource(null)
+
+        }
         setTracking(false);
       };
-        // Cleanup: Entferne die Geolokationskomponenten beim Deaktivieren
+
+
+
+    } else {
+      setTracking(false);
+      setGeolocation(null);
+
+      // Entferne den Vektor-Layer, falls vorhanden
+      if (vectorLayer) {
+        map.removeLayer(vectorLayer);
+        setVectorLayer(null);
         
+      }; 
+
+      if (vectorSource) {
+        vectorSource.clear(); // Leere die VectorSource, um alle Features zu entfernen
+        setVectorSource(null);
+      };
     }
   }, [map, activeGeoloc]);
 
