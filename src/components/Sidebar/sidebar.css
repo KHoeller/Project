@@ -6,7 +6,6 @@
 }
 
 .ant-drawer-content-wrapper{
-/*variable je nach Header*/    /*variable je nach footer*/
     top: 45px !important; 
     
     bottom: 28px !important; 
@@ -20,7 +19,7 @@
 }
 
 .openButton {
-    /*display: 'inline-flex';*/
+    
     display: flex;
     justify-content: center; 
     align-items: center;
@@ -31,17 +30,17 @@
     padding: 0px 0px;
     transition: right 0.33s; 
     z-index: 1;
-
-    /* background: white;
-    border-color: grey; *
-    border-radius: 6px;      */
 }
 
 .openButtonDrawerOpen {
     right: 378px;
 }
 
-/* .openButton:hover{
+
+
+
+/* automatisch von AntDesign: 
+.openButton:hover{
     background-color: lightgrey !important;
 } */
 

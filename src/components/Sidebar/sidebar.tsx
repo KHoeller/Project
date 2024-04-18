@@ -46,12 +46,7 @@ export default function Sidebar ({map}:SidebarProps){
                 maskClosable={false}
                 mask={false}
                 keyboard={true}
-            >
-                {/* <LayerTree map={map}/>
-                <LayerTreeSlider map={map}/> */}
-
-                <LayerManager map={map} />
-
+            > <LayerManager map={map} />
             </Drawer>
             <Button
                 type="default"
@@ -71,25 +66,4 @@ export default function Sidebar ({map}:SidebarProps){
     );
 }
 
-// return(
-//         <div className="sidebarContainer">
-//             <Drawer title='Themenbaum' 
-//                     onClose={onClose} 
-//                     open={open} 
-//                     placement="right" >
-//                     <p> some content </p> 
-                
-//             </Drawer>
-//             <Button type="primary" 
-//                     onClick={showDrawer} 
-//                     className="openButton" 
-//                     style={{ position: 'fixed', 
-//                             right: open ? '380px' : '0', 
-//                             transition: 'right 0.3s', 
-//                             background: "grey", 
-//                             borderColor: "dblack" }}>
-//                 {open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-//             </Button>
-//         </div>
-       
-//     );
+

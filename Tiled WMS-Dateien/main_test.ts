@@ -1,3 +1,5 @@
+// Überreste von den ersten Versuchen mit tsx und html (vor React) 
+
 import Map from "/node_modules/.vite/deps/ol_Map__js.js?v=0f6ba595";
 import OSM from "/node_modules/.vite/deps/ol_source_OSM__js.js?v=0f6ba595";
 import TileLayer from "/node_modules/.vite/deps/ol_layer_Tile__js.js?v=0f6ba595";
@@ -44,7 +46,7 @@ if (targetElement !== null) {
   map.addControl(mousePositionControl);
 }
 map.on("singleclick", function(evt) {
-  console.log(evt.coordinate);
+  //console.log(evt.coordinate);
   const infoElement = document.getElementById("info");
   if (infoElement) {
     infoElement.innerHTML = "";
@@ -57,10 +59,10 @@ map.on("singleclick", function(evt) {
         "EPSG:3857",
         { "INFO_FORMAT": "application/json" }
       );
-      console.log(url);
+     // console.log(url);
       if (url) {
         fetch(url).then((response) => response.json()).then((responseObject) => {
-          console.log(responseObject);
+          //console.log(responseObject);
         });
       }
     }

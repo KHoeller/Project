@@ -10,11 +10,6 @@
     z-index: 1;
     transition: left 0.33s; 
 }
-/* .button {
-    /* width: 30px;
-    height: 30px; */
-    /* background-color: white;
-}  */
 
 .tool{   
     border-radius: 6px; 
@@ -30,6 +25,3 @@
     height: 32px;   
 }
 
-/* .tool:hover {
-    background-color: lightgrey !important; 
-} Ändere die Hintergrundfarbe bei Hover (wenn Maus über Button fährt */

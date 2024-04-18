@@ -70,4 +70,4 @@ const InfoIcon: React.FC<InfoIconProps> = ({infoTextTitle, infoText}) => {
 
 export default InfoIcon;
 
-//onClick={event => event.stopPropagation} -> führt dazu, dass auf dem Modal keine Clicks mehr zu Veränderung des Layertrees führen
+//onClick={event => event.stopPropagation} -> führt dazu, dass auf dem Modal keine Clicks mehr zu Veränderung des Layertrees führen!

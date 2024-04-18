@@ -1,6 +1,6 @@
 
 // Component MousePosition
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import './mousePosition.css';
 import Map from 'ol/Map';
 
@@ -36,25 +36,4 @@ export default function MousePositionControl ({map}: MousePositionProps) {
 };      
 
 
-// Herausforderung:
-// bei Klick für featureinfo auch die aktuellen Koordinaten festhalten? 
     
-    
-// return (
-//     <div id = "location">
-//         <div id = 'mouse-position' className = "Custom-mouse-position">Koordinaten:</div>
-//     </div>
-
-    // );
-
-
-    
-
-// <div id="wrapper">
-    
-// #wrapper{
-//     /* padding: 5px; */
-//     border: 1px solid black; 
-//     z-index: 100; 
-//     background-color: white;
-//   } 

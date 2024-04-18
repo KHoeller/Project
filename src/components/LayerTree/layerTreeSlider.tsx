@@ -1,6 +1,6 @@
 
-// der Part des LayerTrees holt sich keine Informationen über die aktuell sichtbaren Layer in map 
-// -> sofern Raster initial state visible = true ein Problem 
+// LayerTree für alle Layer mit Slider Funktion 
+
 
 
 import React, { useState, useEffect } from 'react';
@@ -54,7 +54,7 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
         });
 
         setLayerGroups(updatedLayerGroups);
-        // console.log('updatedLayerGroups:', updatedLayerGroups);
+            // console.log('updatedLayerGroups:', updatedLayerGroups);
     }, [map]);
 
 
@@ -76,18 +76,6 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
         } else {
             setCheckedGroups([]);
         }
-        //const checkedKeyArray = [checkedKeysArray[checkedKeysArray.length - 1]]         // kann man mit Sicherheit auch schöner machen; derzeit wird immer der zuletzt hinzugefügt verwendet und weitergegeben, damit immer nur ein Layer checked und visible ist!
-
-        //console.log('checkedKeys:', checkedKeyArray); 
-
-        // Update expanded groups to include newly checked groups
-        // const newExpandedGroups = [...expandedGroups];
-        // checkedKeyArray.forEach(groupName => {
-        //     if (!newExpandedGroups.includes(groupName)) {
-        //         newExpandedGroups.push(groupName);
-        //     }
-        // });
-        // setExpandedGroups(newExpandedGroups);
     };
 
     const updateGroupSelectedIndex = (groupName: string, index: number) => {
@@ -109,7 +97,7 @@ export default function LayerTreeSlider({ map }: LayerTreeSliderProps) {
     }, [checkedGroups, layerGroups]);
     
 
-    // Erstellen treeData-Struktur 
+    // create treeData-structure 
     const treeData = Object.keys(layerGroups).map(groupName => ({
         title: (
             <>

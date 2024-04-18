@@ -1,3 +1,21 @@
+.ant-modal-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+.ant-modal-wrap {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: auto;
+}
+
+.ant-modal-content{
+    text-align: justify;
+}
+
 /* .layer-tree-info{
     
     position: 'absolute';
@@ -31,20 +49,3 @@
     all: unset; 
 } */
 
-.ant-modal-open {
-    overflow: hidden;
-    position: fixed;
-    width: 100%;
-}
-
-.ant-modal-wrap {
-    position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-    overflow: auto;
-}
-
-.ant-modal-content{
-    text-align: justify;
-}

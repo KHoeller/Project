@@ -10,11 +10,14 @@ import { Circle as CircleStyle, Fill, Stroke, Style } from 'ol/style.js';
 import { OSM, Vector as VectorSource } from 'ol/source.js';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer.js';
 
+
 export type GeolocationCompProps = {
   map: Map; 
   activeGeoloc: boolean;
 }
 
+
+// basi
 
 export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompProps) {
  
@@ -23,16 +26,19 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
   const [vectorLayer, setVectorLayer] = useState<VectorLayer | null>(null);
   const [vectorSource, setVectorSource] = useState<VectorSource | null>(null);
 
-  // console.log('map', map); // ist auch da
-  // console.log('button',activeGeoloc);  // active prop wird richtig weitergegeben 
 
-  // useEffect(() => { // wird gemountet
-  //   console.log('geolocation: mount');
+  
+      // console.log('map', map); // ist auch da
+      // console.log('button', activeGeoloc);  // active prop wird richtig weitergegeben 
 
-  //   return () => {
-  //       console.log('geolocation: unmount')
-  //   };
-  // }, []);
+    // Kontrolle: wird die Component gerendert? 
+      // useEffect(() => { // wird gemountet
+      //   console.log('geolocation: mount');
+
+      //   return () => {
+      //       console.log('geolocation: unmount')
+      //   };
+      // }, []);
 
 
   useEffect(() => {
@@ -57,11 +63,21 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
       });
 
       const accuracyFeature = new Feature();
+
       geolocation.on('change:accuracyGeometry', () => {
-        accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
+        const accuracyGeometry = geolocation.getAccuracyGeometry();
+      
+        // Check if accuracyGeometry is not null before setting it as the feature's geometry
+        if (accuracyGeometry !== null) {
+          accuracyFeature.setGeometry(accuracyGeometry);
+        } else { // (optional)
+            // Handle the case where accuracyGeometry is null 
+          // accuracyFeature.setGeometry(undefined);
+          console.log('error');
+        }
       });
   
-      // Aussehen Symbol for showing location 
+      // Symbol for showing location 
       const positionFeature = new Feature();
       positionFeature.setStyle(
         new Style({
@@ -78,10 +94,22 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
         })
       );
   
+      // geolocation.on('change:position', () => {
+      //   const coordinates = geolocation.getPosition();
+      //   positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+      // });
+
       geolocation.on('change:position', () => {
-        // console.log('change')
         const coordinates = geolocation.getPosition();
-        positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
+      
+        // Check if coordinates is not null before setting it as the feature's geometry
+        if (coordinates !== null) {
+          const pointGeometry = new Point(coordinates);
+          positionFeature.setGeometry(pointGeometry);
+        } else {
+          // Handle the case where coordinates is null (optional)
+          positionFeature.setGeometry(undefined);
+        }
       });
 
       const newVectorSource = new VectorSource({
@@ -140,89 +168,3 @@ export default function GeolocationComp ({map, activeGeoloc}: GeolocationCompPro
 };
 
 
-
-// import Feature from 'ol/Feature.js';
-// import Geolocation from 'ol/Geolocation.js';
-// import Map from 'ol/Map.js';
-// import Point from 'ol/geom/Point.js';
-// import View from 'ol/View.js';
-// import {Circle as CircleStyle, Fill, Stroke, Style} from 'ol/style.js';
-// import {OSM, Vector as VectorSource} from 'ol/source.js';
-// import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer.js';
-// import React from 'react';
-
-// export type GeolocationCompProps ={
-//     map: Map; 
-// }
-
-// export default function GeolocationComp ({map}: GeolocationCompProps){
-
-//     console.log(map);
-//     const geolocation = new Geolocation({
-//     // enableHighAccuracy must be set to true to have the heading value.
-//     trackingOptions: {
-//         enableHighAccuracy: true,
-//     },
-//     projection: map.View.getProjection(),
-//     });
-
-//     function el(id: any) {
-//     return document.getElementById(id);
-//     }
-
-//     el('track')?.addEventListener('change', function () {
-//     geolocation.setTracking(this.checked);
-//     });
-
-//     // update the HTML page when the position changes.
-//     geolocation.on('change', function () {
-//     el('accuracy').innerText = geolocation.getAccuracy() + ' [m]';
-//     el('altitude').innerText = geolocation.getAltitude() + ' [m]';
-//     el('altitudeAccuracy').innerText = geolocation.getAltitudeAccuracy() + ' [m]';
-//     el('heading').innerText = geolocation.getHeading() + ' [rad]';
-//     el('speed').innerText = geolocation.getSpeed() + ' [m/s]';
-//     });
-
-//     // handle geolocation error.
-//     geolocation.on('error', function (error) {
-//     const info = document.getElementById('info');
-//     info.innerHTML = error.message;
-//     info.style.display = '';
-//     });
-
-//     const accuracyFeature = new Feature();
-//     geolocation.on('change:accuracyGeometry', function () {
-//     accuracyFeature.setGeometry(geolocation.getAccuracyGeometry());
-//     });
-
-//     const positionFeature = new Feature();
-//     positionFeature.setStyle(
-//     new Style({
-//         image: new CircleStyle({
-//         radius: 6,
-//         fill: new Fill({
-//             color: '#3399CC',
-//         }),
-//         stroke: new Stroke({
-//             color: '#fff',
-//             width: 2,
-//         }),
-//         }),
-//     }),
-//     );
-
-//     geolocation.on('change:position', function () {
-//     const coordinates = geolocation.getPosition();
-//     positionFeature.setGeometry(coordinates ? new Point(coordinates) : null);
-//     });
-
-//     new VectorLayer({
-//     map: map,
-//     source: new VectorSource({
-//         features: [accuracyFeature, positionFeature],
-//     }),
-//     });
-//     return(
-//         <div></div>
-//     )
-// }

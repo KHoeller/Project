@@ -1,5 +1,28 @@
 
-/* .ant-drawer-content-wrapper {
+
+.ant-drawer{
+    z-index: 50; 
+}
+
+.attribute-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.attribute-name {
+    flex: 1;
+    text-align: left;
+}
+
+.attribute-value {
+    flex: 1;
+    text-align: right;
+    margin-bottom: 5px;
+}
+
+
+/* falls man ein Modal statt eines Drawers verwendet 
+.ant-drawer-content-wrapper {
     z-index: 5;
 }
 
@@ -32,25 +55,7 @@
     flex-direction: column;
 } */
 
-.ant-drawer{
-    z-index: 50; 
-}
 
-.attribute-row {
-    display: flex;
-    justify-content: space-between;
-}
-
-.attribute-name {
-    flex: 1;
-    text-align: left;
-}
-
-.attribute-value {
-    flex: 1;
-    text-align: right;
-    margin-bottom: 5px;
-}
 
 
 

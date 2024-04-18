@@ -19,7 +19,7 @@
 }
 
 .map {
-    width: 100%;
+    width: 100%; /* generelle Maße zur Map */ 
     height: 100%;
     font-family: sans-serif;
     z-index: 0;
@@ -28,30 +28,3 @@
 
 
 
-/* verschoben in General.css*/
-/* .ol-zoom .ol-zoom-in {
-    border-radius: 6px 6px 6px 6px;
-    width: 32px; 
-    height: 32px;
-}
-
-.ol-zoom .ol-zoom-out {
-    border-radius: 6px 6px 6px 6px;
-    width: 32px; 
-    height: 32px;
-}
-
-.ol-control{
-    background-color: transparent;
-}
-
-.ol-control button {
-    margin: 4px; 
-}
-
-.ol-scale-line{
-    position: absolute;
-    bottom: 80px;
-    left: 5px; 
-    /* background: transparent; 
-} */

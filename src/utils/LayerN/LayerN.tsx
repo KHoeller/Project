@@ -48,7 +48,7 @@
                 const isVisible = layerConfig.visible !== undefined ? layerConfig.visible : false;
                 const isQueryable = layerConfig.queryable !== undefined ? layerConfig.queryable : false;
                 const title = layerConfig.title;
-                const url = layerConfig.url || 'http://localhost:8080/geoserver/Umwelt-Gesundheit/wms';
+                const url = layerConfig.url || 'https://umwegk.terrestris.de/geoserver/Umwelt-Gesundheit/wms'; //"http://localhost:8080/geoserver/Umwelt-Gesundheit/wms" -> für dev
                 const year = layerConfig.year !== undefined ? layerConfig.year : false;
                 const layerType = layerConfig.layerType;
                 const urlLegend = layerConfig.urlLegend !== undefined ? layerConfig.urlLegend : false;

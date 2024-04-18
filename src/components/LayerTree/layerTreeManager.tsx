@@ -1,4 +1,4 @@
-
+// LayerTree Manager bringt beide Teile des LayerTrees zusammen (nicht der schönste Weg!)
 import React from 'react';
 import Map from 'ol/Map';
 

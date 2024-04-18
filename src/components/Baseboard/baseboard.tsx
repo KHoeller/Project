@@ -16,22 +16,22 @@ export default function Baseboard({map}: BaseboardProp) {
     return (
         <>
         <div className='baseboard'>
+
             <div className="Koordinaten">
                 Koordinaten: <MousePosition map = {map}/>
             </div> 
             
             <div>
-                {/* <Attribution/> */}
             </div>
-            { /* ESPG 3857*/ }
+
             <div className="buttonAbout">
                 <About/>
             </div>
             
-            <div className="attribution"></div>
-                
-            <div >
-                
+            <div>
+            </div>
+
+            <div >    
             </div>
             
         </div>
@@ -39,13 +39,15 @@ export default function Baseboard({map}: BaseboardProp) {
     )
 }
 
-// useEffect(() => {
-//     const scaleControl = new ScaleLine();
-//     map.addControl(scaleControl);
 
-//     return () => {
-//         map.removeControl(scaleControl);
-//     };
-// }, [map]);
+// ScaleLine kann auch in das Baseboard integriert werden 
+    // useEffect(() => {
+    //     const scaleControl = new ScaleLine();
+    //     map.addControl(scaleControl);
 
-// &nbsp - Befehl für Leerzeichen 
+    //     return () => {
+    //         map.removeControl(scaleControl);
+    //     };
+    // }, [map]);
+
+    // &nbsp - Befehl für Leerzeichen 

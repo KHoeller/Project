@@ -1,3 +1,5 @@
+// NominatimSearch (Vorlage von reactGeo von terrestris)
+
 import * as React from 'react';
 import { AutoComplete } from 'antd';
 import { AutoCompleteProps } from 'antd/lib/auto-complete';
