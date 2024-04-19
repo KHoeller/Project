@@ -44,7 +44,7 @@ export default function Toolbar (
         // }, []);
     
 
-    // Damit ZoomButtons bei Öffnen von DrawerLeft nach rechts in die Map verschoben werden 
+    // Damit ZoomButtons bei Oeffnen von DrawerLeft nach rechts in die Map verschoben werden 
     const ZoomButtons = document.getElementsByClassName("ol-zoom ol-unselectable ol-control") 
     for (let i = 0; i < ZoomButtons.length; i++) {
         const ZoomButton = ZoomButtons.item(i) as HTMLElement;
@@ -53,7 +53,7 @@ export default function Toolbar (
         ZoomButton.style.transition = 'left 0.33s';
     }
 
-    // Damit ScaleLine bei Öffnen von DrawerLeft nach rechts in die Map verschoben werden 
+    // Damit ScaleLine bei Oeffnen von DrawerLeft nach rechts in die Map verschoben werden 
     const ScaleLines = document.getElementsByClassName("ol-scale-line ol-unselectable") 
     for (let i = 0; i < ScaleLines.length; i++) {
         const ScaleLine = ScaleLines.item(i) as HTMLElement;

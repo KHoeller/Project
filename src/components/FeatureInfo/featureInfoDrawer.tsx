@@ -57,7 +57,7 @@ export default function FeatureInfo ({ map, source }: FeatureInfoProps) {
                             const source = layer.getSource();                           // get Source of the layer 
 
                             if (source instanceof TileWMS) {                            // if it is a TileWMS 
-                                const hitTolerance = 100;                               // hit tolerance 100 pixel 
+                                const hitTolerance = 20;                               // hit tolerance 100 pixel 
                                 const url = source?.getFeatureInfoUrl(                  // create an url for getting feature information for an exact position and resolution 
                                     evt.coordinate,
                                     viewResolution,

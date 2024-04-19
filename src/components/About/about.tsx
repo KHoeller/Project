@@ -44,7 +44,7 @@ export default function About (){
                     Das Ziel der Webapplikation ist die Bereitstellung von Informationen zur
                     Schadstoff- und Lärmbelastung in Deutschland sowie die Sensibilisierung für die Problematik und die potentiell damit einhergehenden Gesundheitsrisiken.
                     Übergeordnetes methodisches Ziel war das Kennenlernen und Anwenden
-                    der verschiedenen Schritte bei der Entwicklung einer Webapplikation. 
+                    der verschiedenen Schritte bei der Entwicklung einer Webapplikation.   
                 </p> 
 
                 <p>
@@ -78,7 +78,7 @@ export default function About (){
                     Wichtigste Anknüpfungspunkte sind dabei die Themen Verkehr, Ernährung und Konsum. Wir können zum Beispiel bewusst auf
                     die Nutzung des Autos verzichten und andere Verkehrsmittel nutzen, Fahrgemeinschaften bilden oder unsere Reisepläne überdenken.
                     Außerdem können wir uns für einen regionaleren und/oder saisonaleren Einkauf entscheiden und Plastikverpackungen wenn möglich vermeiden. 
-                    Im Bereich Konsum sollten wir uns immer wieder die Frage stellen 'Brauchen wir das wirklich?'.
+                    Im Bereich Konsum ist beispielsweise eine zentrale Frage 'Brauchen wir das wirklich?'.
                     Es ist schwierig, wenn nicht sogar unmöglich, in allen Bereichen des Lebens gleichzeitig
                     die Emission von Schadstoffen zu reduzieren oder gar zu unterbinden. Dennoch
                     ist es relevant, dass wir die entstehenden Emissionen und Auswirkungen bewusst in unseren alltäglichen 
@@ -99,8 +99,8 @@ export default function About (){
                  <p>Hinweis zu den Daten: <br></br>
                     In Bezug auf die Rasterdaten (Daten zur flächendeckenden Schadstoffbelastung) ist daraufhinzuweisen, dass diese auf die Nationalgrenzen von Deutschland
                     zugeschnitten wurden und es aus diesem Grund in Randbereichen zu fehlenden Werten und Lücken kommen kann.
-                    Diese Daten sind zudem das Ergebnis einer Interpolation, weshalb
-                    es in der Realität zu kleinräumigen Abweichungen innerhalb der Rasterzellen kommen kann und die Werte von den Ergebnissen der Messstationen (Vektordaten) abweichen können. 
+                    Diese Daten sind zudem das Ergebnis einer Interpolation, weshalb in der Realität kleinräumige Unterschiede innerhalb der Rasterzellen erwartbar sind 
+                    und die Werte von den Ergebnissen der Messstationen (Vektordaten) abweichen können. 
                     Außerdem standen nur für die Schadstoffe Stickstoffoxide (NOx), Stickstoffdioxid (NO2), Feinstaub PM10 und Feinstaub PM2.5 flächendeckende jährliche Mittelwerte zur Verfügung. 
                     Für die verschiedenen Messstationen gilt, dass die angegebenen Werte für diese bestimmte geographische Position gelten. Abhängig von der Lage der Messstation  
                     kann es in der Realität kleinräumig zu abweichenden Werten kommen. 

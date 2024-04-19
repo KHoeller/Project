@@ -2,5 +2,10 @@ node_modules
 notizen    
 methode_notes 
 dist
-grayindexes
-Legende_help
+GrayIndexes
+grayindexes.txt
+Legende_help.txt
+config_copy.txt
+docs
+
+
